@@ -8,18 +8,16 @@
 
 
 return [
-    'service_manager' => array(
-        'factories' => array(
-            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory', // <-- add this
-        ),
-    ),
+    'service_manager' => [
+        'factories' => [
+            'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
+        ],
+    ],
     'view_manager' => [
         'template_map' => include PEDAGOGIE_MODULE_ROOT . '/template_map.php',
         'template_path_stack' => [
             PEDAGOGIE_MODULE_ROOT . '/view',
-
         ],
-
     ],
     'controllers' => [
         'invokables' => [
@@ -28,6 +26,10 @@ return [
             'Pedagogie\\Update' => 'Pedagogie\\Controller\\UpdateController',
             'Pedagogie\\Delete' => 'Pedagogie\\Controller\\DeleteController',
             'Pedagogie\\Save' => 'Pedagogie\\Controller\\SaveController',
+            'Pedagogie\\Dashboard' => 'Pedagogie\\Controller\\DashboardController',
+        ],
+        'factories' => [
+            
         ],
     ],
     'router' => [
@@ -59,20 +61,43 @@ return [
             ],
         ],
     ],
-    'navigation' =>   include PEDAGOGIE_MODULE_ROOT . '/navigator/nav_admin_map.php',
-    'translator' => array(
+    'navigation' => [
+        'default' => [
+            [
+                'label' => 'Formation',
+                'module' => 'pedagogie',
+                'controller' => 'show',
+                'action' => 'showdetailsformation',
+                'pages' => [
+                    [
+                        'label' => 'Details formations',
+                        'module' => 'pedagogie',
+                        'controller' => 'show',
+                        'action' => 'showdetailsformation',
+                    ],
+                    [
+                        'label' => 'Ajouter une formation',
+                        'module' => 'pedagogie',
+                        'controller' => 'create',
+                        'action' => 'addformation',
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'translator' => [
         'locale' => 'fr_FR',
-        'translation_file_patterns' => array(
-            array(
-                'type'     => 'phpArray',
+        'translation_file_patterns' => [
+            [
+                'type' => 'phpArray',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.php',
-            ),
-        ),
-    ),
+                'pattern' => '%s.php',
+            ],
+        ],
+    ],
     'form_elements' => [
         'factories' => [
-
+            
         ],
         'invokables' => [
             'pedagogieFormation' => 'Pedagogie\\Form\\Formation',
