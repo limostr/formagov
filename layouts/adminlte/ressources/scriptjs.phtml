@@ -1,0 +1,123 @@
+<SCRIPT type="text/javascript">
+
+
+    function AjaxLoader(page,id ,laodplace){
+        $.ajax({
+            type:"POST",
+            url:page,
+            data:{id:id },
+            beforeSend :function(){
+                $('#'+laodplace).html("Encours...");
+            },
+            success:function(response){
+                $('#'+laodplace).html(response);
+
+            }
+        });
+    }
+
+    /******************************Initialisation de l'accordion**********************************/
+
+
+    $(document).ready(function () {
+
+        /**********************chargement des ann�es universitaire************************/
+
+    });
+
+
+    function todashboard(){
+        $(location).attr('href',"");
+    }
+    /************************************************************************************/
+    function AjaxLoaderSelect(page,id ,laodplace){
+
+
+        $.ajax({
+            type:"POST",
+            url:page,
+            data:{id:id },
+            beforeSend :function(){
+                $('#'+laodplace).html("<option value=''>Encours...<option>");
+
+            },
+            success:function(response){
+                $('#'+laodplace).html(response);
+            }
+        });
+    }
+
+    function editdata(url){
+        $.ajax({
+            type:"POST",
+            url:url ,
+            beforeSend :function(){
+                $('#formcontent').html("Encours...");
+                $('#myModal').modal('show');
+            },
+            success:function(response){
+                $('#formcontent').html(response);
+
+
+            }
+        });
+    }
+
+    function showinmodal(url,param){
+        $.ajax({
+            type:"POST",
+            url:url ,
+            data:{id:param},
+            beforeSend :function(){
+                $('#formcontent').html("Encours...");
+                $('#myModal').modal('show');
+            },
+            success:function(response){
+                $('#formcontent').html(response);
+
+
+            }
+        });
+    }
+
+
+    function rechercher(){
+
+       var lien='';
+
+        $(location).attr('href',lien);
+
+    }
+
+    function deletedata(url,idzone,urlreoad,zonereload){
+
+
+        bootbox.confirm("Vous voulez vraiment supprimer cette enregistrement ?",function(result){
+
+            if(result){
+                $.ajax({
+                    type:"POST",
+                    url:url ,
+                    beforeSend :function(){
+                        $('#'.idzone).html("Encours...");
+                    },
+                    success:function(response){
+                        var obj = JSON.parse(response);
+
+                        if(obj.status=="success"){
+                            AjaxLoader(urlreoad, 'ajax',zonereload)
+                        }else{
+                            $("#messageconfig2").html("<div class='alert alert-block alert-error fade in'>"
+                                +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                                +"<h4 class='alert-heading'>Erreur de suppression</h4>"
+                                +"<p> "+obj.message
+                                +" </p> </div>");
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+</SCRIPT>

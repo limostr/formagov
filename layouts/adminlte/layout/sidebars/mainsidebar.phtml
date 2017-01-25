@@ -1,0 +1,25 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+
+
+
+    <!-- Sidebar user panel -->
+
+    <?=\Myhelper\Template::GenView("layout/usersmainsidebar",'layouts/adminlte/map_template.php')?>
+
+     <!-- search form -->
+    <?=\Myhelper\Template::GenView("layout/recherche",'layouts/adminlte/map_template.php')?>
+
+     <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+
+        <?=\Myhelper\Template::GenView("layout/mainmenu",'layouts/adminlte/map_template.php' ,array('adminmenu'=>$this->menuadmin) )?>
+
+
+    </ul>
+
+
+
+</section>
+<!-- /.sidebar -->

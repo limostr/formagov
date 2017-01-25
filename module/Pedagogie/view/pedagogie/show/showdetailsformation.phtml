@@ -1,0 +1,82 @@
+<?php
+
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        AjaxLoader('showdetailsmoduls','0','moduledesc');
+    });
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+              <h2> <i class="fa fa-book text-aqua"></i> <?=$this->translate('details_formation')?></h2>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <table class="table">
+                            <thead>
+                            <tr class="bg-light-blue">
+                                <th>Type Diplôme</th>
+                                <td>Licence Appliquée</td>
+                            </tr>
+                            <tr>
+                                <th>Domaine</th>
+                                <td>Sciences économiques et de gestion</td>
+                            </tr>
+                            <tr>
+                                <th>Mention</th>
+                                <td>Management</td>
+                            </tr>
+                            <tr>
+                                <th>Spécialité</th>
+                                <td>gestion des petites et moyennes entreprises </td>
+                            </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="box-header">
+                                <?=$this->translate('description_formation')?>
+                            </div>
+                            <div class="box-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Liste des modules-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3><i class="fa fa-cubes text-green"></i> <?=$this->translate('details_modules')?></h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation" class="active"><a href="#">Semestre 1</a></li>
+                            <li role="presentation"><a href="#">Semestre 2</a></li>
+                            <li role="presentation"><a href="#">Semestre 3</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9" id="moduledesc">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Fin liste des modules-->

@@ -1,0 +1,52 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<?php
+//$this->h1('pedagogie_title_create');
+
+//$this->formationsDataForm->setAttribute('action', $this->url('pedagogie/create'));
+
+ echo $this->bootstrapForm($this->form);
+?>
+<p>
+    <a class="btn btn-primary" href="<?php echo $this->url('pedagogie'); ?>">
+        <i class="fa fa-table"></i>
+        <?php echo $this->translate('pedagogie_action_index'); ?>
+    </a>
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+                <h1><?php echo $this->titre?></h1>
+                <h2>Pedagogie Module</h2>
+                <h3>Create Controller</h3>
+                <h4>Addformation Action</h4>
+
+                <?php
+/*
+                $form = $this->form;
+
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+                $this->formHidden($form->get('id'));
+                echo $this->formRow($form->get('title'));echo "<br>";
+                echo $this->formRow($form->get('artist'));echo "<br>";
+                echo $this->formSubmit($form->get('submit'));echo "<br>";
+                echo $this->form()->closeTag();
+*/
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
