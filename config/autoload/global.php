@@ -14,7 +14,7 @@
 return array(
     'db' => [
         'driver'  => 'pdo',
-        'dsn'     => 'mysql:dbname=tutorat;host=localhost;charset=utf8;port=3308',
+        'dsn'     => 'mysql:dbname=pedagogie;host=localhost;charset=utf8;port=3306',
         'user'    => 'root',
         'pass'    => '',
         'driver_options' => array(
