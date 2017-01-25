@@ -14,9 +14,9 @@ use Zend\View\Model\ViewModel;
 
 /**
  * ShowController
- *
+ * 
  * Handles the ShowController requests for the Pedagogie Module
- *
+ * 
  * @package Pedagogie\Controller
  */
 class ShowController extends AbstractActionController
@@ -26,14 +26,14 @@ class ShowController extends AbstractActionController
 
     /**
      * Index action for ShowController
-     *
+     * 
      * @return ViewModel
      */
     public function indexAction()
     {
         $viewModel = new ViewModel();
-                         $viewModel->annees=$this->getFormationTable()->fetchAll();
-                         return $viewModel;
+                                 $viewModel->annees=$this->getFormationTable()->fetchAll();
+                                 return $viewModel;
     }
 
     /**
@@ -42,33 +42,45 @@ class ShowController extends AbstractActionController
     public function getFormationTable()
     {
         if (!$this->formationsTable) {
-                            $sm = $this->getServiceLocator();
-                            $this->formationsTable = $sm->get('Model\AnneeunivTable');
-                        }
-                         return $this->formationsTable;
+                                    $sm = $this->getServiceLocator();
+                                    $this->formationsTable = $sm->get('Model\AnneeunivTable');
+                                }
+                                 return $this->formationsTable;
     }
 
     /**
      * Showdetailsformation action for ShowController
-     *
+     * 
      * @return ViewModel
      */
     public function showdetailsformationAction()
     {
         $viewModel = new ViewModel();
 
-                return $viewModel;
+                        return $viewModel;
     }
 
     /**
      * Showdetailsmoduls action for ShowController
-     *
+     * 
      * @return ViewModel
      */
     public function showdetailsmodulsAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
+                $viewModel->setTerminal(true);
+                return $viewModel;
+    }
+
+    /**
+     * Listeformations action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function listeformationsAction()
+    {
+        $viewModel = new ViewModel();
+
         return $viewModel;
     }
 

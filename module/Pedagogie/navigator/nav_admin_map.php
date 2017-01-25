@@ -10,13 +10,17 @@ return  array(
     'default' => array(
 
         array(
-
             'label'      => "Formation",
             'module'     => 'pedagogie',
             'controller' => 'show',
-            'action'     => 'showdetailsformation',
+            'action'     => 'listeformations',
             'pages' => array(
                 array(
+                    'label' => 'Liste formations',
+                    'module'     => 'pedagogie',
+                    'controller' => 'show',
+                    'action'     => 'listeformations',
+                ),array(
                     'label' => 'Details formations',
                     'module'     => 'pedagogie',
                     'controller' => 'show',
