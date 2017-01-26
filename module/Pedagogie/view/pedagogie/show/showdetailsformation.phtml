@@ -4,7 +4,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         AjaxLoader('showdetailsmoduls','0','moduledesc');
+
+        $('ul.nav.nav-pills li a').click(function() {
+            $(this).parent().addClass('active').siblings().removeClass('active');
+        });
     });
+
+    function getSemestreModule(idsemestre){
+        AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>',idsemestre,'moduledesc');
+
+    }
 </script>
 <div class="row">
     <div class="col-md-12">
@@ -65,9 +74,9 @@
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="nav nav-pills nav-stacked">
-                            <li role="presentation" class="active"><a href="#">Semestre 1</a></li>
-                            <li role="presentation"><a href="#">Semestre 2</a></li>
-                            <li role="presentation"><a href="#">Semestre 3</a></li>
+                            <li class="active" ><a href="#" onclick="getSemestreModule('S1')">Semestre 1</a></li>
+                            <li><a href="#" onclick="getSemestreModule('S2')">Semestre 2</a></li>
+                            <li><a href="#" onclick="getSemestreModule('S3')">Semestre 3</a></li>
                         </ul>
                     </div>
                     <div class="col-md-9" id="moduledesc">

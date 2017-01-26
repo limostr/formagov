@@ -32,8 +32,8 @@ class ShowController extends AbstractActionController
     public function indexAction()
     {
         $viewModel = new ViewModel();
-                         $viewModel->annees=$this->getFormationTable()->fetchAll();
-                         return $viewModel;
+        $viewModel->annees=$this->getFormationTable()->fetchAll();
+        return $viewModel;
     }
 
     /**

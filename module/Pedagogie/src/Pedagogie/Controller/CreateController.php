@@ -11,13 +11,12 @@ namespace Pedagogie\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
- 
 
 /**
  * CreateController
- *
+ * 
  * Handles the CreateController requests for the Pedagogie Module
- *
+ * 
  * @package Pedagogie\Controller
  */
 class CreateController extends AbstractActionController
@@ -25,7 +24,7 @@ class CreateController extends AbstractActionController
 
     /**
      * Index action for CreateController
-     *
+     * 
      * @return ViewModel
      */
     public function indexAction()
@@ -33,22 +32,42 @@ class CreateController extends AbstractActionController
         $viewModel = new ViewModel();
 
 
-        return $viewModel;
+                return $viewModel;
     }
 
     /**
      * Addformation action for CreateController
-     *
+     * 
      * @return ViewModel
      */
     public function addformationAction()
     {
         $viewModel = new ViewModel();
-        $Formation=new  \Pedagogie\Form\Formation();
+        $sm = $this->getServiceLocator();
+        $TypeFormationTable = $sm->get('Model\TypeformationTable');
+        $types=$TypeFormationTable->getPrincipalTypesFormation();
+        $viewModel->TypesFormation=$types;
+        return $viewModel;
+    }
 
-       // $Formation->get('submit')->setValue('Enregistrer');
+    /**
+     * Adddyntypeform action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function adddyntypeformAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $id= $this->getRequest()->getPost('id');
 
-        $viewModel->setVariable("form",$Formation);
+        $sm = $this->getServiceLocator();
+        $TypeFormationTable = $sm->get('Model\TypeformationTable');
+        $typesModel=array();
+        $TypeFormationTable->getModelTypeFormation($id,$typesModel);
+        $viewModel->ModelTypesFormation=$typesModel;
+
+
         return $viewModel;
     }
 

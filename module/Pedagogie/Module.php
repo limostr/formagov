@@ -92,6 +92,11 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
                     $table = new \Models\ExTutorat\ExAnneeunivTable($dbAdapter);
                     return $table;
                 },
+                'Model\TypeformationTable'=> function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new \Models\ExTutorat\ExTypeformationTable($dbAdapter);
+                    return $table;
+                },
 
             ),
         );
