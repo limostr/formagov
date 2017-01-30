@@ -43,4 +43,23 @@ return [
     'niveau'=>'Nombre de niveau',
     'modeformation'=>'Mode de formation',
 
+    'UeAdd_El_TItre'=>"Titre de l'UE",
+
+    //element Btn
+
+    'DetailModule_Btn_AjoutModule'=>"Ajouter une unité d'enseignement",
+
+
+    //affichage module
+    'ECUE_ENSEIGEMENT'=>'Enseignements',
+    'Objectifs_UE'=>"Objectifs de l’UE <small>(Savoirs, aptitudes et compétences) </small>",
+   /* 'Objectifs_UE'=>"Pré-requis (définir les UE et les compétences indispensables pour suivre l’UE concernée) ",
+    'Objectifs_UE'=>"Objectifs de l’UE ",
+    'Objectifs_UE'=>"Objectifs de l’UE ",*/
+    'update_ue'=>'Mise à jour de UE',
+    'update_ue_code'=>'Code',
+    'update_ue_labelle'=>'Libelle ue',
+    'update_ue_cr'=>'Credit',
+    'update_ue_coef'=>'Coefecient',
+    'update_ue_rg'=>'Régime',
 ];

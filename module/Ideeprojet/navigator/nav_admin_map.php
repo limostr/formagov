@@ -10,7 +10,7 @@ return  array(
     'default' => array(
         array()
     ),
-    'Pedagogie_Navigator' => array(
+    'Ideeprojet_Navigator' => array(
 
         array(
 

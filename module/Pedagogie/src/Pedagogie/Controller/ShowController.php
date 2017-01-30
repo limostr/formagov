@@ -32,8 +32,8 @@ class ShowController extends AbstractActionController
     public function indexAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->annees=$this->getFormationTable()->fetchAll();
-        return $viewModel;
+                                        $viewModel->annees=$this->getFormationTable()->fetchAll();
+                                        return $viewModel;
     }
 
     /**
@@ -42,10 +42,10 @@ class ShowController extends AbstractActionController
     public function getFormationTable()
     {
         if (!$this->formationsTable) {
-                            $sm = $this->getServiceLocator();
-                            $this->formationsTable = $sm->get('Model\AnneeunivTable');
-                        }
-                         return $this->formationsTable;
+                                                            $sm = $this->getServiceLocator();
+                                                            $this->formationsTable = $sm->get('Model\AnneeunivTable');
+                                                        }
+                                                         return $this->formationsTable;
     }
 
     /**
@@ -57,7 +57,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                return $viewModel;
+                                                return $viewModel;
     }
 
     /**
@@ -68,7 +68,56 @@ class ShowController extends AbstractActionController
     public function showdetailsmodulsAction()
     {
         $viewModel = new ViewModel();
+                                        $viewModel->setTerminal(true);
+                                        return $viewModel;
+    }
+
+    /**
+     * Enseignements action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function enseignementsAction()
+    {
+        $viewModel = new ViewModel();
+
+                                return $viewModel;
+    }
+
+    /**
+     * Gestionue action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function gestionueAction()
+    {
+        $viewModel = new ViewModel();
+
+                        return $viewModel;
+    }
+
+    /**
+     * Detailmodulepresence action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function detailmodulepresenceAction()
+    {
+        $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
+        return $viewModel;
+    }
+
+    /**
+     * Detailmodulevirtual action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function detailmodulevirtualAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+
         return $viewModel;
     }
 

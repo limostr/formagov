@@ -14,9 +14,9 @@ use Zend\View\Model\ViewModel;
 
 /**
  * UpdateController
- *
+ * 
  * Handles the UpdateController requests for the Pedagogie Module
- *
+ * 
  * @package Pedagogie\Controller
  */
 class UpdateController extends AbstractActionController
@@ -24,13 +24,25 @@ class UpdateController extends AbstractActionController
 
     /**
      * Index action for UpdateController
-     *
+     * 
      * @return ViewModel
      */
     public function indexAction()
     {
         $viewModel = new ViewModel();
 
+                return $viewModel;
+    }
+
+    /**
+     * Updateue action for UpdateController
+     *
+     * @return ViewModel
+     */
+    public function updateueAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
         return $viewModel;
     }
 

@@ -6,11 +6,13 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-
+$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 return [
     'service_manager' => [
         'factories' => [
             'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
+            'Pedagogie_Navigator' => 'Pedagogie\\Navigator\\Service\\PedagogieNavigationFactory' ,
+
         ],
     ],
     'view_manager' => [
@@ -61,30 +63,8 @@ return [
             ],
         ],
     ],
-    'navigation' => [
-        'default' => [
-            [
-                'label' => 'Formation',
-                'module' => 'pedagogie',
-                'controller' => 'show',
-                'action' => 'showdetailsformation',
-                'pages' => [
-                    [
-                        'label' => 'Details formations',
-                        'module' => 'pedagogie',
-                        'controller' => 'show',
-                        'action' => 'showdetailsformation',
-                    ],
-                    [
-                        'label' => 'Ajouter une formation',
-                        'module' => 'pedagogie',
-                        'controller' => 'create',
-                        'action' => 'addformation',
-                    ],
-                ],
-            ],
-        ],
-    ],
+    'navigation' => $navigation
+     ,
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [

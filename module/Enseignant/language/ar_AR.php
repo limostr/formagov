@@ -15,13 +15,6 @@
  */
 return [
     //Titre des pages
-   'Creation_Ens_Travail'=>'Ajouter un nouveau travail E-learning',
+   'Creation_Ens_Travail'=>'أضف المحتوى ',
 
-
-    //element form
-    'Ens_Trav_Type_Travail'=>'Type de travail',
-
-    ///element value
-
-    'Select_ChoixVide_Type_Trav'=>'Selectionnez un type de travail',
 ];

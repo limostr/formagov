@@ -67,7 +67,7 @@
         $.ajax({
             type:"POST",
             url:url ,
-            data:{id:param},
+            data:param,
             beforeSend :function(){
                 $('#formcontent').html("Encours...");
                 $('#myModal').modal('show');

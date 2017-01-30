@@ -13,7 +13,7 @@ use Zend\ModuleManager\Feature\InitProviderInterface;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-
+use Zend\Mvc\MvcEvent;
 /**
  * Module Ideeprojet
  *
@@ -69,7 +69,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
                     'Myhelper' => __DIR__ . '/../../vendor/Myhelper',
                     'Models\Tutorat\Model' => __DIR__ . '/../../models/tutorat/model',
                     'Models\ExTutorat' => __DIR__ . '/../../models/extutorat',
-
+                    'Ideeprojet\Navigator\Service' => __DIR__ . '/navigator/service',
                 ),
             ),
         );

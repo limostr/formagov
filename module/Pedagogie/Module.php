@@ -15,7 +15,7 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
 
-
+use Zend\Mvc\MvcEvent;
 /**
  * Module Pedagogie
  *
@@ -69,7 +69,6 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
         return array(
             'Zend\\Loader\\ClassMapAutoloader' => array(
                 __NAMESPACE__ => __DIR__ . '/autoload_classmap.php',
-
             ),
             'Zend\\Loader\\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -77,7 +76,9 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
                     'Myhelper' => __DIR__ . '/../../vendor/Myhelper',
                     'Models\Tutorat\Model' => __DIR__ . '/../../models/tutorat/model',
                     'Models\ExTutorat' => __DIR__ . '/../../models/extutorat',
+                    'Pedagogie\Navigator\Service' => __DIR__ . '/navigator/service',
                  ),
+
             ),
         );
     }

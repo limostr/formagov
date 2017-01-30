@@ -14,9 +14,9 @@ use Zend\View\Model\ViewModel;
 
 /**
  * CreateController
- *
+ * 
  * Handles the CreateController requests for the Enseignant Module
- *
+ * 
  * @package Enseignant\Controller
  */
 class CreateController extends AbstractActionController
@@ -24,10 +24,22 @@ class CreateController extends AbstractActionController
 
     /**
      * Index action for CreateController
-     *
+     * 
      * @return ViewModel
      */
     public function indexAction()
+    {
+        $viewModel = new ViewModel();
+
+                return $viewModel;
+    }
+
+    /**
+     * Createjob action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function createjobAction()
     {
         $viewModel = new ViewModel();
 

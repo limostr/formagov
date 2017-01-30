@@ -14,9 +14,9 @@ use Zend\View\Model\ViewModel;
 
 /**
  * CreateController
- * 
+ *
  * Handles the CreateController requests for the Pedagogie Module
- * 
+ *
  * @package Pedagogie\Controller
  */
 class CreateController extends AbstractActionController
@@ -24,7 +24,7 @@ class CreateController extends AbstractActionController
 
     /**
      * Index action for CreateController
-     * 
+     *
      * @return ViewModel
      */
     public function indexAction()
@@ -32,22 +32,22 @@ class CreateController extends AbstractActionController
         $viewModel = new ViewModel();
 
 
-                return $viewModel;
+                        return $viewModel;
     }
 
     /**
      * Addformation action for CreateController
-     * 
+     *
      * @return ViewModel
      */
     public function addformationAction()
     {
         $viewModel = new ViewModel();
-        $sm = $this->getServiceLocator();
-        $TypeFormationTable = $sm->get('Model\TypeformationTable');
-        $types=$TypeFormationTable->getPrincipalTypesFormation();
-        $viewModel->TypesFormation=$types;
-        return $viewModel;
+                $sm = $this->getServiceLocator();
+                $TypeFormationTable = $sm->get('Model\TypeformationTable');
+                $types=$TypeFormationTable->getPrincipalTypesFormation();
+                $viewModel->TypesFormation=$types;
+                return $viewModel;
     }
 
     /**
@@ -58,15 +58,28 @@ class CreateController extends AbstractActionController
     public function adddyntypeformAction()
     {
         $viewModel = new ViewModel();
+                $viewModel->setTerminal(true);
+                $id= $this->getRequest()->getPost('id');
+
+                $sm = $this->getServiceLocator();
+                $TypeFormationTable = $sm->get('Model\TypeformationTable');
+                $typesModel=array();
+                $TypeFormationTable->getModelTypeFormation($id,$typesModel);
+                $viewModel->ModelTypesFormation=$typesModel;
+
+
+                return $viewModel;
+    }
+
+    /**
+     * Createue action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function createueAction()
+    {
+        $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
-        $id= $this->getRequest()->getPost('id');
-
-        $sm = $this->getServiceLocator();
-        $TypeFormationTable = $sm->get('Model\TypeformationTable');
-        $typesModel=array();
-        $TypeFormationTable->getModelTypeFormation($id,$typesModel);
-        $viewModel->ModelTypesFormation=$typesModel;
-
 
         return $viewModel;
     }

@@ -13,6 +13,8 @@ use Zend\ModuleManager\Feature\InitProviderInterface;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Mvc\MvcEvent;
+
 
 /**
  * Module Enseignant
@@ -62,10 +64,12 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
         return array(
             'Zend\\Loader\\ClassMapAutoloader' => array(
                 __NAMESPACE__ => __DIR__ . '/autoload_classmap.php',
+
             ),
             'Zend\\Loader\\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    'Enseignant\Navigator\Service' => __DIR__ . '/navigator/service',
                 ),
             ),
         );
