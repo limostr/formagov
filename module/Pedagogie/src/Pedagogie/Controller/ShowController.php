@@ -42,10 +42,10 @@ class ShowController extends AbstractActionController
     public function getFormationTable()
     {
         if (!$this->formationsTable) {
-                                                            $sm = $this->getServiceLocator();
-                                                            $this->formationsTable = $sm->get('Model\AnneeunivTable');
-                                                        }
-                                                         return $this->formationsTable;
+            $sm = $this->getServiceLocator();
+            $this->formationsTable = $sm->get('Model\AnneeunivTable');
+        }
+         return $this->formationsTable;
     }
 
     /**
@@ -68,8 +68,8 @@ class ShowController extends AbstractActionController
     public function showdetailsmodulsAction()
     {
         $viewModel = new ViewModel();
-                                        $viewModel->setTerminal(true);
-                                        return $viewModel;
+        $viewModel->setTerminal(true);
+        return $viewModel;
     }
 
     /**
@@ -81,7 +81,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                                return $viewModel;
+        return $viewModel;
     }
 
     /**
@@ -93,7 +93,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                        return $viewModel;
+        return $viewModel;
     }
 
     /**
@@ -113,7 +113,7 @@ class ShowController extends AbstractActionController
      *
      * @return ViewModel
      */
-    public function detailmodulevirtualAction()
+       public function detailmodulevirtualAction()
     {
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
@@ -121,5 +121,40 @@ class ShowController extends AbstractActionController
         return $viewModel;
     }
 
+    /**
+     * listeformations action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function listeformationsAction()
+    {
+        $viewModel = new ViewModel();
+
+        return $viewModel;
+    }
+
+    /**
+     * showallue action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function showallueAction()
+    {
+        $viewModel = new ViewModel();
+
+        return $viewModel;
+    }
+
+    /**
+     * showallue action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function showenseignementueAction()
+    {
+        $viewModel = new ViewModel();
+
+        return $viewModel;
+    }
 
 }
