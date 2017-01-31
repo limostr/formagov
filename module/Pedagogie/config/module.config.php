@@ -61,30 +61,36 @@ return [
             ],
         ],
     ],
-    'navigation' => [
-        'default' => [
-            [
-                'label' => 'Formation',
-                'module' => 'pedagogie',
+    'navigation' => array(
+        'default' => array(
+
+            array(
+                'label'      => "Formation",
+                'module'     => 'pedagogie',
                 'controller' => 'show',
-                'action' => 'showdetailsformation',
-                'pages' => [
-                    [
-                        'label' => 'Details formations',
-                        'module' => 'pedagogie',
+                'action'     => 'listeformations',
+                'pages' => array(
+                    array(
+                        'label' => 'Liste formations',
+                        'module'     => 'pedagogie',
                         'controller' => 'show',
-                        'action' => 'showdetailsformation',
-                    ],
-                    [
+                        'action'     => 'listeformations',
+                    ),array(
+                        'label' => 'Details formations',
+                        'module'     => 'pedagogie',
+                        'controller' => 'show',
+                        'action'     => 'showdetailsformation',
+                    ),array(
                         'label' => 'Ajouter une formation',
-                        'module' => 'pedagogie',
+                        'module'     => 'pedagogie',
                         'controller' => 'create',
-                        'action' => 'addformation',
-                    ],
-                ],
-            ],
-        ],
-    ],
+                        'action'     => 'addformation',
+                    ),
+
+                ),
+            ),
+        ),
+    ),
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [

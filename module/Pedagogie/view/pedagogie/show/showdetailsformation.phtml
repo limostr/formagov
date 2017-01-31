@@ -65,9 +65,11 @@
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="nav nav-pills nav-stacked">
-                            <li role="presentation" class="active"><a href="#">Semestre 1</a></li>
-                            <li role="presentation"><a href="#">Semestre 2</a></li>
-                            <li role="presentation"><a href="#">Semestre 3</a></li>
+                            <li> <a href="#" onclick="AjaxLoader('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsmoduls','id'=>'s1'), null, true); ?>','s1','moduledesc');"><a href="#">Semestre 1</a></li>
+                            <li><a href="#" onclick="AjaxLoader('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsmoduls'), null, true); ?>','s2','moduledesc');">Semestre 2</a></li>
+                            <li><a href="#" onclick="AjaxLoader('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsmoduls'), null, true); ?>','s3','moduledesc');">Semestre 3</a></li>
+                            <li><a href="#" onclick="AjaxLoader('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsmoduls'), null, true); ?>','s4','moduledesc');">Semestre 4</a></li>
+
                         </ul>
                     </div>
                     <div class="col-md-9" id="moduledesc">
