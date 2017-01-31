@@ -7,7 +7,6 @@
  */
 
 
-return array(
-    'layout/default'           => __DIR__ . '/../../layouts/adminlte/layout/default.phtml',
-
-);
+return [
+    
+];

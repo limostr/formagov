@@ -1,0 +1,20 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+?>
+
+<?php foreach($ModelTypesFormation as $type):?>
+    <div class="form-group">
+        <label for="Type_<?=$type['idtypeformation']?>" class="col-sm-2 control-label text-blue"><?=$type['labeltype']?></label>
+        <div class="col-sm-10">
+            <input type="hidden" value="<?=$type['idtypeformation']?>" name="<?=$type['labeltype']?>">
+            <input type="text" class="form-control text-blue" name="Type_<?=$type['idtypeformation']?>">
+        </div>
+    </div>
+
+<?php endforeach;?>

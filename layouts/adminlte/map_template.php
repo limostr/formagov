@@ -17,6 +17,7 @@ return array(
     'layout/js'                 => __DIR__ . '/ressources/js.phtml',
     'layout/scriptjs'           => __DIR__ . '/ressources/scriptjs.phtml',
     'layout/table'              => __DIR__ . '/ressources/table.phtml',
+    'layout/default'             => __DIR__ . '/layout/default.phtml',
 
 
     'layout/map'                => __DIR__ . '/layout/corps/map.phtml',

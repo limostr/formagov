@@ -13,6 +13,7 @@ return [
         'Pedagogie',
         'Ideeprojet',
         'Enseignant',
+        'Superadmin',
     ],
     'module_listener_options' => [
         'module_paths' => [
