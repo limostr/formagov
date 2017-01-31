@@ -7,19 +7,21 @@
  */
 
 
-namespace Ideeprojet;
+namespace Enseignant;
 
 use Zend\ModuleManager\Feature\InitProviderInterface;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\MvcEvent;
+
+
 /**
- * Module Ideeprojet
+ * Module Enseignant
  *
- * Sets up and configures the Ideeprojet module
+ * Sets up and configures the Enseignant module
  *
- * @package Ideeprojet
+ * @package Enseignant
  */
 class Module implements InitProviderInterface, ConfigProviderInterface, AutoloaderProviderInterface
 {
@@ -33,8 +35,8 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
      */
     public function init(ModuleManagerInterface $manager)
     {
-        if (!defined('IDEEPROJET_MODULE_ROOT')) {
-            define('IDEEPROJET_MODULE_ROOT', realpath(__DIR__));
+        if (!defined('ENSEIGNANT_MODULE_ROOT')) {
+            define('ENSEIGNANT_MODULE_ROOT', realpath(__DIR__));
         }
     }
 
@@ -62,14 +64,12 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
         return array(
             'Zend\\Loader\\ClassMapAutoloader' => array(
                 __NAMESPACE__ => __DIR__ . '/autoload_classmap.php',
+
             ),
             'Zend\\Loader\\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                    'Myhelper' => __DIR__ . '/../../vendor/Myhelper',
-                    'Models\Tutorat\Model' => __DIR__ . '/../../models/tutorat/model',
-                    'Models\ExTutorat' => __DIR__ . '/../../models/extutorat',
-                    'Ideeprojet\Navigator\Service' => __DIR__ . '/navigator/service',
+                    'Enseignant\Navigator\Service' => __DIR__ . '/navigator/service',
                 ),
             ),
         );

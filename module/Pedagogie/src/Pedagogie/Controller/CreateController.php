@@ -11,7 +11,6 @@ namespace Pedagogie\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
- 
 
 /**
  * CreateController
@@ -33,7 +32,7 @@ class CreateController extends AbstractActionController
         $viewModel = new ViewModel();
 
 
-        return $viewModel;
+                        return $viewModel;
     }
 
     /**
@@ -44,11 +43,44 @@ class CreateController extends AbstractActionController
     public function addformationAction()
     {
         $viewModel = new ViewModel();
-        $Formation=new  \Pedagogie\Form\Formation();
+                $sm = $this->getServiceLocator();
+                $TypeFormationTable = $sm->get('Model\TypeformationTable');
+                $types=$TypeFormationTable->getPrincipalTypesFormation();
+                $viewModel->TypesFormation=$types;
+                return $viewModel;
+    }
 
-       // $Formation->get('submit')->setValue('Enregistrer');
+    /**
+     * Adddyntypeform action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function adddyntypeformAction()
+    {
+        $viewModel = new ViewModel();
+                $viewModel->setTerminal(true);
+                $id= $this->getRequest()->getPost('id');
 
-        $viewModel->setVariable("form",$Formation);
+                $sm = $this->getServiceLocator();
+                $TypeFormationTable = $sm->get('Model\TypeformationTable');
+                $typesModel=array();
+                $TypeFormationTable->getModelTypeFormation($id,$typesModel);
+                $viewModel->ModelTypesFormation=$typesModel;
+
+
+                return $viewModel;
+    }
+
+    /**
+     * Createue action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function createueAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+
         return $viewModel;
     }
 

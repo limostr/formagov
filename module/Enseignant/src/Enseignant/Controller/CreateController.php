@@ -7,23 +7,23 @@
  */
 
 
-namespace Pedagogie\Controller;
+namespace Enseignant\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 /**
- * UpdateController
+ * CreateController
  * 
- * Handles the UpdateController requests for the Pedagogie Module
+ * Handles the CreateController requests for the Enseignant Module
  * 
- * @package Pedagogie\Controller
+ * @package Enseignant\Controller
  */
-class UpdateController extends AbstractActionController
+class CreateController extends AbstractActionController
 {
 
     /**
-     * Index action for UpdateController
+     * Index action for CreateController
      * 
      * @return ViewModel
      */
@@ -35,14 +35,14 @@ class UpdateController extends AbstractActionController
     }
 
     /**
-     * Updateue action for UpdateController
+     * Createjob action for CreateController
      *
      * @return ViewModel
      */
-    public function updateueAction()
+    public function createjobAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
+
         return $viewModel;
     }
 

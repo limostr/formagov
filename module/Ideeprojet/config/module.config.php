@@ -6,8 +6,16 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 
 return [
+    'service_manager' => [
+        'factories' => [
+            'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
+            __NAMESPACE__.'_Navigator' => __NAMESPACE__.'\\Navigator\\Service\\'. __NAMESPACE__ .'NavigationFactory' ,
+
+        ],
+    ],
     'view_manager' => [
         'template_map' => include IDEEPROJET_MODULE_ROOT . '/template_map.php',
         'template_path_stack' => [
@@ -48,6 +56,8 @@ return [
             ],
         ],
     ],
+    'navigation' => $navigation
+    ,
     'translator' => array(
         'locale' => 'fr_FR',
         'translation_file_patterns' => array(

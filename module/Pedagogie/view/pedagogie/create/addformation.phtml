@@ -8,19 +8,11 @@
 
 
 ?>
-<?php
-//$this->h1('pedagogie_title_create');
-
-//$this->formationsDataForm->setAttribute('action', $this->url('pedagogie/create'));
-
- ///echo $this->bootstrapForm($this->form);
-?>
-<p>
-    <a class="btn btn-primary" href="<?php echo $this->url('pedagogie'); ?>">
-        <i class="fa fa-table"></i>
-        <?php echo $this->translate('pedagogie_action_index'); ?>
-    </a>
-</p>
+ <script type="text/javascript">
+     function getTypeFormations(typeformations){
+         AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"create","action"=>"adddyntypeform"),null,true)?>',typeformations,'detailformation');
+     }
+ </script>
 
 <div class="row">
     <div class="col-md-8">
@@ -28,33 +20,64 @@
             <div class="box-header"></div>
             <div class="box-body">
                 <h1><?php echo $this->titre?></h1>
-                <form role="form">
-                    <div class="box-body">
+                <form action="" method="post" name="formation">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Type de formation</label>
-                            <select class="form-control" name="type"
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <input type="file" id="exampleInputFile">
+                            <label class="col-sm-3 control-label"  for="exampleInputEmail1">Diplôme</label>
+                            <div class="col-sm-9">
+                            <Select class="form-control" name="idtypeformation" onchange="getTypeFormations($(this).val())">
+                                <option value=""><?=$this->translate('Selectioner_une_valeur')?></option>
+                                <?php foreach($TypesFormation as $type): ?>
+                                        <option value="<?=$type->idtypeformation?>"><?=$type->labeltype?></option>
+                                <?php endforeach;?>
+                            </Select>
+                            </div>
+                         </div>
+                    <hr>
+                        <div id="detailformation">
 
-                            <p class="help-block">Example block-level help text here.</p>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Check me out
-                            </label>
+                    <hr>
+                    <div class="form-group">
+                        <label for="abrev" class="col-sm-3 control-label"><?=$this->translate('abrev')?></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="abrev">
                         </div>
                     </div>
-                    <!-- /.box-body -->
-
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="codeformationuvt" class="col-sm-3 control-label"><?=$this->translate('codeformationuvt')?></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="codeformationuvt">
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label for="codeformationmis" class="col-sm-3 control-label"><?=$this->translate('codeformationmis')?></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="codeformationmis">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siteweb" class="col-sm-3 control-label"><?=$this->translate('siteweb')?></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="siteweb">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modeformation" class="col-sm-3 control-label"><?=$this->translate('modeformation')?></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="modeformation">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-2 control-label"><?=$this->translate('description')?></label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="description" cols="25" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" name="save" value="Enregistrer">
+
                 </form>
 
             </div>

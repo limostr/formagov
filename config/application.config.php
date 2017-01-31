@@ -12,6 +12,7 @@ return [
         'Application',
         'Pedagogie',
         'Ideeprojet',
+        'Enseignant',
     ],
     'module_listener_options' => [
         'module_paths' => [

@@ -10,20 +10,16 @@ return  array(
     'default' => array(
         array()
     ),
-    'Pedagogie_Navigator' => array(
+    'Ideeprojet_Navigator' => array(
 
         array(
+
             'label'      => "Formation",
             'module'     => 'pedagogie',
             'controller' => 'show',
-            'action'     => 'listeformations',
+            'action'     => 'showdetailsformation',
             'pages' => array(
                 array(
-                    'label' => 'Liste formations',
-                    'module'     => 'pedagogie',
-                    'controller' => 'show',
-                    'action'     => 'listeformations',
-                ),array(
                     'label' => 'Details formations',
                     'module'     => 'pedagogie',
                     'controller' => 'show',

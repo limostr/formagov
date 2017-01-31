@@ -7,42 +7,35 @@
  */
 
 $navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
+
 return [
     'service_manager' => [
         'factories' => [
             'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
-            'Pedagogie_Navigator' => 'Pedagogie\\Navigator\\Service\\PedagogieNavigationFactory' ,
-
+            'Enseignant_Navigator' => 'Enseignant\\Navigator\\Service\\EnseignantNavigationFactory' ,
         ],
     ],
     'view_manager' => [
-        'template_map' => include PEDAGOGIE_MODULE_ROOT . '/template_map.php',
+        'template_map' => include ENSEIGNANT_MODULE_ROOT . '/template_map.php',
         'template_path_stack' => [
-            PEDAGOGIE_MODULE_ROOT . '/view',
+            ENSEIGNANT_MODULE_ROOT . '/view',
         ],
     ],
     'controllers' => [
         'invokables' => [
-            'Pedagogie\\Show' => 'Pedagogie\\Controller\\ShowController',
-            'Pedagogie\\Create' => 'Pedagogie\\Controller\\CreateController',
-            'Pedagogie\\Update' => 'Pedagogie\\Controller\\UpdateController',
-            'Pedagogie\\Delete' => 'Pedagogie\\Controller\\DeleteController',
-            'Pedagogie\\Save' => 'Pedagogie\\Controller\\SaveController',
-            'Pedagogie\\Dashboard' => 'Pedagogie\\Controller\\DashboardController',
-        ],
-        'factories' => [
-            
+            'Enseignant\\Create' => 'Enseignant\\Controller\\CreateController',
+            'Enseignant\\Show' => 'Enseignant\\Controller\\ShowController',
         ],
     ],
     'router' => [
         'routes' => [
-            'pedagogie' => [
+            'enseignant' => [
                 'type' => 'Literal',
                 'options' => [
-                    'route' => '/pedagogie',
+                    'route' => '/enseignant',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Pedagogie',
-                        'controller' => 'Show',
+                        '__NAMESPACE__' => 'Enseignant',
+                        'controller' => 'Create',
                         'action' => 'index',
                     ],
                 ],
@@ -73,14 +66,6 @@ return [
                 'base_dir' => __DIR__ . '/../language',
                 'pattern' => '%s.php',
             ],
-        ],
-    ],
-    'form_elements' => [
-        'factories' => [
-            
-        ],
-        'invokables' => [
-            'pedagogieFormation' => 'Pedagogie\\Form\\Formation',
         ],
     ],
 ];

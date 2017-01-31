@@ -7,3 +7,125 @@
  */
 
 ?>
+
+<script type="text/javascript">
+    function getAddUe(idsemestre,idformation){
+        AjaxLoader("<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>","0",'moduledesc');
+    }
+</script>
+<button type="button" class="btn btn-info pull-right"  onclick="getAddUe('1','2');"><i class="fa fa-edit"></i> <?=$this->translate('DetailModule_Btn_AjoutModule')?></button>
+<br>
+<hr>
+<table class="table table-bordered">
+    <thead>
+        <tr class="bg-purple-gradient text-center">
+            <!--UE-->
+            <th>Code_Ue</th>
+            <th>Libelle</th>
+            <th>Cr</th>
+            <th>Coef</th>
+            <th>Nat</th>
+            <th>Rg</th>
+            <th>Action</th>
+            <!--FIN UE-->
+            <!--ECUE-->
+            <th>Eléments d'enseignements</th>
+
+            <!--FIN ECUE-->
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <!--UE-->
+        <td>1325035</td>
+        <td>Unité fondamentale</td>
+        <td>7</td>
+        <td>6</td>
+        <td>Fond</td>
+        <td>MX</td>
+        <td>
+
+            <!--Debut action menu-->
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Liste</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#"><i class="fa fa-eye"></i>Details</a></li>
+                    <li><a href="#">Modifier</a></li>
+                    <li><a href="#">Details e-learning</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Details présentielle</a></li>
+                </ul>
+            </div>
+
+            <!---->
+
+        </td>
+        <!--FIN UE-->
+        <!--ECUE-->
+        <td>
+            <table class="table table-bordered">
+                <thead>
+                <!--ECUE-->
+                <tr class="bg-green-gradient">
+
+                    <th>Code_ECUE</th>
+                    <th>Libelle</th>
+                    <th>Cr</th>
+                    <th>Coef</th>
+                    <th>Rg</th>
+                    <th>Action</th>
+                </tr>
+                <!--FIN ECUE-->
+                </thead>
+                <tbody>
+                <!--ECUE-->
+                <tr>
+
+                    <td>113250164</td>
+                    <td>gestion de la production</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>MX</td>
+                    <td>
+                        <!--Debut action menu-->
+                        <div class="btn-group">
+                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Liste</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action'=>'detailmodulepresence'))?>',{id:2,Type:'ECUE'});"><i class="fa fa-eye"></i>Details</a></li>
+                                <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'update','action'=>'updateue'))?>',{id:2,Type:'ECUE'});">Modifier</a></li>
+                                <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action'=>'detailmodulevirtual'))?>',{id:2,Type:'ECUE'});">Details e-learning</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Details présentielle</a></li>
+                            </ul>
+                        </div>
+
+                        <!---->
+
+                    </td>
+                </tr>
+                <!--FIN ECUE-->
+                <!--ECUE-->
+                <tr>
+
+                    <td>113250165</td>
+                    <td>marketing</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>MX</td>
+                    <td>Action</td>
+                </tr>
+                <!--FIN ECUE-->
+                </tbody>
+            </table>
+        </td>
+
+        <!--FIN ECUE-->
+    </tr>
+    </tbody>
+ </table>
