@@ -31,6 +31,18 @@ class DashboardController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+                return $viewModel;
+    }
+
+    /**
+     * Infogenform action for DashboardController
+     *
+     * @return ViewModel
+     */
+    public function infogenformAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
         return $viewModel;
     }
 
