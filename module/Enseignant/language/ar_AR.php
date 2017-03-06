@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * ZF2rapid skeleton application
  *

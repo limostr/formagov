@@ -43,24 +43,6 @@ class Periode implements InputFilterAwareInterface
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'idpereperiode',
-			'required' => false,
-			'filters'  => array(
-			array('name' => 'StripTags'),
-			array('name' => 'StringTrim'),
-			),
-			'validators' => array(
-			array(
-			'name'    => 'StringLength',
-			'options' => array(
-			'encoding' => 'utf8',
-			'min'      => 1,
-			'max'      => 25,
-				),
-				),
-				),
-				)));
-				            $inputFilter->add($factory->createInput(array(
 			'name'       => 'idlevelformation',
 			'required'   => true,
 			'filters' => array(

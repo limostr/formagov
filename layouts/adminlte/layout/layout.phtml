@@ -19,6 +19,7 @@
  $temp=$this->viewModel()->getCurrent()->getChildren()[0]->getTemplate();
  $array = explode("/",$temp);
  $CURRENT_MODULE_NAME=$array[0];
+
  ?>
 <div class="wrapper">
     <header class="main-header">
@@ -36,15 +37,11 @@
         <?php
         //Menue administrateur
          $this->navigation($CURRENT_MODULE_NAME.'_Navigator')->menu()->setUlClass("treeview-menu");
-        $string=  $this->navigation($CURRENT_MODULE_NAME.'_Navigator')->menu() ->setTranslator($this->plugin('translate')->getTranslator())
-
-
+        $string=  $this->navigation($CURRENT_MODULE_NAME.'_Navigator')
+            ->menu()
+            ->setTranslator($this->plugin('translate')
+            ->getTranslator())
             ->renderMenu(null,array('maxDepth'   =>  0));
-         if(is_string($string)) {
-            $string = str_replace(array('{{', '}}', '||'), array('<','>', '"'), $string);
-        }
-
-
 
         ?>
 <?=\Myhelper\Template::GenView("layout/mainsidebar",'layouts/adminlte/map_template.php' ,array('menuadmin'=>$string) )?>

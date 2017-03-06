@@ -1,4 +1,5 @@
-<?php /* <body><pre>
+<?php
+declare(strict_types = 1); /* <body><pre>
 
 -------------------------------------------------------------------------------------------
   CKEditor - Posted Data

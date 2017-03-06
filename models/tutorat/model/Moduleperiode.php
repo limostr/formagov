@@ -8,7 +8,7 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
 
-class Utilisateur implements InputFilterAwareInterface
+class Moduleperiode implements InputFilterAwareInterface
 {
     protected $inputFilter;
 
@@ -25,22 +25,33 @@ class Utilisateur implements InputFilterAwareInterface
             $factory = new InputFactory();
             
             $inputFilter->add($factory->createInput(array(
-			'name'     => 'idpersonnes',
-			'required' => true,
+			'name'       => 'idmoduleperiode',
+			'required'   => true,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'       => 'idModule',
+			'required'   => true,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'       => 'idperiodeformation',
+			'required'   => true,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'     => 'descmoduleperiode',
+			'required' => false,
 			'filters'  => array(
 			array('name' => 'StripTags'),
 			array('name' => 'StringTrim'),
 			),
-			'validators' => array(
-			array(
-			'name'    => 'StringLength',
-			'options' => array(
-			'encoding' => 'utf8',
-			'min'      => 1,
-			'max'      => 25,
-				),
-				),
-				),
 				)));
 				 
 

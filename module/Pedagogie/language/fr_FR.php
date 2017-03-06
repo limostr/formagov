@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * ZF2rapid skeleton application
  *
@@ -62,4 +63,8 @@ return [
     'update_ue_cr'=>'Credit',
     'update_ue_coef'=>'Coefecient',
     'update_ue_rg'=>'Régime',
+    'prerequis_ue'=>"Pré-requis<small> (définir les UE et les compétences indispensables pour suivre l’UE concernée)</small>",
+    'elelement_ue'=>"Eléments constitutifs de l’UE <small>(ECUE)</small>",
+
+
 ];

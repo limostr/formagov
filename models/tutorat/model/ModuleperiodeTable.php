@@ -6,10 +6,10 @@ use Zend\Db\TableGateway\AbstractTableGateway,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\Sql\Select;
 
-class UtilisateurTable extends AbstractTableGateway
+class ModuleperiodeTable extends AbstractTableGateway
 {
-    protected $table ='utilisateur';
-    protected $tableName ='utilisateur';
+    protected $table ='moduleperiode';
+    protected $tableName ='moduleperiode';
 
     public function qi($name)  { return $this->adapter->platform->quoteIdentifier($name); }
     
@@ -18,7 +18,7 @@ class UtilisateurTable extends AbstractTableGateway
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
-        $this->resultSetPrototype = new ResultSet(new Utilisateur);
+        $this->resultSetPrototype = new ResultSet(new Moduleperiode);
 
         $this->initialize();
     }
@@ -36,7 +36,7 @@ class UtilisateurTable extends AbstractTableGateway
     public function getSelect(&$select,$columnsArray=array()) 
     {
     	$select = new Select;
-    	return $select->from('utilisateur')->columns($columnsArray);    	
+    	return $select->from('moduleperiode')->columns($columnsArray);    	
     }
     
     public function createIfNotExist($checkColumnsArray,$optionalColumns=array(),&$isRowCreated=null) {
@@ -52,7 +52,7 @@ class UtilisateurTable extends AbstractTableGateway
     			$id=$this->lastInsertValue;
     			$isRowCreated=true;
     		} else {
-    			$id=$row->idpersonnes;
+    			$id=$row->idmoduleperiode;
     			$isRowCreated=false;
     		}
     		return $id;
@@ -62,7 +62,7 @@ class UtilisateurTable extends AbstractTableGateway
     
     public function createEmptyRow() {
     	$row=array(
-    	'idpersonnes' => null
+    	'idmoduleperiode' => null
     	);
     	$affectedRows=$this->insert($row);
  		if ($affectedRows != 1) {
@@ -72,10 +72,10 @@ class UtilisateurTable extends AbstractTableGateway
     	return $id;
 	}
     
-    public function getUtilisateur($id)
+    public function getModuleperiode($id)
     {
         $id  = (int) $id;
-        $rowset = $this->select(array('idpersonnes' => $id));
+        $rowset = $this->select(array('idmoduleperiode' => $id));
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -83,9 +83,18 @@ class UtilisateurTable extends AbstractTableGateway
         return $row;
     }
     
-     public function matchUtilisateur()
+     public function matchModuleperiode($idModule, $idperiodeformation, $descmoduleperiode)
     {
         $select = $this->getSelect();
+                if ($idModule != null) {
+        	$select->where->like('idModule' ,'%'.$idModule.'%');
+        }
+                if ($idperiodeformation != null) {
+        	$select->where->like('idperiodeformation' ,'%'.$idperiodeformation.'%');
+        }
+                if ($descmoduleperiode != null) {
+        	$select->where->like('descmoduleperiode' ,'%'.$descmoduleperiode.'%');
+        }
                 $statement = $this->getSql()->prepareStatementForSqlObject($select);
         $result = $statement->execute();
         $ret = $result->current();
@@ -99,41 +108,52 @@ class UtilisateurTable extends AbstractTableGateway
     }
     
 
-    public function saveUtilisateur(Utilisateur $utilisateur)
+    public function saveModuleperiode(Moduleperiode $moduleperiode)
     {
         $data = array(
-        	        );
+        	            'idModule' => $moduleperiode->idModule,
+                        'idperiodeformation' => $moduleperiode->idperiodeformation,
+                        'descmoduleperiode' => $moduleperiode->descmoduleperiode,
+                    );
 
-        $id = (int)$utilisateur->id;
+        $id = (int)$moduleperiode->id;
         if ($id == 0) {
             $this->insert($data);
         } else {
-            if ($this->getUtilisateur($id)) {
-                $this->update($data, array('idpersonnes' => $id));
+            if ($this->getModuleperiode($id)) {
+                $this->update($data, array('idmoduleperiode' => $id));
             } else {
                 throw new \Exception('Form id does not exit');
             }
         }
     }
 
-    public function addUtilisateur()
+    public function addModuleperiode($idModule, $idperiodeformation, $descmoduleperiode = null)
     {
-        $data = array(        );
+        $data = array(            'idModule' => $idModule,
+                        'idperiodeformation' => $idperiodeformation,
+                    );
+                if ($descmoduleperiode != null) {
+        	$data['descmoduleperiode'] = $descmoduleperiode;
+        }
                 $affectedRows=$this->insert($data);
                 return $affectedRows;
             }
     
    
-    public function updateUtilisateur($idpersonnes, )
+    public function updateModuleperiode($idmoduleperiode, $idModule, $idperiodeformation, $descmoduleperiode)
     {
         $data = array(
-        	                );
-        $this->update($data, array(idpersonnes => $id));
+        	            'idModule' => $moduleperiode->idModule,
+                        'idperiodeformation' => $moduleperiode->idperiodeformation,
+                        'descmoduleperiode' => $moduleperiode->descmoduleperiode,
+                            );
+        $this->update($data, array(idmoduleperiode => $id));
     }
 
-    public function deleteUtilisateur($id)
+    public function deleteModuleperiode($id)
     {
-        $this->delete(array('idpersonnes' => $id));
+        $this->delete(array('idmoduleperiode' => $id));
     }
 
 }

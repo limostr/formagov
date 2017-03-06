@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -39,8 +40,6 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
             define('PEDAGOGIE_MODULE_ROOT', realpath(__DIR__));
 
         }
-
-
 
     }
 
@@ -97,7 +96,21 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new \Models\ExTutorat\ExTypeformationTable($dbAdapter);
                     return $table;
+                },'Model\FormationTable'=> function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new \Models\ExTutorat\ExFormationsTable($dbAdapter);
+                    return $table;
                 },
+                'Model\NiveauformationTable'=> function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new \Models\ExTutorat\ExNiveauformationTable($dbAdapter);
+                    return $table;
+                },'Model\LevelformationTable'=> function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new \Models\ExTutorat\ExLevelformationTable($dbAdapter);
+                    return $table;
+                },
+
 
             ),
         );

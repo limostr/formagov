@@ -1,0 +1,69 @@
+
+
+<script type="text/javascript">
+    function treeconstractor(){
+        $("#tree").fancytree({
+            source: {
+                url: "<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'whowjsonformation','select'=>'formation'))?>"
+            },
+            lazyload: function(e, data){
+
+                data.result = $.ajax({
+                    url: "<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'treeformation','select'=>'formation'))?>",
+                    dataType: "json"
+                });
+            },
+            click: function(event, data) {
+                //  alert(data.node.key);
+                $("#selectedformation").html(data.node.tooltip);
+                var keydata=data.node.key;
+                var keysplit=keydata.split("_");
+                var url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?> ";
+                if(keysplit[0]=="NIV"){
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gniveau','action'=>'parametrageniveau'))?>/idniv/"+data.node.key;
+                }else if(keysplit[0]=="PERE"){
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/niveau/"+data.node.key;
+                }else if(keysplit[0]=="GPERE"){
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/niveau/"+data.node.key;
+                }else if(keysplit[0]=="SEM"){
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/sem/"+data.node.key;
+                }else{
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/id/"+data.node.key;
+                }
+
+                $.ajax({
+                    type:"POST",
+                    url: url,
+                    data:{
+                        niveau:data.node.key
+                        ,anneescolaire:1
+                    },
+                    beforeSend :function(){
+                        $('#maincontent').html("Encours...");
+                    },
+                    success:function(response){
+                        $('#maincontent').html(response);
+                    }
+                });
+                //save in session the key of formation choisie
+            }
+        });
+
+
+    }
+
+    $(function(){
+        treeconstractor();
+       // AjaxLoader('<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage','niveau'=>'GPERE_PR'))?>', 'ajax','formation_content');
+
+
+    });
+
+
+
+
+</script>
+
+<div id="formation_content">
+
+</div>

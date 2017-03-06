@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 // A list of permitted file extensions
 $allowed = array('png', 'jpg', 'gif','zip');

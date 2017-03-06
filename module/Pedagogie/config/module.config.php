@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -7,12 +8,12 @@
  */
 
 $navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
+
 return [
     'service_manager' => [
         'factories' => [
             'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
-            'Pedagogie_Navigator' => 'Pedagogie\\Navigator\\Service\\PedagogieNavigationFactory' ,
-
+            'Pedagogie_Navigator' => 'Pedagogie\\Navigator\\Service\\PedagogieNavigationFactory',
         ],
     ],
     'view_manager' => [
@@ -21,6 +22,9 @@ return [
             PEDAGOGIE_MODULE_ROOT . '/view',
         ],
     ],
+    'strategies' => array(
+        'ViewJsonStrategy',
+    ),
     'controllers' => [
         'invokables' => [
             'Pedagogie\\Show' => 'Pedagogie\\Controller\\ShowController',
@@ -29,6 +33,7 @@ return [
             'Pedagogie\\Delete' => 'Pedagogie\\Controller\\DeleteController',
             'Pedagogie\\Save' => 'Pedagogie\\Controller\\SaveController',
             'Pedagogie\\Dashboard' => 'Pedagogie\\Controller\\DashboardController',
+            'Pedagogie\\Anneeuniv' => 'Pedagogie\\Controller\\AnneeunivController',
         ],
         'factories' => [
             
@@ -64,7 +69,7 @@ return [
         ],
     ],
     'navigation' => $navigation
-     ,
+    ,
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [

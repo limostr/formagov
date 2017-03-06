@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -67,7 +68,7 @@
                             </table>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-info"><i class="fa fa-eye"></i> </a>
+                            <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation'), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
                             <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
                             <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
 
@@ -111,7 +112,7 @@
                                 </table>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-info"><i class="fa fa-eye"></i> </a>
+                                <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation'), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
                                 <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
                                 <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
 
@@ -155,7 +156,7 @@
                                    </table>
                                </td>
                                <td>
-                                   <a href="#" class="btn btn-info"><i class="fa fa-eye"></i> </a>
+                                   <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation'), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
                                    <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
                                    <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
 
@@ -170,4 +171,28 @@
 
 
     </div>
+</div>
+<pre>
+    <?php print_r($formations)?>
+</pre>
+<div class="row">
+<div class="col-md-12">
+    <div class="box">
+        <div class="box-body">
+            <?php foreach ($listeformation as $formation):?>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><?=$formation->labeltype?> : <?=$formation->Label?></th>
+                        </tr>
+                    </thead>
+                </table>
+            <?php endforeach;?>
+        </div>
+
+
+    </div>
+</div>
+
+
 </div>

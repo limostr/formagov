@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * DataTables example server-side processing script.

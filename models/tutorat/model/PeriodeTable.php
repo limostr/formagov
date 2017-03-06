@@ -83,12 +83,9 @@ class PeriodeTable extends AbstractTableGateway
         return $row;
     }
     
-     public function matchPeriode($idpereperiode, $idlevelformation, $labelperiode, $descperiode)
+     public function matchPeriode($idlevelformation, $labelperiode, $descperiode)
     {
         $select = $this->getSelect();
-                if ($idpereperiode != null) {
-        	$select->where->like('idpereperiode' ,'%'.$idpereperiode.'%');
-        }
                 if ($idlevelformation != null) {
         	$select->where->like('idlevelformation' ,'%'.$idlevelformation.'%');
         }
@@ -114,8 +111,7 @@ class PeriodeTable extends AbstractTableGateway
     public function savePeriode(Periode $periode)
     {
         $data = array(
-        	            'idpereperiode' => $periode->idpereperiode,
-                        'idlevelformation' => $periode->idlevelformation,
+        	            'idlevelformation' => $periode->idlevelformation,
                         'labelperiode' => $periode->labelperiode,
                         'descperiode' => $periode->descperiode,
                     );
@@ -132,13 +128,10 @@ class PeriodeTable extends AbstractTableGateway
         }
     }
 
-    public function addPeriode($idlevelformation, $idpereperiode = null, $labelperiode = null, $descperiode = null)
+    public function addPeriode($idlevelformation, $labelperiode = null, $descperiode = null)
     {
         $data = array(            'idlevelformation' => $idlevelformation,
                     );
-                if ($idpereperiode != null) {
-        	$data['idpereperiode'] = $idpereperiode;
-        }
                 if ($labelperiode != null) {
         	$data['labelperiode'] = $labelperiode;
         }
@@ -150,11 +143,10 @@ class PeriodeTable extends AbstractTableGateway
             }
     
    
-    public function updatePeriode($idperiode, $idpereperiode, $idlevelformation, $labelperiode, $descperiode)
+    public function updatePeriode($idperiode, $idlevelformation, $labelperiode, $descperiode)
     {
         $data = array(
-        	            'idpereperiode' => $periode->idpereperiode,
-                        'idlevelformation' => $periode->idlevelformation,
+        	            'idlevelformation' => $periode->idlevelformation,
                         'labelperiode' => $periode->labelperiode,
                         'descperiode' => $periode->descperiode,
                             );
