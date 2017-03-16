@@ -1,0 +1,90 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<script type="text/javascript">
+    function getAddUe(idsemestre,idformation){
+        AjaxLoader("<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createcalend'))?>","0",'moduledesc');
+    }
+
+    function getGestCalendrier(idsemestre,idformation){
+        AjaxLoader("<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createcalend'))?>","0",'moduledesc');
+    }
+</script>
+<button type="button" class="btn btn-info pull-right"  onclick="getAddUe('1','2');"><i class="fa fa-edit"></i> <?=$this->translate('DetailModule_Btn_AjoutModule')?></button>
+<br>
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <table class="table table-bordered">
+                <tr>
+                    <th class="bg-aqua">Année Universitaire</th>
+                    <td>2016-2017</td>
+                </tr>
+
+                <tr>
+                    <th class="bg-aqua">Formation</th>
+                    <td>Licence Fondamentale en gestion Comptable
+                        Troisième année -LGC</td>
+                </tr>
+
+                <tr>
+                    <th class="bg-aqua">Coordinateur :</th>
+                    <td>
+                        <b>Nom & Prénom : </b><br>
+                        <b>Email :</b><br>
+                        <b>Tel:</b>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="bg-aqua">Journée de travail avec les tuteur</th>
+                    <td>29 Septembre 2015-de 9h à 10h30</td>
+                </tr>
+                <tr>
+                    <th class="bg-aqua">Date de démarrage de la formation</th>
+                    <td>29 Septembre 2015-de 11h à 13h</td>
+                </tr>
+                <tr class="bg-blue-active text-center">
+                    <th>Semestre 1</th>
+                    <td>Du 29/09/2015 au 24/01/2016</td>
+                </tr>
+                <tr>
+                    <td>Semestre 1 /Période 1<br>
+                        Regroupement présentiel 1<br>
+                        Regroupement présentiel 2<br>
+                        DS1 : après 3 semaines<br>
+                        DS 2 : après 6 semaines<br>
+                        Date des examens (session principale)<br>
+                        Délibération (Affichage le résultat)</td>
+                    <td>Du 29/09/2015 au 22/11/2015<br>
+                        Voir calendrier détaillé sur Espace étudiants et Espace<br>
+                        Administration-Tuteurs<br>
+                        27-28 novembre 2015<br>
+                        18 décembre 2016</td>
+                </tr>
+
+
+                <tr class="bg-blue-active text-center">
+                    <th>Semestre 2</th>
+                    <td>Du 01/02/2016 au 29/05/2016</td>
+                </tr>
+                <tr class="bg-purple-gradient text-center">
+                    <th>Periode</th>
+                    <th>Activité</th>
+                </tr>
+
+                </table>
+
+
+
+
+        </div>
+    </div>
+</div>

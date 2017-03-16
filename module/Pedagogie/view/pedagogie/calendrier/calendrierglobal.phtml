@@ -1,0 +1,102 @@
+<?php
+declare(strict_types = 1);
+
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        AjaxLoader('caldetailglob','0','moduledesc');
+
+        $('ul.nav.nav-pills li a').click(function() {
+            $(this).parent().addClass('active').siblings().removeClass('active');
+        });
+    });
+
+    function getSemestreModule(idsemestre){
+        AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"calendrier","action"=>"caldetailglob"),null,true)?>',idsemestre,'moduledesc');
+
+    }
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-book text-aqua"></i> <?=$this->translate('details_formation')?></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <table class="table">
+                            <thead>
+                            <tr class="bg-light-blue">
+                                <th>Type Diplôme</th>
+                                <td>Licence Appliquée</td>
+                            </tr>
+                            <tr>
+                                <th>Domaine</th>
+                                <td>Sciences économiques et de gestion</td>
+                            </tr>
+                            <tr>
+                                <th>Mention</th>
+                                <td>Management</td>
+                            </tr>
+                            <tr>
+                                <th>Spécialité</th>
+                                <td>gestion des petites et moyennes entreprises </td>
+                            </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="box-header">
+                                <?=$this->translate('description_formation')?>
+                            </div>
+                            <div class="box-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Liste des modules-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-cubes text-green"></i> <?=$this->translate('details_modules')?></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active" ><a href="#" onclick="getSemestreModule('S1')">Semestre 1</a></li>
+                            <li><a href="#" onclick="getSemestreModule('S2')">Semestre 2</a></li>
+                            <li><a href="#" onclick="getSemestreModule('S3')">Semestre 3</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9" id="moduledesc">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Fin liste des modules-->
