@@ -124,12 +124,7 @@ class EnseignantsTable extends AbstractTableGateway
             }
     
    
-    public function updateEnseignants($idpersonnes, )
-    {
-        $data = array(
-        	                );
-        $this->update($data, array(idpersonnes => $id));
-    }
+
 
     public function deleteEnseignants($id)
     {
