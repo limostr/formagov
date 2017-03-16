@@ -160,22 +160,6 @@ class EnseignementelearningTable extends AbstractTableGateway
             }
     
    
-    public function updateEnseignementelearning($array('idactiviteelearning', 'idTypeenseignement', 'idModule'), $idactiviteelearning, $idTypeenseignement, $idModule, $seuileval, $descengelearning, $remarqueee)
-    {
-        $data = array(
-        	            'idactiviteelearning' => $enseignementelearning->idactiviteelearning,
-                        'idTypeenseignement' => $enseignementelearning->idTypeenseignement,
-                        'idModule' => $enseignementelearning->idModule,
-                        'seuileval' => $enseignementelearning->seuileval,
-                        'descengelearning' => $enseignementelearning->descengelearning,
-                        'remarqueee' => $enseignementelearning->remarqueee,
-                            );
-        $this->update($data, array(array('idactiviteelearning', 'idTypeenseignement', 'idModule') => $id));
-    }
 
-    public function deleteEnseignementelearning($id)
-    {
-        $this->delete(array('array('idactiviteelearning', 'idTypeenseignement', 'idModule')' => $id));
-    }
 
 }
