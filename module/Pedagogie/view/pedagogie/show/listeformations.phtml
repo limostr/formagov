@@ -27,165 +27,50 @@ declare(strict_types = 1);
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="box">
-            <div class="box-header">
-<h3>Listes des formations</h3>
-            </div>
-            <div class="box-body">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Foramtion</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>LAM</td>
-                        <td>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th>Type Diplôme</th>
-                                    <td>Licence Appliquée</td>
-                                </tr>
-                                <tr>
-                                    <th>Domaine</th>
-                                    <td>Sciences économiques et de gestion</td>
-                                </tr>
-                                <tr>
-                                    <th>Mention</th>
-                                    <td>Management</td>
-                                </tr>
-                                <tr>
-                                    <th>Spécialité</th>
-                                    <td>gestion des petites et moyennes entreprises</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation'), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
-                            <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
-                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
-
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-               <div class="box-body">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Foramtion</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>MPSQ</td>
-                            <td>
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <th>Type Diplôme</th>
-                                        <td>Licence Appliquée</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Domaine</th>
-                                        <td>Sciences économiques et de gestion</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Mention</th>
-                                        <td>Administration des affaires</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Spécialité</th>
-                                        <td>Gestion de la PME</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                            <td>
-                                <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation'), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
-                                <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
-                                <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
-
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                   <div class="box-body">
-                       <table class="table table-hover">
-                           <thead>
-                           <tr>
-                               <th>Foramtion</th>
-                               <th>Description</th>
-                               <th>Action</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           <tr>
-                               <td>LASTIC</td>
-                               <td>
-                                   <table class="table">
-                                       <tbody>
-                                       <tr>
-                                           <th>Type Diplôme</th>
-                                           <td>Master</td>
-                                       </tr>
-                                       <tr>
-                                           <th>Domaine</th>
-                                           <td>technologies des télécommunications</td>
-                                       </tr>
-                                       <tr>
-                                           <th>Mention</th>
-                                           <td>les réseaux téléinformatiques</td>
-                                       </tr>
-                                       <tr>
-                                           <th>Spécialité</th>
-                                           <td>Gestion de la PME</td>
-                                       </tr>
-                                       </tbody>
-                                   </table>
-                               </td>
-                               <td>
-                                   <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation'), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
-                                   <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
-                                   <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
-
-                               </td>
-                           </tr>
-                           </tbody>
-                       </table>
-
-            </div>
-
-        </div>
 
 
-    </div>
-</div>
-<pre>
-    <?php print_r($formations)?>
-</pre>
+<!--pre>
+    <?php //print_r($formations)?>
+</pre-->
 <div class="row">
 <div class="col-md-12">
     <div class="box">
         <div class="box-body">
-            <?php foreach ($listeformation as $formation):?>
-                <table class="table table-bordered">
+            <div class="box-header">
+                <h3>Listes des formations</h3>
+            </div>
+            <?php foreach ($formations as $key => $formation):?>
+                <table class="table table-bordered table-responsive">
                     <thead>
-                        <tr>
-                            <th><?=$formation->labeltype?> : <?=$formation->Label?></th>
+                        <tr class="bg-blue">
+                            <th colspan="4" style="text-align: center;"><?=$key?></th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php foreach ($formation as $keyParcours => $Parcours):?>
+                            <tr>
+                                <td class="col-md-3"><?=$Parcours['tooltip']?> <?=$Parcours['title']?></td>
+                                <td class="col-md-7">
+                                    <!--Table descriptif de la formation-->
+                                    <table class="table bg-light-blue">
+                                        <?php foreach ($Parcours['description'] as $keydesc => $desc):?>
+                                            <tr>
+                                                <td class="col-md-4"><?=$desc['type']?></td>
+                                                <td class="col-md-8"><?=$desc['label']?></td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    </table>
+                                </td>
+                                <td class="col-md-2">
+                                    <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation','id'=>$Parcours['key']), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
+                                    <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
+                                    <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
+
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                    </tbody>
+
                 </table>
             <?php endforeach;?>
         </div>

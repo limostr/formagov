@@ -76,18 +76,24 @@ class ExFormationsTable extends FormationsTable
         $selector = new \Zend\Db\Sql\Select ;
         $selector->from('typeformation');
         $selector->where(array("idtypeformation"=>$idtype));
-         $result = $this->selectWith($selector);
-        list($key,$val)=each($result);
-print_r($val);
-        return $val->labeltype;
+
+        $result = $this->executeSelect($selector);
+        $rec=$result->current();
+        if($rec){
+
+            return $rec->labeltype;
+        }else{
+            return "";
+        }
+
     }
 
-   public function getdetailsformation(&$formation,$id="",$idsingne="",$typedepere=""){
-
-
+   public function getdetailsformation(&$formation,$id="",$idsingne="",$typedepere="",&$Parent=array()){
 
        if(empty($id)){
-             $listeformation=$this->getThisFormation("",true,$idsingne);
+
+           $listeformation=$this->getThisFormation("",true,$idsingne);
+
          }else{
              $listeformation=$this->getThisFormation($id,true,$idsingne);
          }
@@ -106,6 +112,10 @@ print_r($val);
                  $formation1["labeltype"]=$this->getTypeFormation($value['idtypeformation']);
                  $formation1['typepere']=$typedepere;
                  $formation1["folder"]= "true";
+
+                 $Parent[$value['idtypeformation']]=array('type'=>$this->getTypeFormation($value['idtypeformation']),'label'=>$value['value']);
+                 $formation1["description"]= $Parent;
+
 
                  $niveau=array();
 
@@ -134,17 +144,19 @@ print_r($val);
 
                      $formation1['niveau'][]=$niv;
                  }
-                 $formation[]=$formation1;
+                 $formation[$typedepere][]=$formation1;
                  $formation1=array();
              }else{
-                 $typeprincipale="";
-                    if(!$value['pere']){
-                      $typeprincipale=$value['idtypeformation']  ;
+
+                    if(empty($value['pere'])){
+                        $typedepere=$value['value']  ;
+                        $Parent=array();
                     }
-                 $this->getdetailsformation($formation ,$value['key'],"",$typeprincipale);
+                 $Parent[$value['idtypeformation']]=array('type'=>$this->getTypeFormation($value['idtypeformation']),'label'=>$value['value']);
+
+                 $this->getdetailsformation($formation ,$value['key'],"",$typedepere,$Parent);
              }
          }
-
    }
 
    public function getformation($idpere=NULL){

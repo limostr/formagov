@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -33,7 +32,7 @@ class CreateController extends AbstractActionController
         $viewModel = new ViewModel();
 
 
-                        return $viewModel;
+                                        return $viewModel;
     }
 
     /**
@@ -44,11 +43,11 @@ class CreateController extends AbstractActionController
     public function addformationAction()
     {
         $viewModel = new ViewModel();
-                $sm = $this->getServiceLocator();
-                $TypeFormationTable = $sm->get('Model\TypeformationTable');
-                $types=$TypeFormationTable->getPrincipalTypesFormation();
-                $viewModel->TypesFormation=$types;
-                return $viewModel;
+                                $sm = $this->getServiceLocator();
+                                $TypeFormationTable = $sm->get('Model\TypeformationTable');
+                                $types=$TypeFormationTable->getPrincipalTypesFormation();
+                                $viewModel->TypesFormation=$types;
+                                return $viewModel;
     }
 
     /**
@@ -59,17 +58,17 @@ class CreateController extends AbstractActionController
     public function adddyntypeformAction()
     {
         $viewModel = new ViewModel();
-                $viewModel->setTerminal(true);
-                $id= $this->getRequest()->getPost('id');
+                                $viewModel->setTerminal(true);
+                                $id= $this->getRequest()->getPost('id');
 
-                $sm = $this->getServiceLocator();
-                $TypeFormationTable = $sm->get('Model\TypeformationTable');
-                $typesModel=array();
-                $TypeFormationTable->getModelTypeFormation($id,$typesModel);
-                $viewModel->ModelTypesFormation=$typesModel;
+                                $sm = $this->getServiceLocator();
+                                $TypeFormationTable = $sm->get('Model\TypeformationTable');
+                                $typesModel=array();
+                                $TypeFormationTable->getModelTypeFormation($id,$typesModel);
+                                $viewModel->ModelTypesFormation=$typesModel;
 
 
-                return $viewModel;
+                                return $viewModel;
     }
 
     /**
@@ -80,7 +79,31 @@ class CreateController extends AbstractActionController
     public function createueAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
+                        $viewModel->setTerminal(true);
+
+                        return $viewModel;
+    }
+
+    /**
+     * Createcalend action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function createcalendAction()
+    {
+        $viewModel = new ViewModel();
+                $viewModel->setTerminal(true);
+                return $viewModel;
+    }
+
+    /**
+     * Configdiplome action for CreateController
+     *
+     * @return ViewModel
+     */
+    public function configdiplomeAction()
+    {
+        $viewModel = new ViewModel();
 
         return $viewModel;
     }

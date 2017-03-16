@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -7,7 +6,6 @@ declare(strict_types = 1);
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 
 return [
     'service_manager' => [
@@ -22,9 +20,9 @@ return [
             PEDAGOGIE_MODULE_ROOT . '/view',
         ],
     ],
-    'strategies' => array(
+    'strategies' => [
         'ViewJsonStrategy',
-    ),
+    ],
     'controllers' => [
         'invokables' => [
             'Pedagogie\\Show' => 'Pedagogie\\Controller\\ShowController',
@@ -36,7 +34,7 @@ return [
             'Pedagogie\\Anneeuniv' => 'Pedagogie\\Controller\\AnneeunivController',
         ],
         'factories' => [
-            
+            'Pedagogie\\Calendrier' => 'Pedagogie\\Controller\\CalendrierControllerFactory',
         ],
     ],
     'router' => [
@@ -60,7 +58,7 @@ return [
                             'constraints' => [
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id' => '[0-9_-]*',
+                                'id' => '[0-9A-Za-z_-]*',
                             ],
                         ],
                     ],
@@ -68,8 +66,55 @@ return [
             ],
         ],
     ],
-    'navigation' => $navigation
-    ,
+    'navigation' => [
+        'Pedagogie_Navigator' => [
+            [
+                'label' => 'Habilitation formation',
+                'module' => 'pedagogie',
+                'controller' => 'show',
+                'action' => 'listeformations',
+                'icon' => 'fa fa-building',
+                'pages' => [
+                    [
+                        'label' => 'Liste formations',
+                        'module' => 'pedagogie',
+                        'controller' => 'show',
+                        'action' => 'listeformations',
+                        'icon' => 'fa fa-building',
+                    ],
+                    [
+                        'label' => 'Details formations',
+                        'module' => 'pedagogie',
+                        'controller' => 'show',
+                        'action' => 'showdetailsformation',
+                        'icon' => 'fa fa-building',
+                        'visible' => false,
+                    ],
+                    [
+                        'label' => 'Ajouter une formation',
+                        'module' => 'pedagogie',
+                        'controller' => 'create',
+                        'action' => 'addformation',
+                        'icon' => 'fa fa-building',
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Gestion des formations',
+                'module' => 'pedagogie',
+                'controller' => 'show',
+                'action' => 'whowtreeformation',
+                'icon' => 'fa fa-building',
+            ],
+            [
+                'label' => 'Année Universitaire',
+                'module' => 'pedagogie',
+                'controller' => 'anneeuniv',
+                'action' => 'Listeformations',
+                'icon' => 'fa fa-building',
+            ],
+        ],
+    ],
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [
