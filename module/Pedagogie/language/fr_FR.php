@@ -67,4 +67,17 @@ return [
     'elelement_ue'=>"Eléments constitutifs de l’UE <small>(ECUE)</small>",
 
 
+    "Type_Activite"=>"Type d'activé",
+    "Select_Modules"=>"ECUE",
+    "Plan_Cours"=>"Plan de cours",
+    "Date_Debut"=>"Date debut",
+    "Date_Fin"=>"Date Fin",
+    "Heur_debut"=>"Heure de debut",
+    "Heur_fin"=>"Heure de fin",
+    "date"=>"Date",
+    "heur"=>"Heure",
+    "Description"=>"Description",
+    "Titre_event"=>"titre de l'evénement"
+
+
 ];

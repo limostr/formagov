@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -12,8 +11,6 @@ namespace Pedagogie\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\View\Model\ConsoleModel; // if use ConsoleMode
-use Zend\View\Model\JsonModel; // if use JSON
 
 /**
  * ShowController
@@ -35,8 +32,8 @@ class ShowController extends AbstractActionController
     public function indexAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->annees=$this->getFormationTable()->fetchAll();
-        return $viewModel;
+                $viewModel->annees=$this->getFormationTable()->fetchAll();
+                return $viewModel;
     }
 
     /**
@@ -45,10 +42,10 @@ class ShowController extends AbstractActionController
     public function getFormationTable()
     {
         if (!$this->formationsTable) {
-            $sm = $this->getServiceLocator();
-            $this->formationsTable = $sm->get('Model\AnneeunivTable');
-        }
-         return $this->formationsTable;
+                    $sm = $this->getServiceLocator();
+                    $this->formationsTable = $sm->get('Model\AnneeunivTable');
+                }
+                 return $this->formationsTable;
     }
 
     /**
@@ -60,7 +57,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-        return $viewModel;
+                return $viewModel;
     }
 
     /**
@@ -71,8 +68,8 @@ class ShowController extends AbstractActionController
     public function showdetailsmodulsAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
-        return $viewModel;
+                $viewModel->setTerminal(true);
+                return $viewModel;
     }
 
     /**
@@ -84,7 +81,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                        return $viewModel;
+                                return $viewModel;
     }
 
     /**
@@ -96,7 +93,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                        return $viewModel;
+                                return $viewModel;
     }
 
     /**
@@ -107,8 +104,8 @@ class ShowController extends AbstractActionController
     public function detailmodulepresenceAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
-        return $viewModel;
+                $viewModel->setTerminal(true);
+                return $viewModel;
     }
 
     /**
@@ -119,22 +116,21 @@ class ShowController extends AbstractActionController
     public function detailmodulevirtualAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
+                $viewModel->setTerminal(true);
 
-        return $viewModel;
+                return $viewModel;
     }
 
-
-
-    private function getDescFormation(&$listeformation,$idpere=Null){
+    private function getDescFormation(&$listeformation, $idpere = null)
+    {
         $sm = $this->getServiceLocator();
 
-        $_TableFormation = $sm->get('Model\FormationTable');
+                $_TableFormation = $sm->get('Model\FormationTable');
 
-        if(!empty($idpere)){
+                if(!empty($idpere)){
 
-        }
-        $_TableFormation->getformation();
+                }
+                $_TableFormation->getformation();
     }
 
     /**
@@ -146,13 +142,13 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-        $sm = $this->getServiceLocator();
-        $_listeformation = $sm->get('Model\FormationTable');
-        $viewModel->listeformation=$_listeformation->getformation();
-        $formations=array();
-        $_listeformation->getdetailsformation($formations);
-        $viewModel->formations=$formations;
-        return $viewModel;
+                $sm = $this->getServiceLocator();
+                $_listeformation = $sm->get('Model\FormationTable');
+                $viewModel->listeformation=$_listeformation->getformation();
+                $formations=array();
+                $_listeformation->getdetailsformation($formations);
+                $viewModel->formations=$formations;
+                return $viewModel;
     }
 
     /**
@@ -164,7 +160,7 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                        return $viewModel;
+                                return $viewModel;
     }
 
     /**
@@ -176,116 +172,122 @@ class ShowController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                        return $viewModel;
+                                return $viewModel;
     }
 
     /**
      * Whowjsonformation action for ShowController
-     *
+     * 
      * @return ViewModel
      */
-
-    private function contructtree(&$formation,$id="",$idsingne=""){
-
-
+    private function contructtree(&$formation, $id = '', $idsingne = '')
+    {
         $sm = $this->getServiceLocator();
-        $_listeformation = $sm->get('Model\FormationTable');
-        $_listeniveau= $sm->get('Model\NiveauformationTable');
-        $_listLevel= $sm->get('Model\LevelformationTable');
+                $_listeformation = $sm->get('Model\FormationTable');
+                $_listeniveau= $sm->get('Model\NiveauformationTable');
+                $_listLevel= $sm->get('Model\LevelformationTable');
 
-        if(empty($id)){
-            $listeformation=$_listeformation->getThisFormation("",true,$idsingne);
-        }else{
-            $listeformation=$_listeformation->getThisFormation($id,true,$idsingne);
-        }
-         //print_r($listeformation);
-        foreach ($listeformation as $key => $value){
-            $tmplist=$_listeformation->getThisFormation($value['key']);
-
-            if ($tmplist->count()==0){
-                $formation1=array();
-                $formation1["key"]= $value['key'];
-                $formation1["title"]= $value['abrev'];
-                $formation1["tooltip"]= $value['value'];
-                $formation1["iconclass"]= "fa fa-graduation-cap text-green";
-
-                $formation1["folder"]= "true";
-                $niveau=array();
-
-                $niveau=$_listeniveau->getNiveau($value['key']);
-
-                foreach ($niveau as $keyniv => $valniv){
-                    $niv=array();
-                    $niv["key"]= "NIV_".$valniv['idniveauformation'];
-                    $niv["title"]= $valniv['labelnivformation'];
-                    $niv["tooltip"]= $value['value'].'('.$valniv['labelnivformation'].')' ;
-                    $niv["iconclass"]= "fa fa-tags text-yellow";
-
-                    $semestres=$_listLevel->getPeriode($valniv['idlevelformation']);
-
-                    foreach ($semestres as  $semestre){
-                        $sem=array();
-                        $sem["key"]= "SEM_".$semestre['idperiode']."_".$valniv['idlevelformation']."_".$valniv['idniveauformation'];
-                        $sem["title"]= $semestre['labelperiode'];
-                        $sem["tooltip"]= $semestre['labelperiode'];
-                        $sem["iconclass"]= "fa fa-calendar-check-o text-red";
-                        $niv['children'][]=$sem;
-                    }
-                    if(isset($niv['children']) && count($niv['children'])>0){
-                        $niv["folder"]= "true";
-                    }else{
-                        $niv["folder"]= "false";
-                    }
-
-                    $formation1['children'][]=$niv;
+                if(empty($id)){
+                    $listeformation=$_listeformation->getThisFormation("",true,$idsingne);
+                }else{
+                    $listeformation=$_listeformation->getThisFormation($id,true,$idsingne);
                 }
-                $formation[]=$formation1;
-                $formation1=array();
-            }else{
-                $formation1=array();
-                $formation1["key"]= "PERE_".$value['key'];
-                $formation1["title"]= $value['abrev'];
-                $formation1["tooltip"]= $value['value'];
-                $formation1["folder"]= "true";
-                $formation1['children']=array();
-                $formation1["iconclass"]= "fa fa-folder text-purple";
+                 //print_r($listeformation);
+                foreach ($listeformation as $key => $value){
+                    $tmplist=$_listeformation->getThisFormation($value['key']);
 
-                $this->contructtree($formation1['children'],$value['key']);
-                $formation[]=$formation1;
-            }
-        }
+                    if ($tmplist->count()==0){
+                        $formation1=array();
+                        $formation1["key"]= $value['key'];
+                        $formation1["title"]= $value['abrev'];
+                        $formation1["tooltip"]= $value['value'];
+                        $formation1["iconclass"]= "fa fa-graduation-cap text-green";
 
+                        $formation1["folder"]= "true";
+                        $niveau=array();
+
+                        $niveau=$_listeniveau->getNiveau($value['key']);
+
+                        foreach ($niveau as $keyniv => $valniv){
+                            $niv=array();
+                            $niv["key"]= "NIV_".$valniv['idniveauformation'];
+                            $niv["title"]= $valniv['labelnivformation'];
+                            $niv["tooltip"]= $value['value'].'('.$valniv['labelnivformation'].')' ;
+                            $niv["iconclass"]= "fa fa-tags text-yellow";
+
+                            $semestres=$_listLevel->getPeriode($valniv['idlevelformation']);
+
+                            foreach ($semestres as  $semestre){
+                                $sem=array();
+                                $sem["key"]= "SEM_".$semestre['idperiode']."_".$valniv['idlevelformation']."_".$valniv['idniveauformation'];
+                                $sem["title"]= $semestre['labelperiode'];
+                                $sem["tooltip"]= $semestre['labelperiode'];
+                                $sem["iconclass"]= "fa fa-calendar-check-o text-red";
+                                $niv['children'][]=$sem;
+                            }
+                            if(isset($niv['children']) && count($niv['children'])>0){
+                                $niv["folder"]= "true";
+                            }else{
+                                $niv["folder"]= "false";
+                            }
+
+                            $formation1['children'][]=$niv;
+                        }
+                        $formation[]=$formation1;
+                        $formation1=array();
+                    }else{
+                        $formation1=array();
+                        $formation1["key"]= "PERE_".$value['key'];
+                        $formation1["title"]= $value['abrev'];
+                        $formation1["tooltip"]= $value['value'];
+                        $formation1["folder"]= "true";
+                        $formation1['children']=array();
+                        $formation1["iconclass"]= "fa fa-folder text-purple";
+
+                        $this->contructtree($formation1['children'],$value['key']);
+                        $formation[]=$formation1;
+                    }
+                }
     }
 
     public function whowjsonformationAction()
     {
-
-
-
         $allform=array();
 
-        $currentformation="";
-         $this->contructtree($allform,"",$currentformation);
-        $formation1["key"]= "GPERE_IDEtab";
-        $formation1["title"]= "Gestion des formations";
-        $formation1["tooltip"]= "Universite Virtuelle de Tunis";
-        $formation1["folder"]= "true";
-        $formation1['iconclass']="fa fa-briefcase text-green";
-        $formation1['children']=$allform;
-        $form[]=$formation1;
-        echo \Zend\Json\Encoder::encode($form);
-        $viewModel = new ViewModel();
+                $currentformation="";
+                 $this->contructtree($allform,"",$currentformation);
+                $formation1["key"]= "GPERE_IDEtab";
+                $formation1["title"]= "Gestion des formations";
+                $formation1["tooltip"]= "Universite Virtuelle de Tunis";
+                $formation1["folder"]= "true";
+                $formation1['iconclass']="fa fa-briefcase text-green";
+                $formation1['children']=$allform;
+                $form[]=$formation1;
+                echo \Zend\Json\Encoder::encode($form);
+                $viewModel = new ViewModel();
 
-        $viewModel->setTerminal(true);
-        return $viewModel;
+                $viewModel->setTerminal(true);
+                return $viewModel;
     }
 
     /**
      * Whowtreeformation action for ShowController
-     *
+     * 
      * @return ViewModel
      */
     public function whowtreeformationAction()
+    {
+        $viewModel = new ViewModel();
+
+                return $viewModel;
+    }
+
+    /**
+     * Configdiplome action for ShowController
+     *
+     * @return ViewModel
+     */
+    public function configdiplomeAction()
     {
         $viewModel = new ViewModel();
 
