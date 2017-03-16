@@ -4,7 +4,7 @@ declare(strict_types = 1);
 ?>
 <script type="text/javascript">
     $(document).ready(function () {
-        AjaxLoader('showdetailsmoduls','0','moduledesc');
+        AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>','S1','moduledesc');
 
         $('ul.nav.nav-pills li a').click(function() {
             $(this).parent().addClass('active').siblings().removeClass('active');

@@ -6,6 +6,7 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 
 return [
     'service_manager' => [
@@ -32,6 +33,7 @@ return [
             'Pedagogie\\Save' => 'Pedagogie\\Controller\\SaveController',
             'Pedagogie\\Dashboard' => 'Pedagogie\\Controller\\DashboardController',
             'Pedagogie\\Anneeuniv' => 'Pedagogie\\Controller\\AnneeunivController',
+            'Pedagogie\\Config' => 'Pedagogie\\Controller\\ConfigController',
         ],
         'factories' => [
             'Pedagogie\\Calendrier' => 'Pedagogie\\Controller\\CalendrierControllerFactory',
@@ -66,55 +68,7 @@ return [
             ],
         ],
     ],
-    'navigation' => [
-        'Pedagogie_Navigator' => [
-            [
-                'label' => 'Habilitation formation',
-                'module' => 'pedagogie',
-                'controller' => 'show',
-                'action' => 'listeformations',
-                'icon' => 'fa fa-building',
-                'pages' => [
-                    [
-                        'label' => 'Liste formations',
-                        'module' => 'pedagogie',
-                        'controller' => 'show',
-                        'action' => 'listeformations',
-                        'icon' => 'fa fa-building',
-                    ],
-                    [
-                        'label' => 'Details formations',
-                        'module' => 'pedagogie',
-                        'controller' => 'show',
-                        'action' => 'showdetailsformation',
-                        'icon' => 'fa fa-building',
-                        'visible' => false,
-                    ],
-                    [
-                        'label' => 'Ajouter une formation',
-                        'module' => 'pedagogie',
-                        'controller' => 'create',
-                        'action' => 'addformation',
-                        'icon' => 'fa fa-building',
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Gestion des formations',
-                'module' => 'pedagogie',
-                'controller' => 'show',
-                'action' => 'whowtreeformation',
-                'icon' => 'fa fa-building',
-            ],
-            [
-                'label' => 'Année Universitaire',
-                'module' => 'pedagogie',
-                'controller' => 'anneeuniv',
-                'action' => 'Listeformations',
-                'icon' => 'fa fa-building',
-            ],
-        ],
-    ],
+    'navigation' => $navigation,
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [

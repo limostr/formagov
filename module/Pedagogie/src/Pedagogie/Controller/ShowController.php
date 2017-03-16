@@ -68,8 +68,8 @@ class ShowController extends AbstractActionController
     public function showdetailsmodulsAction()
     {
         $viewModel = new ViewModel();
-                $viewModel->setTerminal(true);
-                return $viewModel;
+        $viewModel->setTerminal(true);
+        return $viewModel;
     }
 
     /**

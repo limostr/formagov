@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -13,30 +12,34 @@ return [
     'service_manager' => [
         'factories' => [
             'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
-            'Enseignant_Navigator' => 'Enseignant\\Navigator\\Service\\EnseignantNavigationFactory' ,
+            'Commun_Navigator' => 'Pedagogie\\Navigator\\Service\\CommunNavigationFactory',
         ],
     ],
+    'navigation' => $navigation
+    ,
     'view_manager' => [
-        'template_map' => include ENSEIGNANT_MODULE_ROOT . '/template_map.php',
+        'template_map' => include COMMUN_MODULE_ROOT . '/template_map.php',
         'template_path_stack' => [
-            ENSEIGNANT_MODULE_ROOT . '/view',
+            COMMUN_MODULE_ROOT . '/view',
         ],
     ],
     'controllers' => [
-        'invokables' => [
-            'Enseignant\\Create' => 'Enseignant\\Controller\\CreateController',
-            'Enseignant\\Show' => 'Enseignant\\Controller\\ShowController',
+        'factories' => [
+            'Commun\\Formations' => 'Commun\\Controller\\FormationsControllerFactory',
         ],
     ],
+    'strategies' => array(
+        'ViewJsonStrategy',
+    ),
     'router' => [
         'routes' => [
-            'enseignant' => [
+            'commun' => [
                 'type' => 'Literal',
                 'options' => [
-                    'route' => '/enseignant',
+                    'route' => '/commun',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Enseignant',
-                        'controller' => 'Create',
+                        '__NAMESPACE__' => 'Commun',
+                        'controller' => 'Formations',
                         'action' => 'index',
                     ],
                 ],
@@ -54,18 +57,6 @@ return [
                         ],
                     ],
                 ],
-            ],
-        ],
-    ],
-    'navigation' => $navigation
-    ,
-    'translator' => [
-        'locale' => 'fr_FR',
-        'translation_file_patterns' => [
-            [
-                'type' => 'phpArray',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern' => '%s.php',
             ],
         ],
     ],

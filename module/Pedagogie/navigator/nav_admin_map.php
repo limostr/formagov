@@ -49,6 +49,22 @@ return  array(
             'icon' => 'fa fa-building',
         ),
         array(
+            'label'      => "Administration & configuration",
+            'module'     => 'pedagogie',
+            'controller' => 'config',
+            'action'     => 'tableaudesfonctions',
+            'icon' => 'fa fa-building',
+            'pages' => array(
+                array(
+                    'label' => 'Ajouter un Model de formation',
+                    'module'     => 'pedagogie',
+                    'controller' => 'create',
+                    'action'     => 'addformation',
+                    'icon' => 'fa fa-building',
+                ),
+            ),
+        ),
+        array(
             'label'      => "Année Universitaire",
             'module'     => 'pedagogie',
             'controller' => 'anneeuniv',
