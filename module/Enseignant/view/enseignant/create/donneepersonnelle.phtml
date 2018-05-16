@@ -1,0 +1,227 @@
+<?php
+$flash=$this->flashMessenger()
+    ->setMessageOpenFormat('<div%s>')
+    ->setMessageSeparatorString('')
+    ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("Saisie des information personnel");
+$form = $this->form;
+$form->setAttribute('action', $this->url("enseignant/controller-action",array("controller"=>"save","action"=>"donneepersonnelle"),array("query"=>array("lng"=>($this->langue=="ar_AR" ? "ar" : 'fr'))),true));
+
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+?>
+<div class="row">
+
+    <div class="col-md-12" <?=$this->langue=="ar_AR" ? "dir='rtl'" : '' ?>>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3><?=$this->translate("enseignants_title_create",null,$this->langue)?></h3>
+
+            </div>
+            <div class="box-body">
+                <?php
+                    echo $this->form()->openTag($form);
+                    echo $flash->render('save_enseignants',array('btn', 'btn-danger'));
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend><?=$this->translate("enseignants_legende_Identiter",null,$this->langue)?></legend>
+                            <div class="form-group">
+                                <?php
+                                    $elt = $form->get('cin');
+                                    echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                    echo $this->formInput($elt);
+                                    echo $this->formElementErrors($elt);
+                                    echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('datelivrecin');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formDate($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('matricule');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formInput($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('typematricule');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formSelect($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('rib');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formInput($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend><?=$this->translate("enseignants_legende_Identiter",null,$this->langue)?></legend>
+                            <div class="form-group">
+                                <?php
+                                    $elt = $form->get('nom');
+                                    echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                    echo $this->formInput($elt);
+                                    echo $this->formElementErrors($elt);
+                                    echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('prenom');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formInput($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('civilite');
+                                //echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+
+                                echo $this->formRadio($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('datedenaissance');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formDate($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $elt = $form->get('lieudenaissance');
+                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                echo $this->formInput($elt);
+                                echo $this->formElementErrors($elt);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+
+                        </fieldset>
+                </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                            <fieldset>
+                                <legend></legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <?php
+                                        $elt = $form->get('adress');
+                                        echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                        echo $this->formTextarea($elt);
+                                        echo $this->formElementErrors($elt);
+                                        echo $formLabel->closeTag();
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <?php
+                                        $elt = $form->get('pays');
+                                        echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                        echo $this->formInput($elt);
+                                        echo $this->formElementErrors($elt);
+                                        echo $formLabel->closeTag();
+                                        ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <?php
+                                        $elt = $form->get('ville');
+                                        echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                        echo $this->formInput($elt);
+                                        echo $this->formElementErrors($elt);
+                                        echo $formLabel->closeTag();
+                                        ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <?php
+                                        $elt = $form->get('codepostal');
+                                        echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                        echo $this->formInput($elt);
+                                        echo $this->formElementErrors($elt);
+                                        echo $formLabel->closeTag();
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <?php
+                                            $elt = $form->get('telfix');
+                                            echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                            echo $this->formInput($elt);
+                                            echo $this->formElementErrors($elt);
+                                            echo $formLabel->closeTag();
+                                            ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <?php
+                                            $elt = $form->get('telportable');
+                                            echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                            echo $this->formInput($elt);
+                                            echo $this->formElementErrors($elt);
+                                            echo $formLabel->closeTag();
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+                <?php
+                echo $this->formElement($form->get('save_enseignants'));
+                echo $this->form()->closeTag();
+
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

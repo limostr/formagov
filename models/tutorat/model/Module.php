@@ -82,13 +82,6 @@ class Module implements InputFilterAwareInterface
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
-			'name'       => 'credit',
-			'required'   => false,
-			'filters' => array(
-			array('name'    => 'Int'),
-			),
-			)));
-			            $inputFilter->add($factory->createInput(array(
 			'name'     => 'idRegime',
 			'required' => true,
 			'filters'  => array(
@@ -120,6 +113,123 @@ class Module implements InputFilterAwareInterface
 			'encoding' => 'utf8',
 			'min'      => 1,
 			'max'      => 25,
+				),
+				),
+				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'       => 'credit',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'     => 'codeue',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
+				),
+				),
+				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'titremodule',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'noteeleminatoire',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
+				),
+				),
+				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'descriptionecue',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'       => 'nbrscience',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'       => 'nbroption',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'     => 'resumer',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'codemes',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
+				),
+				),
+				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'codemoodle',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
 				),
 				),
 				),

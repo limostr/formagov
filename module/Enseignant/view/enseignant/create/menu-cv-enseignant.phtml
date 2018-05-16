@@ -1,0 +1,145 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<script type="text/javascript">
+    AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"aide-saisie-dossier-enseignat"),null,true)?>',1,'contentcv')
+</script>
+<div class="row">
+    <div class="col-md-2">
+
+        <div class="box box-solid">
+            <div class="box-header with-border bg-blue">
+                <h3 class="box-title">Mon CV</h3>
+
+                <div class="box-tools ">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=>"donneepersonnelle" ),array('query'=>array("lng"=>"fr_FR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                           <?=$this->translate("Menu_CV_Titre_InfoGenerale",null,"fr_FR")?>
+                        </a>
+                    </li>
+
+                    <li><a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=>"donneepersonnelle" ),array('query'=>array("lng"=>"fr_FR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Titre_Depotimageprofile",null,"fr_FR")?>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=>"compte-utilisateur"),null,true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Compte",null,"fr_FR")?>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"gest-diplome-enseignant"),null,true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Diplome",null,"fr_FR")?>
+                        </a>
+                    </li>
+                 </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+
+
+        <div class="box box-solid">
+            <div class="box-header with-border bg-green">
+                <h3 class="box-title"><?=$this->translate("Menu_CV_InformationPro",null,"fr_FR")?> </h3>
+
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"grades-enseignants"),null,true)?>',1,'contentcv')"><i class="fa fa-trophy"></i>Mes Competences</a></li>
+                    <li><a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"gest-info-pro-dossier"),null,true)?>',1,'contentcv')"><i class="fa fa-star"></i>Mes spécialités </a> </li>
+                    <li><a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"gest-info-pro-dossier"),null,true)?>',1,'contentcv')"><i class="fa fa-mortar-board"></i>Mon expérience d'enseignement</a></li>
+                    <li><a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"gest-info-pro-dossier"),null,true)?>',1,'contentcv')"><i class="fa fa-user-secret"></i>Mon expérience professionnel </a></li>
+                </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+        <div class="box box-solid">
+            <div class="box-header with-border bg-green">
+                <h3 class="box-title"><?=$this->translate("Menu_CV_InformationUvt",null,"fr_FR")?> </h3>
+
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#"><i class="fa  fa-book"></i>J'ai assuré des formations </a></li>
+                    <li><a href="#"><i class="fa  fa-book"></i>J'ai suivi des formations </a></li>
+                    <li><a href="#"><i class="fa  fa-book"></i>Mes traveaux </a></li>
+                </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+    </div>
+    <div class="col-md-8" id="contentcv">
+
+    </div>
+
+    <div class="col-md-2" id="contentcv">
+        <div class="box box-solid" dir="rtl">
+            <div class="box-header with-border bg-blue">
+                <h3 class="box-title"><?=$this->translate("Menu_CV_Titre_InfoGenerale",null,"ar_AR")?></h3>
+
+                <div style="position: absolute;left: 10px;top: 5px;">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=> "donneepersonnelle" ),array('query'=>array("lng"=>"ar_AR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_InformationPersonnel",null,'ar_AR')?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=>"info-pro-dossier-ar" ),array('query'=>array("lng"=>"ar_AR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Titre_InfoProfissionnel",null,'ar_AR')?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=>"diplome-enseignant" ),array('query'=>array("lng"=>"ar_AR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Titre_DiplomeEns",null,'ar_AR')?>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"gest-depot-dossier-papier" ),array('query'=>array("lng"=>"ar_AR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Titre_DossierDepot",null,'ar_AR')?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"imprimer-demande-heur-enseigne" ),array('query'=>array("lng"=>"ar_AR")),true)?>',1,'contentcv')"><i class="fa fa-user"></i>
+                            <?=$this->translate("Menu_CV_Titre_Imprimerdemande",null,'ar_AR')?>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>

@@ -71,7 +71,15 @@ class Niveauformation implements InputFilterAwareInterface
 			array('name'    => 'Int'),
 			),
 			)));
-			 
+			            $inputFilter->add($factory->createInput(array(
+			'name'     => 'autreinfonivform',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				 
 
             $this->inputFilter = $inputFilter;        
         }

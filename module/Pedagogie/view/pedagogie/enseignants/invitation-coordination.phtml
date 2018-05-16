@@ -1,0 +1,367 @@
+<?php
+
+//print_r($this->form);die();
+//print_r($this->rows->toArray());die();
+$diplomeactive="";
+$formationactive="59";
+$this->naturecoordination->buffer();
+?>
+
+<script type="text/javascript">
+    $(function(){
+
+
+        var optmyform = {
+            beforeSend: function()  { },
+            uploadProgress: function(event, position, total, percentComplete) { },
+            success: function() { },
+            complete: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                if(obj.status=="success"){
+                    var msg;
+
+
+                    if(obj.Envoi=='Oui'){
+                        sendEmail(obj.idinvitation);
+                        msg="Envoi effetuer avec succés";
+                    }else{
+                        msg="Invitation déjà envoyer, procédé a re-envoyer l'email";
+                    }
+                    $("#messageconfig").html("<div class='alert alert-success'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'>"+msg+"</h4>"
+                        +"<p> "+obj.status
+                        +" </p> </div>");
+                }else{
+
+                    $("#messageconfig").html("<div class='alert alert-block alert-error fade in'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                        +"<p> "+obj.message
+                        +" </p> </div>");
+
+
+                }
+
+            },
+            error: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                $("#messageconfig").html("<div class='alert alert-block alert-error fade in'>"
+                    +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                    +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                    +"<p> "+obj.message
+                    +" </p> </div>");
+
+            }
+
+        };
+        $("#sendinvite").ajaxForm(optmyform);
+
+        $("#niveautablechoix")
+            .DataTable({
+                "responsive": true
+
+            });
+
+        /****************Chargement de la liste des diplome**********************/
+        var url="<?=$this->url('pedagogie/controller-action',array('controller'=>'dashboard','action' =>'infogenform'), null, true); ?>";
+        $.ajax({
+            type:"POST",
+            url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getdiplomesoption'), null, true); ?>",
+
+            beforeSend :function(){$('#diplomeecue').html("<option>Encours... </option>");},
+            success:function(response){
+
+                $("#diplomeecue").html(response);
+                $("#diplomeecue").val("<?=$diplomeactive?>");
+                $('#diplomeecue').trigger("chosen:updated");
+
+                $.ajax({
+                    type:"POST",
+                    url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getformationoption'), null, true); ?>",
+                    data:{idpere:'<?=$diplomeactive?>'},
+                    beforeSend :function(){$('#formationecue').html("<option>Encours... </option>");},
+                    success:function(response){
+
+                        $("#formationecue").html(response);
+                        $("#formationecue").val("<?=$formationactive?>");
+                        $('#formationecue').trigger("chosen:updated");
+
+                    }
+                });
+            }
+        });
+        $("#diplomeecue").change(function(){
+            var opt=$(this).val();
+            $.ajax({
+                type:"POST",
+                url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getformationoption'), null, true); ?>",
+                data:{idpere:opt},
+                beforeSend :function(){$('#formationecue').html("<option>Encours... </option>");$('#formationecue').trigger("chosen:updated");},
+                success:function(response){
+                    $("#formationecue").html(response);
+                    $("#formationecue").val("<?=$formationactive?>");
+                    $('#formationecue').trigger("chosen:updated");
+                }
+            });
+
+
+        });
+
+
+        /***************on change formation***********************/
+        $("#formationecue").change(function(){
+            var opt=$(this).val();
+            $.ajax({
+                type:"POST",
+                url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getniveaulevelJson'), null, true); ?>",
+                data:{id:opt },
+                beforeSend :function(){
+                },
+                success:function(response){
+
+
+                    var jsdata = JSON.parse(response);
+                    var tab=  $("#niveautablechoix").DataTable();
+
+                    tab.clear().draw();
+                    $.each(jsdata,function(i,val){
+                        var label =val;
+                        var id=i;
+
+                        tab.row.add([
+
+                                "<input type='checkbox' name='idNiveau[]' onclick=\"choisirNiveau('"+label+"','"+id+"');\" value='"+id+"' checked='checked'>"  ,
+                                label
+                            ]
+                        ).draw();
+                    });
+                }
+            });
+        });
+
+
+
+
+    }) ;
+
+    function choisirNiveau(label,id){
+        var tab=  $("#ecuetable").DataTable();
+        tab.row.add([
+
+                "<input type='checkbox' name='idNiveau[]' value='"+id+"'>"  ,
+                label
+            ]
+        ).draw();
+
+    }
+
+    function sendEmail(idinvitation){
+        $.ajax({
+            type:"POST",
+            url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'enseignants','action' =>'envoyer-invitation'), null, true); ?>",
+
+            data:{idinvitation:idinvitation  },
+            beforeSend :function(){
+            },
+            success:function(response){
+                var jsdata = JSON.parse(response);
+            }
+        });
+    }
+
+
+</script>
+
+<div id="messageconfig"></div>
+
+<form   method="POST"
+        action="<?=$this->url("pedagogie/controller-action",array("controller"=>"enseignants","action"=>"Save-invit-coordination"),null,true)?>"
+        id="sendinvite">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-aqua"><i class="fa fa-mortar-board "></i>Inviter un coordinateur</h3>
+                </div>
+                <div class="box-body">
+
+
+
+                    <?php if(!empty($this->errors['email'])):?>
+                        <div class="form-group has-error input-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?=$this->form->get('email')->getValue()?>">
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-danger btn-flat glyphicon glyphicon-envelope"  >  </button>
+                             </span>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback input-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?=$this->form->get('email')->getValue()?>">
+
+                            <span class="input-group-btn">
+                               <button type="button" class="btn btn-info btn-flat glyphicon glyphicon-envelope"  >  </button>
+                            </span>
+                        </div>
+                    <?php endif;?>
+
+                    <?php if(!empty($this->errors['nom'])):?>
+                        <div class="form-group has-error input-group">
+                            <input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" value="<?=$this->form->get('nom')->getValue()?>">
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-danger btn-flat glyphicon glyphicon-lock" id="nombt" >  </button>
+                              </span>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback input-group">
+                            <input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" value="<?=$this->form->get('nom')->getValue()?>">
+
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-info btn-flat glyphicon glyphicon-lock" id="nombt">  </button>
+                                 </span>
+
+                        </div>
+                    <?php endif;?>
+
+
+                    <?php if(!empty($this->errors['prenom'])):?>
+                        <div class="form-group has-error input-group">
+                            <input type="text" class="form-control" placeholder="<?=utf8_encode("Prénom")?>" id="prenom" name="prenom" value="<?=$this->form->get('prenom')->getValue()?>">
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-danger btn-flat glyphicon glyphicon-lock" id="prenombt" >  </button>
+                              </span>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback input-group">
+                            <input type="text" class="form-control" placeholder="<?=utf8_encode("Prénom")?>" id="prenom" name="prenom" value="<?=$this->form->get('prenom')->getValue()?>">
+
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-info btn-flat glyphicon glyphicon-lock" id="prenombt">  </button>
+                                 </span>
+
+                        </div>
+                    <?php endif;?>
+
+                    <?php if(!empty($this->errors['naturecoordination'])):?>
+                        <div class="form-group has-error">
+
+
+                            <select id="naturecoordination" name="naturecoordination"  class="form-control">
+                                <option value=""><?=utf8_encode("Type de coordination")?></option>
+                                <?php foreach($this->naturecoordination as $row):?>
+                                    <option value="<?=$row->idnaturecoordinateur?>"> <?=$row->labeltypecoord?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback">
+                            <select id="naturecoordination" name="naturecoordination"  class="form-control">
+                                <option value=""><?=("Type de coordination")?></option>
+                                <?php foreach($this->naturecoordination as $row):?>
+                                    <?php $naturecoordination=$this->form->get('naturecoordination')->getValue();?>
+                                    <option value="<?=$row->idnaturecoordinateur?>" <?=(!empty($naturecoordination) ? 'selected' :'')?>> <?=$row->labeltypecoord?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php endif;?>
+
+                    <?php if(!empty($this->errors['anneescolaire'])):?>
+                        <div class="form-group has-error">
+
+
+                            <select id="anneescolaire" name="anneescolaire"  class="form-control">
+                                <option value=""><?=utf8_encode("Année Universitaire")?></option>
+                                <?php foreach($this->rows as $row):?>
+                                    <option value="<?=$row->idanneeuniv?>"> <?=$row->labelanneeuniv?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback">
+                            <select id="anneescolaire" name="anneescolaire"  class="form-control">
+                                <option value=""><?=("Année Universitaire")?></option>
+                                <?php foreach($this->rows as $row):?>
+                                    <?php $annuniv=$this->form->get('anneescolaire')->getValue();?>
+                                    <option value="<?=$row->idanneeuniv?>" <?=(!empty($annuniv) ? 'selected' :'')?>> <?=$row->labelanneeuniv?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php endif;?>
+
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Enregistrer</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-danger"><i class="fa fa-book "></i> Liste des Niveaux</h3>
+                </div>
+                <div class="box-body">
+
+                    <fieldset>
+                        <legend>Choix de formation</legend>
+                        <div class="col-md-4">
+                            <label class="control-sidebar-subheading">
+                                <?=("Diplôme active")?>
+                                <div style="color:#000000;">
+                                    <select id="diplomeecue" name= "diplomeecue" class="pull-right form-control">
+
+                                    </select>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+
+                            <label class="control-sidebar-subheading">
+                                <span>Formation</span>
+                                <div style="color:#000000;">
+                                    <select id="formationecue" name= "formationecue" class="pull-right form-control">
+
+                                    </select>
+                                </div>
+                            </label>
+
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset>
+                        <legend>Liste des niveaux</legend>
+                        <table id="niveautablechoix" class="table table-bordered table-hover responsive">
+                            <thead>
+                            <th style="width:5%;">Choisir</th>
+                            <th>Niveau</th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+

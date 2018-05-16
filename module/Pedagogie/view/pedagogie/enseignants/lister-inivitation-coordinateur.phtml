@@ -1,0 +1,112 @@
+<script>
+    $(function(){
+        $(".HideInfor").toggle();
+    });
+
+</script>
+
+<div class="box">
+    <div class="box-header">
+        <h3>Liste des invitation envoyer</h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered">
+            <thead>
+            <th>Nom </th>
+            <th>Prenom </th>
+            <th>Email </th>
+            <th>Annee Universitaire </th>
+            <th>Type Coordination</th>
+            <th>Réponse</th>
+            </thead>
+            <tbody>
+            <?php foreach($this->listeInvitation as $m):?>
+                <tr>
+                    <td><?=$m['invitation']->nominviter?></td>
+                    <td><?=$m['invitation']->prenominviter?></td>
+                    <td><?=$m['invitation']->email?></td>
+                    <td><?=$m['invitation']->idanneeuniv?></td>
+                    <td><?=$m['invitation']->idnaturecoordinateur?></td>
+                    <td>
+                        <table class="table table-bordered  table-striped">
+                            <tr>
+                                <th>Formation</th>
+                                <th>Niveau</th>
+
+                            </tr>
+                            <?php if(isset($m['formation']['diplome'])):?>
+                                <tr>
+                                    <td rowspan="<?=count($m['formation']['niveaux'])+1?>">
+                                        <!--Formation-->
+                                        <table class="tableContent">
+                                            <?php foreach($m['formation']['diplome'] as $f):?>
+                                                <tr>
+                                                    <th><?=$f['idtypeformation']?></th>
+                                                    <td><?=$f['Label']?></td>
+                                                </tr>
+                                            <?php endforeach;?>
+                                        </table>
+                                        <!--Fin Formation-->
+                                    </td>
+                                </tr>
+                                <?php foreach($m['formation']['niveaux'] as $n):?>
+                                    <tr>
+                                        <th><?=$n?></th>
+                                    </tr>
+                                <?php endforeach;?>
+
+                                </tr>
+                            <?php endif;?>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-info" href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'enseignants','action' =>'show-mail-invitation','id'=>$m['invitation']->idinvitations), null, true); ?>','<?=$m['invitation']->idinvitations?>','MailSended','mailcontent')"><i class="fa fa-eye"></i> </a>
+                        <a class="btn btn-success" href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'enseignants','action' =>'envoyer-invitation','id'=>$m['invitation']->idinvitations), null, true); ?>','<?=$m['invitation']->idinvitations?>','MailSended','mailcontent')"><i class="fa fa-send"></i> </a>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+
+            </tbody>
+
+        </table>
+    </div>
+    <div class="box-footer">
+
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="MailSended"  >
+    <div class="modal-dialog" style="width:auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Mail d'invitation Envoyer</h4>
+            </div>
+            <div class="modal-body" id="formchoixue">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-danger"><i class="fa fa-book "></i> Mail</h3>
+                        </div>
+                        <div class="box-body" id="mailcontent">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->

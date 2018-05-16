@@ -1,0 +1,104 @@
+<form class="form-horizontal" method="post" action="#" id="formecue">
+
+
+    <div class="control-group">
+        <label class="control-label" for="idecue">Code Module</label>
+        <div class="controls">
+
+            <input type="text" name="idecue" id="idecue" value="FRU215" maxlength="25" class="input-xlarge">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="idtypeue">Type unité</label>
+        <div class="controls">
+
+            <select name="idtypeue" id="idtypeue">
+                <option value="" label="- - Select - -">- - Select - -</option>
+                <option value="Fondamental" label="Fondamental" selected="selected">Fondamental</option>
+                <option value="Optionnel" label="Optionnel">Optionnel</option>
+                <option value="Trasversal" label="Trasversal">Trasversal</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="idregime">Régime</label>
+        <div class="controls">
+
+            <select name="idregime" id="idregime">
+                <option value="" label="- - Select - -">- - Select - -</option>
+                <option value="CC" label="Controle contenue" selected="selected">Controle contenue</option>
+                <option value="MIX" label="MIX">MIX</option>
+            </select>                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="titreecue">Titre de module</label>
+        <div class="controls">
+
+            <textarea name="titreecue" id="titreecue" class="input-xxlarge" rows="15" cols="80">Français</textarea>                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="coef">Coef.</label>
+        <div class="controls">
+
+            <input type="text" name="coef" id="coef" value="1" maxlength="45" class="input-xlarge">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="credit">Credit</label>
+        <div class="controls">
+
+            <input type="text" name="credit" id="credit" value="11" maxlength="45" class="input-xlarge">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="noteeleminatoire">Note éliminatoire</label>
+        <div class="controls">
+
+            <input type="text" name="noteeleminatoire" id="noteeleminatoire" value="10">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="descriptionecue">Description</label>
+        <div class="controls">
+
+            <textarea name="descriptionecue" id="descriptionecue" class="input-xxlarge" rows="15" cols="80"></textarea>                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="resume">Resume</label>
+        <div class="controls">
+
+            <textarea name="resume" id="resume" class="input-xxlarge" rows="15" cols="80"></textarea>                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="nombresience">Nombre de science</label>
+        <div class="controls">
+
+            <input type="text" name="nombresience" id="nombresience" value="0">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="nombreoptions">Nombre d'option</label>
+        <div class="controls">
+
+            <input type="text" name="nombreoptions" id="nombreoptions" value="0">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="idue"></label>
+        <div class="controls">
+
+            <input type="hidden" name="idue" value="UE2015" style="display:none;" id="idue">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="idniveauformation"></label>
+        <div class="controls">
+
+            <input type="hidden" name="idniveauformation" value="1-GPME" style="display:none;" id="idniveauformation">                                            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="idsemestres"></label>
+        <div class="controls">
+
+            <input type="hidden" name="idsemestres" value="S1" style="display:none;" id="idsemestres">                                            </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+
+            <button name="submit" id="submit" type="submit" class="btn btn-primary">Enregistrer</button>                                                    <a class="btn" href="/habilitation/public/habilitation/ecue">Cancel</a>
+        </div>
+    </div>
+</form>

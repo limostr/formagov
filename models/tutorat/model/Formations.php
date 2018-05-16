@@ -203,6 +203,44 @@ class Formations implements InputFilterAwareInterface
 				),
 				),
 				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'       => 'idprojethabilitation',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'     => 'datefinhabilitation',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'debuthabilitation',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'       => 'rehabiliter',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'     => 'autreinfoformation',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
 				 
 
             $this->inputFilter = $inputFilter;        

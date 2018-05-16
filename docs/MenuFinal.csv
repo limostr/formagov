@@ -1,0 +1,48 @@
+Id;ID_pere;Type;Action;URL;Module;Controller
+ens-cr-01;ens-cr;Action;index;enseignant\\create\\index;enseignant;create
+ens-cr-02;ens-cr;Action;createjob;enseignant\\create\\createjob;enseignant;create
+ens-cr-03;ens-cr;Action;donneepersonnelle     ;enseignant\\create\\donneepersonnelle     ;enseignant;create
+ens-cr-04;ens-cr;Action;donnee-perso-arab;enseignant\\create\\donnee-perso-arab;enseignant;create
+ens-cr-05;ens-cr;Action;etablissementenseigne;enseignant\\create\\etablissementenseigne;enseignant;create
+ens-cr-06;ens-cr;Action;traveau-enseignant;enseignant\\create\\traveau-enseignant;enseignant;create
+ens-cr-07;ens-cr;Action;menu-cv-enseignant;enseignant\\create\\menu-cv-enseignant;enseignant;create
+ens-cr-08;ens-cr;Action;liste-mes-grades-ens;enseignant\\create\\liste-mes-grades-ens;enseignant;create
+ens-cr-09;ens-cr;Action;mon-grade-ens;enseignant\\create\\mon-grade-ens;enseignant;create
+ens-cr-10;ens-cr;Action;grades-enseignants;enseignant\\create\\grades-enseignants;enseignant;create
+ens-cr-11;ens-cr;Action;specialite-enseignant;enseignant\\create\\specialite-enseignant;enseignant;create
+ens-cr-12;ens-cr;Action;compte-utilisateur;enseignant\\create\\compte-utilisateur;enseignant;create
+ens-cr-13;ens-cr;Action;diplome-enseignant;enseignant\\create\\diplome-enseignant;enseignant;create
+ens-cr-14;ens-cr;Action;info-pro-dossier;enseignant\\create\\info-pro-dossier;enseignant;create
+ens-cr-15;ens-cr;Action;info-pro-dossier-ar;enseignant\\create\\info-pro-dossier-ar;enseignant;create
+ens-cr-16;ens-cr;Action;depot-dossier-papier;enseignant\\create\\depot-dossier-papier;enseignant;create
+ens-cr-17;ens-cr;Action;inviter-coordinateur;enseignant\\create\\inviter-coordinateur;enseignant;create
+ens-cr-18;ens-cr;Action;inviter-coordinateur-mail-send;enseignant\\create\\inviter-coordinateur-mail-send;enseignant;create
+ens-cr-19;ens-cr;Action;create-compte ;enseignant\\create\\create-compte ;enseignant;create
+ens-sh-01;ens-sh;Action;index;enseignant\\show\\index;enseignant;show
+ens-sh-02;ens-sh;Action;showcv;enseignant\\show\\showcv;enseignant;show
+ens-sh-03;ens-sh;Action;showcvcarriere;enseignant\\show\\showcvcarriere;enseignant;show
+ens-sh-04;ens-sh;Action;liste-mes-grades-ens;enseignant\\show\\liste-mes-grades-ens;enseignant;show
+ens-sh-05;ens-sh;Action;list-diplome-enseignant;enseignant\\show\\list-diplome-enseignant;enseignant;show
+ens-sh-06;ens-sh;Action;gest-diplome-enseignant;enseignant\\show\\gest-diplome-enseignant;enseignant;show
+ens-sh-07;ens-sh;Action;list-info-pro-dossier;enseignant\\show\\list-info-pro-dossier;enseignant;show
+ens-sh-08;ens-sh;Action;gest-info-pro-dossier;enseignant\\show\\gest-info-pro-dossier;enseignant;show
+ens-sh-09;ens-sh;Action;aide-saisie-dossier-enseignat;enseignant\\show\\aide-saisie-dossier-enseignat;enseignant;show
+ens-sh-10;ens-sh;Action;imprimer-demande-heur-enseigne;enseignant\\show\\imprimer-demande-heur-enseigne;enseignant;show
+ens-sh-11;ens-sh;Action;depot-dossier-papier;enseignant\\show\\depot-dossier-papier;enseignant;show
+ens-sh-12;ens-sh;Action;gest-depot-dossier-papier;enseignant\\show\\gest-depot-dossier-papier;enseignant;show
+ens-sh-13;ens-sh;Action;gest-invitation  ;enseignant\\show\\gest-invitation  ;enseignant;show
+ens-inv-01;ens-inv;Action;index;enseignant\\mes-invitations\\index;enseignant;mes-invitations
+ens-inv-02;ens-inv;Action;lister-mes-invitations;enseignant\\mes-invitations\\lister-mes-invitations;enseignant;mes-invitations
+ens-inv-03;ens-inv;Action;accepter-tutorat;enseignant\\mes-invitations\\accepter-tutorat;enseignant;mes-invitations
+ens-inv-04;ens-inv;Action;accepter-coordination  ;enseignant\\mes-invitations\\accepter-coordination  ;enseignant;mes-invitations
+ens-mn-cmp-01;ens-mn-cmp;Action;index;enseignant\\mon-compte\\index;enseignant;mon-compte
+ens-mn-cmp-02;ens-mn-cmp;Action;create-compte;enseignant\\mon-compte\\create-compte;enseignant;mon-compte
+ens-mn-cmp-03;ens-mn-cmp;Action;login;enseignant\\mon-compte\\login;enseignant;mon-compte
+ens-mn-cmp-04;ens-mn-cmp;Action;logout;enseignant\\mon-compte\\logout;enseignant;mon-compte
+ens-mn-cmp-05;ens-mn-cmp;Action;change-password;enseignant\\mon-compte\\change-password;enseignant;mon-compte
+ens-mn-cmp-06;ens-mn-cmp;Action;demande-change-password;enseignant\\mon-compte\\demande-change-password;enseignant;mon-compte
+ens-mn-cmp-07;ens-mn-cmp;Action;save-compte ;enseignant\\mon-compte\\save-compte ;enseignant;mon-compte
+ens-sav-01;ens-sav;Action;index;enseignant\\save\\index;enseignant;save
+ens-sav-02;ens-sav;Action;donneepersonnelle;enseignant\\save\\donneepersonnelle;enseignant;save
+ens-sav-03;ens-sav;Action;etablissementenseigne;enseignant\\save\\etablissementenseigne;enseignant;save
+ens-sav-04;ens-sav;Action;traveau-enseignant;enseignant\\save\\traveau-enseignant;enseignant;save

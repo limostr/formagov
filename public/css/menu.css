@@ -1,0 +1,85 @@
+ul.tab-buttons {
+    margin-bottom: 0;
+    margin-top: 60px;
+    padding-left: 0;
+}
+ul.tab-buttons li {
+    background: #1abc9c none repeat scroll 0 0;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+
+
+ul.tab-buttons li.selectedsuccess {
+    background: #00a65a;
+    font-size:4em;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+ul.tab-buttons li.selected0 {
+    background: #FFFFFF;
+    font-size:4em;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+ul.tab-buttons li.selected3 {
+    background: #9b59b6;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+ul.tab-buttons li.selected4 {
+    background: #e67e22;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+ul.tab-buttons li.selected5 {
+    background: #e74c3c;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+ul.tab-buttons li.selected6 {
+    background: #d9a81d none repeat scroll 0 0;
+    margin-right: 0;
+    transition: all 0.4s ease 0s;
+}
+ul.tab-buttons li.selected6 {
+    background: #d9a81d none repeat scroll 0 0;
+    margin-right: 0;
+    transition: all 0.4s ease 0s;
+}
+ul.tab-buttons li.selected2 {
+    background: #3498db;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.tab-buttons li a {
+    display: block;
+    padding: 30px 0;
+    text-decoration: none;
+    width: 185px;
+}
+/* style.css:41*/
+a {
+    outline: none !important;
+}
+
+/* normalize.less:90*/
+a {
+    background-color: transparent;
+}
+
+.tab-buttons li a i {
+    color: #fff;
+    display: block;
+    font-size: 36px;
+}
+.tab-buttons li span {
+    color: #fff;
+    display: block;
+    font-family: montserrat,sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}

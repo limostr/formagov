@@ -10,5 +10,8 @@ declare(strict_types = 1);
 
 return array(
     'layout/default'           => __DIR__ . '/../../layouts/adminlte/layout/default.phtml',
+    'layout/auth'              => __DIR__ . '/../../layouts/adminlte/layout/auth.phtml',
+    'layout/white'               => __DIR__ . "/../../layouts/adminlte/layout/white.phtml",
+    'layout/menu'               => __DIR__ . "/../../layouts/adminlte/layout/menu.phtml",
 
 );

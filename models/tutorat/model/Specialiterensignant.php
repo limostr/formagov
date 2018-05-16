@@ -8,7 +8,7 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
 
-class Informationpersonnel implements InputFilterAwareInterface
+class Specialiterensignant implements InputFilterAwareInterface
 {
     protected $inputFilter;
 
@@ -25,7 +25,7 @@ class Informationpersonnel implements InputFilterAwareInterface
             $factory = new InputFactory();
             
             $inputFilter->add($factory->createInput(array(
-			'name'       => 'idinformationpersonnel',
+			'name'       => 'idspecialiterensignant',
 			'required'   => true,
 			'filters' => array(
 			array('name'    => 'Int'),
@@ -50,25 +50,7 @@ class Informationpersonnel implements InputFilterAwareInterface
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'idlangue',
-			'required' => true,
-			'filters'  => array(
-			array('name' => 'StripTags'),
-			array('name' => 'StringTrim'),
-			),
-			'validators' => array(
-			array(
-			'name'    => 'StringLength',
-			'options' => array(
-			'encoding' => 'utf8',
-			'min'      => 1,
-			'max'      => 10,
-				),
-				),
-				),
-				)));
-				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'nom',
+			'name'     => 'idspecialiters',
 			'required' => false,
 			'filters'  => array(
 			array('name' => 'StripTags'),
@@ -86,7 +68,23 @@ class Informationpersonnel implements InputFilterAwareInterface
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'prenom',
+			'name'     => 'dateoptentionspecialite',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'descriptionspecialite',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'labelpersospecialite',
 			'required' => false,
 			'filters'  => array(
 			array('name' => 'StripTags'),
@@ -98,48 +96,26 @@ class Informationpersonnel implements InputFilterAwareInterface
 			'options' => array(
 			'encoding' => 'utf8',
 			'min'      => 1,
-			'max'      => 45,
+			'max'      => 512,
 				),
 				),
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'lieudenaissance',
-			'required' => false,
-			'filters'  => array(
-			array('name' => 'StripTags'),
-			array('name' => 'StringTrim'),
+			'name'       => 'pardefautspecialite',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
 			),
-			'validators' => array(
-			array(
-			'name'    => 'StringLength',
-			'options' => array(
-			'encoding' => 'utf8',
-			'min'      => 1,
-			'max'      => 45,
-				),
-				),
-				),
-				)));
-				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'adress',
-			'required' => false,
-			'filters'  => array(
-			array('name' => 'StripTags'),
-			array('name' => 'StringTrim'),
+			)));
+			            $inputFilter->add($factory->createInput(array(
+			'name'       => 'poidsspeciliter',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
 			),
-			'validators' => array(
-			array(
-			'name'    => 'StringLength',
-			'options' => array(
-			'encoding' => 'utf8',
-			'min'      => 1,
-			'max'      => 45,
-				),
-				),
-				),
-				)));
-				 
+			)));
+			 
 
             $this->inputFilter = $inputFilter;        
         }

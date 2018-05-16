@@ -6,7 +6,6 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 
 return [
     'service_manager' => [
@@ -37,6 +36,9 @@ return [
         ],
         'factories' => [
             'Pedagogie\\Calendrier' => 'Pedagogie\\Controller\\CalendrierControllerFactory',
+            'Pedagogie\\Moduleens' => 'Pedagogie\\Controller\\ModuleensControllerFactory',
+            'Pedagogie\\Habilitation' => 'Pedagogie\\Controller\\HabilitationControllerFactory',
+            'Pedagogie\\Enseignants' => 'Pedagogie\\Controller\\EnseignantsControllerFactory',
         ],
     ],
     'router' => [
@@ -56,11 +58,12 @@ return [
                     'controller-action' => [
                         'type' => 'segment',
                         'options' => [
-                            'route' => '/:controller[/:action[/:id]]',
+                            'route' => '/:controller[/:action[/:id/[:id2]]]',
                             'constraints' => [
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'id' => '[0-9A-Za-z_-]*',
+                                'id2' => '[0-9A-Za-z_-]*',
                             ],
                         ],
                     ],
@@ -68,7 +71,80 @@ return [
             ],
         ],
     ],
-    'navigation' => $navigation,
+    'navigation' => [
+        'Pedagogie_Navigator' => [
+            [
+                'label' => 'Habilitation formation',
+                'module' => 'pedagogie',
+                'controller' => 'show',
+                'action' => 'listeformations',
+                'icon' => 'fa fa-building',
+                'pages' => [
+                    [
+                        'label' => 'Liste formations',
+                        'module' => 'pedagogie',
+                        'controller' => 'show',
+                        'action' => 'listeformations',
+                        'icon' => 'fa fa-building',
+                    ],
+                    [
+                        'label' => 'Details formations',
+                        'module' => 'pedagogie',
+                        'controller' => 'show',
+                        'action' => 'showdetailsformation',
+                        'icon' => 'fa fa-building',
+                        'visible' => false,
+                    ],
+                    [
+                        'label' => 'Ajouter une formation',
+                        'module' => 'pedagogie',
+                        'controller' => 'create',
+                        'action' => 'addformation',
+                        'icon' => 'fa fa-building',
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Gestion des formations',
+                'module' => 'pedagogie',
+                'controller' => 'show',
+                'action' => 'whowtreeformation',
+                'icon' => 'fa fa-building',
+            ],
+            [
+                'label' => 'Administration & configuration',
+                'module' => 'pedagogie',
+                'controller' => 'config',
+                'action' => 'tableaudesfonctions',
+                'icon' => 'fa fa-building',
+                'pages' => [
+                    [
+                        'label' => 'Ajouter un Model de formation',
+                        'module' => 'pedagogie',
+                        'controller' => 'create',
+                        'action' => 'addformation',
+                        'icon' => 'fa fa-building',
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Année Universitaire',
+                'module' => 'pedagogie',
+                'controller' => 'anneeuniv',
+                'action' => 'calendrierpedagogie',
+                'icon' => 'fa fa-building',
+                'pages' => [
+                    [
+                        'label' => 'Calendrier',
+                        'module' => 'pedagogie',
+                        'controller' => 'Calendrier',
+                        'action' => 'calendrierglobal',
+                        'icon' => 'fa fa-building',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [
@@ -81,7 +157,9 @@ return [
     ],
     'form_elements' => [
         'factories' => [
-            
+            'pedagogieInvitation' => 'Pedagogie\\Form\\InvitationFactory',
+            'pedagogieInvitationCoordination' => 'Pedagogie\\Form\\InvitationCoordinationFactory',
+            'pedagogiePeriodeFormation' => 'Pedagogie\\Form\\PeriodeFormationFactory',
         ],
         'invokables' => [
             'pedagogieFormation' => 'Pedagogie\\Form\\Formation',

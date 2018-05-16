@@ -1,0 +1,63 @@
+<script type="text/javascript">
+    function deleteprerequit(id){
+        var url='<?=$this->url('pedagogie/controller-action', array('controller' => 'moduleens', 'action' => 'deleteprerequit'))?>';
+        var urlreoad='<?=$this->url('pedagogie/controller-action', array('controller' => 'moduleens', 'action' => 'listeprerequit'))?>';
+
+        bootbox.confirm("Vous voulez vraiment supprimer xz prérequit ?",function(result){
+
+            if(result){
+                $.ajax({
+                    type:"POST",
+                    url:url ,
+                    data:{idp:id},
+                    beforeSend :function(){
+                        $('#'.idzone).html("Encours...");
+                    },
+                    success:function(response){
+                        var obj = JSON.parse(response);
+
+                        if(obj.status=="success"){
+                            AjaxLoaderMultiParam(urlreoad, {idmodule:<?=$this->idmodule?>},'listeZone');
+
+                        }else{
+                            $("#messageconfig2").html("<div class='alert alert-block alert-error fade in'>"
+                                +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                                +"<h4 class='alert-heading'>Erreur de suppression</h4>"
+                                +"<p> "+obj.message
+                                +" </p> </div>");
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>
+
+<div class="box">
+    <div class="box-header">
+        <h3>Prérequits</h3>
+    </div>
+    <div class="box-body">
+        <div id="messageid"></div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Prérequit</th>
+                    <th>Obligatoire</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->Prerequits as $p):?>
+                    <tr>
+                        <td><?=$p->labelprerequit?></td>
+                        <td><?=$p->niveauobligation?></td>
+                        <td><?=$p->descprerequit?></td>
+                        <td><button type="button" onclick="deleteprerequit('<?=$p->idprerequits?>')" class="btn btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+    </div>
+</div>

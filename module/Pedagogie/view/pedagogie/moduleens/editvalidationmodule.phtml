@@ -1,0 +1,37 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+ <?php foreach ($this->typemodule as $key => $val):?>
+    <div class="box">
+        <div class="box-header">
+           <h4> <?=$val['typevalid']?></h4>
+        </div>
+        <div class="box-body">
+            <?php if (is_array($val['subtype'])):?>
+                <?php foreach ($val['subtype'] as $keysub => $valsub):?>
+                    <div class="form-group">
+                        <label for="valumehoraire" class="col-sm-3 control-label"><?=$valsub['typevalid']?> (V.H)</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" title="<?=$valsub['desc']?>" name="VH_<?=$keysub?> ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descreb" class="col-sm-3 control-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea name="DESC_<?=$keysub?> "><?=$valsub['desc']?></textarea>
+                        </div>
+                    </div>
+
+                <?php endforeach;?>
+            <?php endif;?>
+        </div>
+    </div>
+<?php endforeach;?>

@@ -43,6 +43,82 @@ class Personnes implements InputFilterAwareInterface
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'cin',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
+				),
+				),
+				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'datelivrecin',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'civilite',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
+				),
+				),
+				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'telephone',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'email',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'motdepass',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'datedenaissance',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+				)));
+				            $inputFilter->add($factory->createInput(array(
 			'name'     => 'matricule',
 			'required' => false,
 			'filters'  => array(
@@ -61,7 +137,7 @@ class Personnes implements InputFilterAwareInterface
 				),
 				)));
 				            $inputFilter->add($factory->createInput(array(
-			'name'     => 'rib',
+			'name'     => 'typematricule',
 			'required' => false,
 			'filters'  => array(
 			array('name' => 'StripTags'),
@@ -77,6 +153,14 @@ class Personnes implements InputFilterAwareInterface
 				),
 				),
 				),
+				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'datemotdepasse',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
 				)));
 				 
 

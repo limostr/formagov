@@ -26,7 +26,7 @@ use Zend\Mvc\MvcEvent;
  */
 class Module implements InitProviderInterface, ConfigProviderInterface, AutoloaderProviderInterface
 {
-
+private $serviceLocator=null;
     /**
      * Init module
      *
@@ -75,6 +75,9 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
             ),
         );
     }
+
+
+
 
 
 }

@@ -1,0 +1,91 @@
+<?php
+$flash=$this->flashMessenger()
+    ->setMessageOpenFormat('<div%s>')
+    ->setMessageSeparatorString('')
+    ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("aaaa");
+$form = $this->form;
+$form->setAttribute('action', $this->url("enseignant/controller-action",array("controller"=>"save","action"=>"info-pro-dossier-ar"),array("query"=>array("lng"=>($this->langue=="ar_AR" ? "ar" : 'fr'))),true));
+
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+?>
+<div class="row">
+
+    <div class="col-md-12" dir="rtl">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3><?=$this->translate("enseignants_title_create",null,'ar_AR')?></h3>
+
+            </div>
+            <div class="box-body">
+                <?php
+                echo $this->form()->openTag($form);
+                echo $flash->render('save_enseignants',array('btn', 'btn-danger'));
+                ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend><?=$this->translate("enseignants_legende_Identiter",null,'ar_AR')?></legend>
+                            <div class="form-group">
+                                <?php
+                                $eltForm = $form->get('societer');
+                                echo $formLabel->openTag(). $this->translate($eltForm->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($eltForm);
+                                echo $this->formElementErrors($eltForm);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $eltForm = $form->get('poste',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($eltForm->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($eltForm);
+                                echo $this->formElementErrors($eltForm);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $eltForm = $form->get('fonction',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($eltForm->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($eltForm);
+                                echo $this->formElementErrors($eltForm);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+
+                            <div class="form-group">
+                                <?php
+                                $eltForm = $form->get('grade',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($eltForm->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($eltForm);
+                                echo $this->formElementErrors($eltForm);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+
+                        </fieldset>
+
+                    </div>
+
+                </div>
+
+
+                <?php
+                echo $this->form()->closeTag();
+                echo $this->formElement($form->get('save_InfoProEns'));
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,143 @@
+<?php
+$flash=$this->flashMessenger()
+    ->setMessageOpenFormat('<div%s>')
+    ->setMessageSeparatorString('')
+    ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("Période pédagogique de formation");
+$form = $this->form;
+$form->setAttribute('action', $this->url("pedagogie/controller-action",array("controller"=>"anneeuniv","action"=>"save-periode-formation")
+    ,array('query'=>array("idperiodeformation"=>$this->idperiodeformation,"idperiode"=>$this->idperiode,"idformation"=>$this->idformation,"idniveau"=>$this->idniveau)),true));
+
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+?>
+<div class="row">
+
+    <div class="col-md-12" <?=$this->langue=="ar_AR" ? "dir='rtl'" : '' ?>>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3><?=$this->translate("PeriodeFormation_Form_Titre",null,$this->langue)?></h3>
+
+            </div>
+            <div class="box-body">
+                <?php
+                echo $this->form()->openTag($form);
+                echo $flash->render('save_periode',array('btn', 'btn-danger'));
+                ?>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-info">
+                            <div class="box-header"></div>
+                            <div class="box-body">
+                                <fieldset>
+                                    <legend></legend>
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <?php
+                                                $elt = $form->get('debutperiode');
+                                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formDate($elt);
+                                                echo $this->formElementErrors($elt);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <?php
+                                                $elt = $form->get('finperiode');
+                                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formDate($elt);
+                                                echo $this->formElementErrors($elt);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <?php
+                                                $elt = $form->get('debutsemaine');
+                                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formInput($elt);
+                                                echo $this->formElementErrors($elt);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <?php
+                                                $elt = $form->get('finsemaine');
+                                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formInput($elt);
+                                                echo $this->formElementErrors($elt);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <?php
+                                                $elt = $form->get('utiliser');
+                                                echo $formLabel->openTag(). $this->translate($elt->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formCheckbox($elt);
+                                                echo $this->formElementErrors($elt);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-info">
+                            <div class="box-header">
+
+                            </div>
+                            <div class="box-body">
+                                <section>
+                                    <h3>Définition de période</h3>
+                                    <article>
+                                        <h4>Periode pédagogique</h4>
+                                        <p>
+                                        </p>
+                                    </article>
+
+                                    <article>
+                                        <h4>Semestre</h4>
+                                        <p>
+
+                                        </p>
+                                    </article>
+                                    <article>
+                                        <h4>Periode</h4>
+                                        <p>
+                                        </p>
+                                    </article>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <?php
+
+                echo $this->formElement($form->get('submit'));
+                echo $this->form()->closeTag();
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

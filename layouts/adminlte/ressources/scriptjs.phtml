@@ -16,6 +16,21 @@
         });
     }
 
+    function AjaxLoaderMultiParam(page,ids,laodplace){
+        $.ajax({
+            type:"POST",
+            url:page,
+            data:ids ,
+            beforeSend :function(){
+                $('#'+laodplace).html("Encours...");
+            },
+            success:function(response){
+                $('#'+laodplace).html(response);
+
+            }
+        });
+    }
+
     /******************************Initialisation de l'accordion**********************************/
 
 
@@ -63,17 +78,31 @@
         });
     }
 
-    function showinmodal(url,param){ //parametre {id:'0'}
+    function showinmodal(url,param,boxid,formcontent){ //parametre {id:'0'}
         $.ajax({
             type:"POST",
             url:url ,
             data:param,
             beforeSend :function(){
-                $('#formcontent').html("Encours...");
-                $('#myModal').modal('show');
+                if(formcontent) {
+                    $('#'+formcontent).html("Encours...");
+                }else{
+                    $('#formcontent').html("Encours...");
+                }
+                if(boxid){
+                    $('#'+boxid).modal('show');
+                }else{
+                    $('#myModal').modal('show');
+                }
+
             },
             success:function(response){
-                $('#formcontent').html(response);
+                if(formcontent) {
+                    $('#'+formcontent).html(response);
+                }else{
+                    $('#formcontent').html(response);
+                }
+
 
 
             }
@@ -118,6 +147,102 @@
             }
         });
     }
+    function AjaxFormAccess(idform,idmsgereur,urlreload,parametrereload,zonereload){
+        $('#'+idform).validationEngine();
+        var optformformation = {
+            beforeSend: function()  { },
+            uploadProgress: function(event, position, total, percentComplete) { },
+            success: function() { },
+            complete: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                if(obj.status=="success"){
+                    $("#"+idmsgereur).html("<div class='alert alert-success'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'>Success d'insertion des données</h4>"
+                        +"<p> "+obj.status
+                        +" </p> </div>");
+                    //if(urlreload!="" ){
+                    // AjaxLoaderMultiParam(urlreload, parametrereload,zonereload)
+                    // }else {
+                    document.location.href=$(location).attr('href');
+                    // }
+
+                }else{
+
+                    $("#"+idmsgereur).html("<div class='alert alert-block alert-error fade in'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                        +"<p> "+obj.message
+                        +" </p> </div>");
+
+
+                }
+
+            },
+            error: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                $("#"+idmsgereur).html("<div class='alert alert-block alert-error fade in'>"
+                    +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                    +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                    +"<p> "+obj.message
+                    +" </p> </div>");
+
+            }
+
+        };
+        $("#"+idform).ajaxForm(optformformation);
+    }
+
+
+    function AjaxFormAccessAjaxReload(idform,idmsgereur,urlreload,parametrereload,zonereload){
+        $('#'+idform).validationEngine();
+        var optformformation = {
+            beforeSend: function()  { },
+            uploadProgress: function(event, position, total, percentComplete) { },
+            success: function() { },
+            complete: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                if(obj.status=="success"){
+                    $("#"+idmsgereur).html("<div class='alert alert-success'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'>Success d'insertion des données</h4>"
+                        +"<p> "+obj.status
+                        +" </p> </div>");
+
+                       AjaxLoaderMultiParam(urlreload, parametrereload,zonereload)
+
+
+                }else{
+
+                    $("#"+idmsgereur).html("<div class='alert alert-block alert-error fade in'>"
+                        +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                        +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                        +"<p> "+obj.message
+                        +" </p> </div>");
+
+
+                }
+
+            },
+            error: function(response)
+            {
+                var obj = JSON.parse(response.responseText);
+                $("#"+idmsgereur).html("<div class='alert alert-block alert-error fade in'>"
+                    +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                    +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                    +"<p> "+obj.message
+                    +" </p> </div>");
+
+            }
+
+        };
+        $("#"+idform).ajaxForm(optformformation);
+    }
+
+
 
 
 </SCRIPT>

@@ -1,0 +1,95 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+
+<script type="text/javascript">
+
+    function treePLC(){
+        $("#treePLC").fancytree({
+            source: {
+                url: "<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"jsonplancours","id"=>$this->idmodule),null,true)?>"
+            },
+            lazyload: function(e, data){
+                data.result = $.ajax({
+                    url: "<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"jsonplancours","id"=>$this->idmodule),null,true)?>",
+                    dataType: "json"
+                });
+            },
+            click: function(event, data) {
+                var keydata=data.node.key;
+                var keysplit=keydata.split("_");
+
+                var url="<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"editplancours"),null,true)?>";
+                var dataselect={
+                    idmodule:<?=$this->idmodule?>
+                };
+
+                 if(keysplit[0]=="PEL"){
+                     url="<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"editplancours"),null,true)?>";
+                     var dataselect={
+                         idmodule:<?=$this->idmodule?>
+                         ,idplc:keysplit[1]
+                     };
+                }
+
+                $.ajax({
+                    type:"POST",
+                    url: url,
+                    data:dataselect,
+                    beforeSend :function(){
+                        $('#plancoursdesc').html("Encours...");
+                    },
+                    success:function(response){
+                        $('#plancoursdesc').html(response);
+                    }
+                });
+
+            }
+        });
+
+
+    }
+    $(document).ready(function () {
+
+        treePLC();
+
+    });
+
+</script>
+
+<h1>Edition de plan de cours</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="box">
+            <div class="box-header">
+                Plan de cours
+            </div>
+            <div class="box-body" id="treePLC">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-9">
+
+        <div class="box">
+            <div class="box-header">Gestion de plan de cours </div>
+            <div class="box-body" id="plancoursdesc">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<small>Future : Compétence, uploads fichiers</small>

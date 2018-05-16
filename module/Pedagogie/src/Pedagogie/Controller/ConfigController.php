@@ -54,7 +54,10 @@ class ConfigController extends AbstractActionController
     public function listemodelformationAction()
     {
         $viewModel = new ViewModel();
-
+        $sm = $this->getServiceLocator();
+        $TypeFormationTable = $sm->get('Model\TypeformationTable');
+        $types=$TypeFormationTable->getPrincipalTypesFormation();
+        $viewModel->TypesFormation=$types;
         return $viewModel;
     }
 

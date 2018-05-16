@@ -16,9 +16,9 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
  <?php
- $temp=$this->viewModel()->getCurrent()->getChildren()[0]->getTemplate();
+ /*$temp=$this->viewModel()->getCurrent()->getChildren()[0]->getTemplate();
  $array = explode("/",$temp);
- $CURRENT_MODULE_NAME=$array[0];
+ $CURRENT_MODULE_NAME=$array[0];*/
 
  ?>
 <div class="wrapper">
@@ -28,22 +28,7 @@
     </header>
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar" id="mainsidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <?php // <-- Add this !!
-
-         $string= $this->navigation($CURRENT_MODULE_NAME.'_Navigator')->menu()
-             ->render();
-        ?>
-        <?php
-        //Menue administrateur
-         $this->navigation($CURRENT_MODULE_NAME.'_Navigator')->menu()->setUlClass("treeview-menu");
-        $string=  $this->navigation($CURRENT_MODULE_NAME.'_Navigator')
-            ->menu()
-            ->setTranslator($this->plugin('translate')
-            ->getTranslator())
-            ->renderMenu(null,array('maxDepth'   =>  0));
-
-        ?>
+        <?php $string=""?>
 <?=\Myhelper\Template::GenView("layout/mainsidebar",'layouts/adminlte/map_template.php' ,array('menuadmin'=>$string) )?>
     <!-- /.sidebar -->
 
@@ -59,38 +44,15 @@
                 <small><?=isset($desc_titre) ? $desc_titre : ""?></small>
             </h1>
             <div class="breadcrumb">
-                <?php
-                echo $this->navigation($CURRENT_MODULE_NAME.'_Navigator')
-                    ->setTranslator($this->plugin('translate')->getTranslator())
-                    ->breadcrumbs()
-                    ->setLinkLast(true)                   // link last page
-                    ->setMaxDepth(1)                      // stop at level 1
-                    ->setSeparator(' ▶' . PHP_EOL); // cool separator with newline
-                ?>
+
             </div>
 
         </section>
-
-        <?php //$partial = array('pedagogie/template/map.phtml', 'default') ?>
-        <?php //$this->navigation('navigation')->breadcrumbs()->setPartial($partial) ?>
-        <?php //echo $this->navigation('navigation')->breadcrumbs()->render() ?>
-        <?php //echo \Myhelper\Template::GenView("layout/map",'layouts/adminlte/map_template.php')?>
-
-         <!-- Main content -->
+       <!-- Main content -->
         <section class="content" id="principalecontent">
 
-
-
             <div id="submenue" class="nav-tabs-custom" >
-                <?php $this->navigation($CURRENT_MODULE_NAME.'_Navigator')->menu()->setUlClass("nav nav-tabs");?>
 
-                <?php
-                     $submenu= $this->navigation($CURRENT_MODULE_NAME.'_Navigator')->menu()
-                         ->setTranslator($this->plugin('translate')->getTranslator())
-                         ->renderMenu(null,array("minDepth"=>1,"maxDepth"=>0,"onlyActiveBranch"=>true,"renderParents"=>false)) ;
-                     echo   (($submenu)  ) ;
-
-                ?>
             </div>
 
             <div class="row" id="pcontent">

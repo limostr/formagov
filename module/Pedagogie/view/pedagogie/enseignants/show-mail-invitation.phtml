@@ -1,0 +1,54 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<div class="row">
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-header">
+                <h3>Liste des rappelle</h3>
+            </div>
+            <div class="box-body">
+
+                <?php $sended=\Zend\Json\Decoder::decode($this->Invitation->datesenvois)?>
+
+                 <table class="table table-bordered table-responsive">
+                    <thead>
+                        <th>Date envoi</th>
+                        <th>Envoyer par</th>
+                        <th>Réponse</th>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($sended as $send):?>
+                        <tr>
+                        <td><?=$send->date?></td>
+                        <td><?=$send->envoyerpar?></td>
+                            <td><?=isset($send->reponse) ? $send->reponse : 'Non consulter'?></td>
+                        </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="box">
+            <div class="box-header">
+                <h3>Mail envoyer</h3>
+            </div>
+            <div class="box-body">
+                <?=html_entity_decode(htmlspecialchars_decode($this->Invitation->textinvitation))?>
+            </div>
+
+        </div>
+    </div>
+</div>

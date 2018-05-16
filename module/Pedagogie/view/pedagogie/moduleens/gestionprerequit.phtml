@@ -1,0 +1,14 @@
+<script type="text/javascript">
+    $(document).ready(
+        function() {
+
+            AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action', array('controller' => 'moduleens', 'action' => 'listeprerequit'))?>', {idmodule:<?=$this->idmodule?>}, 'listeZone');
+            AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action', array('controller' => 'moduleens', 'action' => 'editprerequit'))?>', {idmodule:<?=$this->idmodule?>}, 'editzone');
+
+        });
+
+</script>
+ <div class="row">
+     <div class="col-md-7" id="listeZone"></div>
+     <div class="col-md-5"  id="editzone"></div>
+ </div>

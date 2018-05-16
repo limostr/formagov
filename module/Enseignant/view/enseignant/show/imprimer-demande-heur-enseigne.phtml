@@ -1,0 +1,80 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header">
+                <div class="form-group">
+                <label for="anneeuniv">Année universitaire</label>
+                <select class="form-control" name="anneeuniv">
+                    <option>2015-2016</option>
+                    <option>2016-2017</option>
+                    <option>2017-2018</option>
+                </select>
+                </div>
+
+            </div>
+            <div class="box-body">
+
+                <table class="table table-bordered table-striped">
+
+                    <thead>
+                        <tr>
+                            <th>Formation</th>
+                            <th>Niveau</th>
+                            <th>Semestre</th>
+                            <th>UE</th>
+                            <th>ECUE</th>
+                            <th>Aide</th>
+                            <th>Imprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($this->MesTutorats as $t):?>
+                         <tr>
+                            <td>
+                                <?=$t->ecue->Label?>
+                            </td>
+                            <td><?=$t->ecue->labelnivformation?></td>
+                            <td>
+                                <?php if(isset($t->Periode)):?>
+                                    <?php if(count($t->Periode)>1):?>
+                                        <?php foreach ($t->Periode as $ptiming):?>
+
+                                            <?=$ptiming->labelperiode?>
+                                            <?php if(isset($ptiming->debutperiode)):?>
+                                            (de <?=date("d/m/Y",strtotime($ptiming->debutperiode))?> à <?=date("d/m/Y",strtotime($ptiming->finperiode))?>)<br>
+                                            <?php endif;?>
+
+                                        <?php endforeach;?>
+                                    <?php else: ?>
+                                        <?=$t->Periode[0]->labelperiode?>
+                                        <?php if(isset($t->Periode[0]->debutperiode)):?>
+                                        (de <?=date("d/m/Y",strtotime($t->Periode[0]->debutperiode))?> à <?=date("d/m/Y",strtotime($t->Periode[0]->finperiode))?>)
+                                        <?php endif;?>
+                                    <?php endif;?>
+
+                                <?php endif;?>
+
+
+                            </td>
+                            <td><?=$t->Module['ue']['titremodule']?></td>
+                            <td><?=$t->Module['ecue']['titremodule']?></td>
+                            <td class="text-center"><button class="btn btn-info"><i class="fa fa-info-circle" ></i></button> </td>
+                            <td class="text-center"><button class="btn btn-success"><i class="fa fa-print" ></i></button> </td>
+                        </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

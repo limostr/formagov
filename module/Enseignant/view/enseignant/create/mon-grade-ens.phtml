@@ -1,0 +1,58 @@
+<?php
+$flash=$this->flashMessenger()
+    ->setMessageOpenFormat('<div%s>')
+    ->setMessageSeparatorString('')
+    ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("aaaa");
+$form = $this->form;
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+?>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3><?=$this->translate("enseignants_title_create")?></h3>
+                <small>
+                    <?=$this->translate('grade_message_aide_titre',null,'ar_AR')?>
+                </small>
+            </div>
+            <div class="box-body">
+                <?php
+                echo $this->form()->openTag($form);
+                echo $flash->render('save_enseignants',array('btn', 'btn-danger'));
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend><?=$this->translate("grade_title_Ajouter")?></legend>
+                            <div class="form-group">
+                                <?php
+                                $element = $form->get('idgrades');
+                                echo $formLabel->openTag(). $this->translate($element->getOption('label')) ." ";
+                                echo $this->formSelect($element);
+                                echo $this->formElementErrors($element);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                </div>
+
+
+                <?php
+                echo $this->form()->closeTag();
+                echo $this->formElement($form->get('save_grade'));
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

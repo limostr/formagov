@@ -1,0 +1,156 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+
+<script type="text/javascript">
+
+    function treeUe(){
+        $("#treeue").fancytree({
+            source: {
+                url: "<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"jzonunite"),null,true)?>"
+            },
+            lazyload: function(e, data){
+                data.result = $.ajax({
+                    url: "<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"jzonunite"),null,true)?>",
+                    dataType: "json"
+                });
+            },
+            click: function(event, data) {
+                var keydata=data.node.key;
+                var keysplit=keydata.split("_");
+
+                var url="<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>";
+                var dataselect={
+                     idform:<?=$this->idform?>
+                    ,ecran:'visualisation'
+                };
+                if(keysplit[0]=="UE"){
+                     url="<?=$this->url("pedagogie/controller-action",array("controller"=>"create","action"=>"menuue"),null,true)?>";
+                      dataselect={
+                        sem: keysplit[2]
+                        ,idue:keysplit[1]
+                        ,Type:'UE'
+                        ,idform:<?=$this->idform?>
+                    };
+                    ///idecue/"+keysplit[1]+"/sem/"+keysplit[3]+"/type/ue
+                }else if(keysplit[0]=="ECUE"){
+                     url="<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"detailecue"),null,true)?>";
+                    dataselect={
+                        sem: keysplit[3]
+                        ,id:keysplit[1]
+                        ,Type:'ECUE'
+                        ,idform:<?=$this->idform?>
+                    };
+                    ////idue/"+keysplit[1]+"/sem/"+keysplit[2]+"/type/ecue
+                }else if(keysplit[0]=="SEM"){
+                    url="<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>";
+
+                    dataselect={
+                        sem: keysplit[1]
+                        ,idform:<?=$this->idform?>
+                        ,ecran:'deatils'
+                    };
+                }
+
+                $.ajax({
+                    type:"POST",
+                    url: url,
+                    data:dataselect,
+                    beforeSend :function(){
+                        $('#moduledesc').html("Encours...");
+                    },
+                    success:function(response){
+                        $('#moduledesc').html(response);
+                    }
+                });
+            }
+        });
+
+
+    }
+
+
+    $(function(){
+        treeUe();
+
+    });
+</script>
+
+<h1>Edition des details de la formation</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-book text-aqua"></i> <?=$this->translate('details_formation')?></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <table class="table">
+                            <thead>
+                            <?php foreach($this->formation as $f):?>
+                                <tr>
+                                    <th><?=$f['idtypeformation']?></th>
+                                    <td><?=$f['Label']?></td>
+                                </tr>
+                            <?php endforeach;?>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="box-header">
+                                <?=$this->translate('description_formation')?>
+                            </div>
+                            <div class="box-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+     <div class="box">
+         <div class="box-header">
+             Liste des unités
+         </div>
+         <div class="box-body" id="treeue">
+
+         </div>
+
+     </div>
+
+    </div>
+
+    <div class="col-md-9">
+
+        <div class="box">
+            <div class="box-header">Gestion de l'unité </div>
+             <div class="box-body" id="moduledesc">
+            </div>
+        </div>
+
+    </div>
+
+</div>

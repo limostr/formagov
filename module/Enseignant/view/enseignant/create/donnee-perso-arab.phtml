@@ -1,0 +1,129 @@
+<?php
+$flash=$this->flashMessenger()
+    ->setMessageOpenFormat('<div%s>')
+    ->setMessageSeparatorString('')
+    ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("aaaa");
+$form = $this->form;
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+?>
+<div class="row">
+
+    <div class="col-md-12" dir="rtl">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3><?=$this->translate("enseignants_title_create",null,'ar_AR')?></h3>
+
+            </div>
+            <div class="box-body">
+                <?php
+                echo $this->form()->openTag($form);
+                echo $flash->render('save_enseignants',array('btn', 'btn-danger'));
+                ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend><?=$this->translate("enseignants_legende_Identiter",null,'ar_AR')?></legend>
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('cin');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('datelivrecin',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formDate($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('datelivrecin',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formDate($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('matricule',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('typematricule',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formSelect($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+                        </fieldset>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('nom',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('prenom',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formInput($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $rib = $form->get('email',null,'ar_AR');
+                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,'ar_AR') ." ";
+                                echo $this->formEmail($rib);
+                                echo $this->formElementErrors($rib);
+                                echo $formLabel->closeTag();
+                                ?>
+                            </div>
+
+
+                        </fieldset>
+                    </div>
+
+                </div>
+
+
+                <?php
+                echo $this->form()->closeTag();
+                echo $this->formElement($form->get('save_enseignants'));
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

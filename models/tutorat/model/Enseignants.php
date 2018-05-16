@@ -42,6 +42,24 @@ class Enseignants implements InputFilterAwareInterface
 				),
 				),
 				)));
+				            $inputFilter->add($factory->createInput(array(
+			'name'     => 'rib',
+			'required' => false,
+			'filters'  => array(
+			array('name' => 'StripTags'),
+			array('name' => 'StringTrim'),
+			),
+			'validators' => array(
+			array(
+			'name'    => 'StringLength',
+			'options' => array(
+			'encoding' => 'utf8',
+			'min'      => 1,
+			'max'      => 45,
+				),
+				),
+				),
+				)));
 				 
 
             $this->inputFilter = $inputFilter;        

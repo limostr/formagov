@@ -51,7 +51,7 @@ class Activitepratiquemodule implements InputFilterAwareInterface
 			)));
 			            $inputFilter->add($factory->createInput(array(
 			'name'     => 'idtypevalidation',
-			'required' => true,
+			'required' => false,
 			'filters'  => array(
 			array('name' => 'StripTags'),
 			array('name' => 'StringTrim'),

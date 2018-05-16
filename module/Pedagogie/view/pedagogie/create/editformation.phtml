@@ -1,0 +1,95 @@
+<?php
+declare(strict_types = 1);
+//echo "<pre>";print_r($this->formation) ;echo "</pre>";
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>','S1','moduledesc');
+
+        $('ul.nav.nav-pills li a').click(function() {
+            $(this).parent().addClass('active').siblings().removeClass('active');
+        });
+    });
+
+    function getSemestreModule(idsemestre){
+        AjaxLoaderMultiParam('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls",'id'=>$this->idformation),null,true)?>',{sem:idsemestre,idform:<?=$this->idformation?>} ,'moduledesc');
+
+    }
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-book text-aqua"></i> <?=$this->translate('details_formation')?></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <table class="table">
+                            <thead>
+                            <?php foreach($this->formation as $f):?>
+                                <tr>
+                                    <th><?=$f['idtypeformation']?></th>
+                                    <td><?=$f['Label']?></td>
+                                </tr>
+                            <?php endforeach;?>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="box-header">
+                                <?=$this->translate('description_formation')?>
+                            </div>
+                            <div class="box-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Liste des modules-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-cubes text-green"></i> <?=$this->translate('details_modules')?></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills nav-stacked">
+                            <?php foreach ($this->Periode as $p):?>
+                                <?php foreach ($p['periode'] as $key=>$d):?>
+                                    <li><a style="cursor: hand;"  onclick="getSemestreModule('<?=$key?>')"><?=$d['labelperiode']?></a></li>
+                                <?php endforeach;?>
+                            <?php endforeach;?>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-9" id="moduledesc">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Fin liste des modules-->

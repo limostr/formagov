@@ -1,0 +1,110 @@
+<?php
+$flash=$this->flashMessenger()
+    ->setMessageOpenFormat('<div%s>')
+    ->setMessageSeparatorString('')
+    ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("aaaa");
+$form = $this->form;
+$form->setAttribute('action', $this->url("enseignant/controller-action",array("controller"=>"create","action"=>"donneepersonnelle"),null,true));
+
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+?>
+<div class="row">
+
+    <div class="col-md-12" <?=$this->langue=="ar_AR" ? "dir='rtl'" : '' ?>>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3><?=$this->translate("enseignants_title_create",null,$this->langue)?></h3>
+
+            </div>
+            <div class="box-body">
+                <?php
+                echo $this->form()->openTag($form);
+                echo $flash->render('save_diplomeens',array('btn', 'btn-danger'));
+                ?>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header"></div>
+                            <div class="box-body">
+                                <fieldset>
+                                    <legend></legend>
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+
+                                            <div class="form-group">
+                                                <?php
+                                                $rib = $form->get('titrediplome');
+                                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formInput($rib);
+                                                echo $this->formElementErrors($rib);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <?php
+                                                $rib = $form->get('specialiterdiplome');
+                                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formInput($rib);
+                                                echo $this->formElementErrors($rib);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <?php
+                                                $rib = $form->get('pays');
+                                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formSelect($rib);
+                                                echo $this->formElementErrors($rib);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <?php
+                                                $rib = $form->get('etablissement');
+                                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formInput($rib);
+                                                echo $this->formElementErrors($rib);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <?php
+                                                $rib = $form->get('dateobtention');
+                                                echo $formLabel->openTag(). $this->translate($rib->getOption('label'),null,$this->langue) ." ";
+                                                echo $this->formInput($rib);
+                                                echo $this->formElementErrors($rib);
+                                                echo $formLabel->closeTag();
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <?php
+
+                echo $this->formElement($form->get('save_diplomeens'));
+                echo $this->form()->closeTag();
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

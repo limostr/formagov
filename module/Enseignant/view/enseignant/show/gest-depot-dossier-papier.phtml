@@ -1,0 +1,25 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<script type="text/javascript">
+    $(function(){
+        AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"show","action"=>"depot-dossier-papier"),null,true)?>',1,'ListeContent')
+
+      //  AjaxLoader('<?=$this->url("enseignant/controller-action",array("controller"=>"create","action"=>"depot-dossier-papier"),null,true)?>',1,'FormContent')
+
+    });
+</script>
+
+<div class="row">
+
+    <div class="col-md-6" id="FormContent"></div>
+
+    <div class="col-md-12" id="ListeContent"></div>
+</div>

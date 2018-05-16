@@ -1,0 +1,465 @@
+ <?php
+
+ //print_r($this->form);die();
+//print_r($this->rows->toArray());die();
+ $diplomeactive="";
+ $formationactive="59";
+ $this->rowssem->buffer();
+ ?>
+
+ <script type="text/javascript">
+     $(function(){
+
+
+         var optmyform = {
+             beforeSend: function()  { },
+             uploadProgress: function(event, position, total, percentComplete) { },
+             success: function() { },
+             complete: function(response)
+             {
+                 var obj = JSON.parse(response.responseText);
+                 if(obj.status=="success"){
+                     var msg;
+
+
+                     if(obj.Envoi=='Oui'){
+                         sendEmail(obj.idinvitation);
+                         msg="Envoi effetuer avec succés";
+                     }else{
+                         msg="Invitation déjà envoyer, procédé a re-envoyer l'email";
+                     }
+                     $("#messageconfig").html("<div class='alert alert-success'>"
+                         +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                         +"<h4 class='alert-heading'>"+msg+"</h4>"
+                         +"<p> "+obj.status
+                         +" </p> </div>");
+                 }else{
+
+                     $("#messageconfig").html("<div class='alert alert-block alert-error fade in'>"
+                         +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                         +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                         +"<p> "+obj.message
+                         +" </p> </div>");
+
+
+                 }
+
+             },
+             error: function(response)
+             {
+                 var obj = JSON.parse(response.responseText);
+                 $("#messageconfig").html("<div class='alert alert-block alert-error fade in'>"
+                     +"<button type='button' class='close' data-dismiss='alert'>X</button>"
+                     +"<h4 class='alert-heading'>Erreur d'insertion des données</h4>"
+                     +"<p> "+obj.message
+                     +" </p> </div>");
+
+             }
+
+         };
+         $("#sendinvite").ajaxForm(optmyform);
+
+         $("#ecuetable")
+             .DataTable({
+                 "responsive": true
+
+             });
+
+         /****************Chargement de la liste des diplome**********************/
+         var url="<?=$this->url('pedagogie/controller-action',array('controller'=>'dashboard','action' =>'infogenform'), null, true); ?>";
+         $.ajax({
+             type:"POST",
+             url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getdiplomesoption'), null, true); ?>",
+
+             beforeSend :function(){$('#diplomeecue').html("<option>Encours... </option>");},
+             success:function(response){
+
+                 $("#diplomeecue").html(response);
+                 $("#diplomeecue").val("<?=$diplomeactive?>");
+                 $('#diplomeecue').trigger("chosen:updated");
+
+                 $.ajax({
+                     type:"POST",
+                     url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getformationoption'), null, true); ?>",
+                     data:{idpere:'<?=$diplomeactive?>'},
+                     beforeSend :function(){$('#formationecue').html("<option>Encours... </option>");},
+                     success:function(response){
+
+                         $("#formationecue").html(response);
+                         $("#formationecue").val("<?=$formationactive?>");
+                         $('#formationecue').trigger("chosen:updated");
+
+                     }
+                 });
+             }
+         });
+         $("#diplomeecue").change(function(){
+             var opt=$(this).val();
+             $.ajax({
+                 type:"POST",
+                 url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getformationoption'), null, true); ?>",
+                 data:{idpere:opt},
+                  beforeSend :function(){$('#formationecue').html("<option>Encours... </option>");$('#formationecue').trigger("chosen:updated");},
+                 success:function(response){
+                     $("#formationecue").html(response);
+                     $("#formationecue").val("<?=$formationactive?>");
+                     $('#formationecue').trigger("chosen:updated");
+                 }
+             });
+
+
+         });
+
+
+         /***************on change formation***********************/
+         $("#formationecue").change(function(){
+             var opt=$(this).val();
+             $.ajax({
+                 type:"POST",
+                 url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'getniveaulevel'), null, true); ?>",
+                  data:{id:opt },
+                 beforeSend :function(){
+                 },
+                 success:function(response){
+                     var rep= "<option value=''>Selectionner un niveau</option>"+response;
+
+                     $("#Niveau").html(rep);
+                     $('#Niveau').chosen();
+                     $('#Niveau').trigger("chosen:updated");
+                 }
+             });
+         });
+
+         $("#semestrechoix").change(function(){
+             var opt=$(this).val();
+             $.ajax({
+                 type:"POST",
+                 url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'jsonlisterecue'), null, true); ?>",
+
+                 data:{id:$("#Niveau").val() ,idniveau:$("#Niveau").val(),sem:opt},
+                 beforeSend :function(){
+                 },
+                 success:function(response){
+                     var jsdata = JSON.parse(response);
+                     var tab=  $("#ecuetablechoix").DataTable();
+
+                     tab.clear().draw();
+                     $.each(jsdata,function(i,val){
+                         var label =jsdata[i].labelecue;
+                         var id=jsdata[i].idecue;
+
+                         tab.row.add([
+
+                                 "<input type='checkbox' name='idecuechoix[]' onclick=\"choisirEcue('"+label+"','"+id+"');\" value='"+id+"'>"  ,
+                                 label
+                             ]
+                         ).draw();
+                     });
+
+                 }
+             });
+         });
+
+         $("#Niveau").change(function(){
+             var opt=$(this).val();
+             $.ajax({
+                 type:"POST",
+                 url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'get-periode'), null, true); ?>",
+                 data:{id:opt },
+                 beforeSend :function(){
+                 },
+                 success:function(response){
+                     var rep= "<option value=''>Selectionner un niveau</option>"+response;
+
+                     $("#semestrechoix").html(rep);
+                     $('#semestrechoix').chosen();
+                     $('#semestrechoix').trigger("chosen:updated");
+                 }
+             });
+         });
+
+     }) ;
+
+     function choisirEcue(label,id){
+         var tab=  $("#ecuetable").DataTable();
+         tab.row.add([
+
+                 "<input type='checkbox' name='idecue[]' value='"+id+"'>"  ,
+                 label
+             ]
+         ).draw();
+
+
+     }
+
+function sendEmail(idinvitation){
+    $.ajax({
+        type:"POST",
+        url:"<?=$this->url('pedagogie/controller-action',array('controller'=>'enseignants','action' =>'envoyer-invitation'), null, true); ?>",
+
+        data:{idinvitation:idinvitation  },
+        beforeSend :function(){
+        },
+        success:function(response){
+            var jsdata = JSON.parse(response);
+        }
+    });
+}
+
+
+ </script>
+
+<div id="messageconfig"></div>
+
+<form   method="POST"
+        action="<?=$this->url("pedagogie/controller-action",array("controller"=>"enseignants","action"=>"save-mail-invitation"),null,true)?>"
+        id="sendinvite">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-aqua"><i class="fa fa-mortar-board "></i>Inviter un tuteur</h3>
+                </div>
+                <div class="box-body">
+
+
+
+                    <?php if(!empty($this->errors['email'])):?>
+                        <div class="form-group has-error input-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?=$this->form->get('email')->getValue()?>">
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-danger btn-flat glyphicon glyphicon-envelope"  >  </button>
+                             </span>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback input-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?=$this->form->get('email')->getValue()?>">
+
+                            <span class="input-group-btn">
+                               <button type="button" class="btn btn-info btn-flat glyphicon glyphicon-envelope"  >  </button>
+                            </span>
+                        </div>
+                    <?php endif;?>
+
+                    <?php if(!empty($this->errors['nom'])):?>
+                        <div class="form-group has-error input-group">
+                            <input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" value="<?=$this->form->get('nom')->getValue()?>">
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-danger btn-flat glyphicon glyphicon-lock" id="nombt" >  </button>
+                              </span>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback input-group">
+                            <input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" value="<?=$this->form->get('nom')->getValue()?>">
+
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-info btn-flat glyphicon glyphicon-lock" id="nombt">  </button>
+                                 </span>
+
+                        </div>
+                    <?php endif;?>
+
+
+                    <?php if(!empty($this->errors['prenom'])):?>
+                        <div class="form-group has-error input-group">
+                            <input type="text" class="form-control" placeholder="<?=utf8_encode("Prénom")?>" id="prenom" name="prenom" value="<?=$this->form->get('prenom')->getValue()?>">
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-danger btn-flat glyphicon glyphicon-lock" id="prenombt" >  </button>
+                              </span>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback input-group">
+                            <input type="text" class="form-control" placeholder="<?=utf8_encode("Prénom")?>" id="prenom" name="prenom" value="<?=$this->form->get('prenom')->getValue()?>">
+
+                            <span class="input-group-btn">
+                                      <button type="button" class="btn btn-info btn-flat glyphicon glyphicon-lock" id="prenombt">  </button>
+                                 </span>
+
+                        </div>
+                    <?php endif;?>
+
+                    <?php if(!empty($this->errors['anneescolaire'])):?>
+                        <div class="form-group has-error">
+
+
+                            <select id="anneescolaire" name="anneescolaire"  class="form-control">
+                                <option value=""><?=utf8_encode("Année Universitaire")?></option>
+                                <?php foreach($this->rows as $row):?>
+                                    <option value="<?=$row->idanneeuniv?>"> <?=$row->labelanneeuniv?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback">
+                            <select id="anneescolaire" name="anneescolaire"  class="form-control">
+                                <option value=""><?=("Année Universitaire")?></option>
+                                <?php foreach($this->rows as $row):?>
+                                    <?php $annuniv=$this->form->get('anneescolaire')->getValue();?>
+                                    <option value="<?=$row->idanneeuniv?>" <?=(!empty($annuniv) ? 'selected' :'')?>> <?=$row->labelanneeuniv?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php endif;?>
+
+                    <?php if(!empty($this->errors['semestre'])):?>
+                        <div class="form-group has-error">
+
+
+                            <select id="semestre" name="semestre"  class="form-control">
+                                <option value="">Semestre </option>
+                                <?php foreach($this->rowssem as $row):?>
+                                    <option value="<?=$row->idperiode?>"> <?=$row->labelperiode?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group has-feedback">
+                            <select id="semestre" name="semestre"  class="form-control">
+                                <option value="">Semestre</option>
+                                <?php foreach($this->rowssem as $row):?>
+                                    <?php $semestre=$this->form->get('semestre')->getValue();?>
+                                    <option value="<?=$row->idperiode?>" <?=(!empty($annuniv) ? 'selected' :'')?>> <?=$row->labelperiode?> </option>
+                                <?php endforeach;?>
+
+                            </select>
+
+                        </div>
+                    <?php endif;?>
+
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Enregistrer</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-danger"><i class="fa fa-book "></i> Liste des Ecue</h3>
+                </div>
+                <div class="box-body">
+                    <a  class="btn btn-success" onclick="$('#choixue').modal('show');">Ajouter ECUE</a>
+
+
+                    <hr>
+                    <div>
+                        <table id="ecuetable" class="table table-bordered table-hover responsive">
+                            <thead>
+                            <th style="width:5%;">Choisir</th>
+                            <th>ECUE</th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="choixue"  >
+    <div class="modal-dialog" style="width:auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Choisir un ECUE</h4>
+            </div>
+            <div class="modal-body" id="formchoixue">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-danger"><i class="fa fa-book "></i> Liste des Ecue</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div>
+                                    <select id="semestrechoix" name="semestrechoix"  class="form-control">
+                                        <option value="">choisir semestre de l'unité </option>
+                                        <?php $this->rowssem->rewind() ;foreach($this->rowssem as $row):?>
+                                            <option value="<?=$row->idperiode?>"> <?=$row->labelperiode?> </option>
+                                        <?php endforeach;?>
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-sidebar-subheading">
+                                        <?=utf8_encode("Diplôme active")?>
+                                        <div style="color:#000000;">
+                                            <select id="diplomeecue" name= "diplomeecue" class="pull-right form-control">
+
+                                            </select>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <label class="control-sidebar-subheading">
+                                        <span>Formation</span>
+                                        <div style="color:#000000;">
+                                            <select id="formationecue" name= "formationecue" class="pull-right form-control">
+
+                                            </select>
+                                        </div>
+                                    </label>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <label class="control-sidebar-subheading">
+                                        <span>Niveau</span>
+                                        <div style="color:#000000;">
+                                            <select id="Niveau" name= "Niveau" class="pull-right form-control">
+
+                                            </select>
+                                        </div>
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+                            <hr>
+                            <div>
+                                <table id="ecuetablechoix" class="table table-bordered table-hover responsive">
+                                    <thead>
+                                    <th style="width:5%;">Choisir</th>
+                                    <th>ECUE</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

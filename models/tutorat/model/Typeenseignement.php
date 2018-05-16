@@ -68,7 +68,14 @@ class Typeenseignement implements InputFilterAwareInterface
 			array('name' => 'StringTrim'),
 			),
 				)));
-				 
+				            $inputFilter->add($factory->createInput(array(
+			'name'       => 'ordreaffichage',
+			'required'   => false,
+			'filters' => array(
+			array('name'    => 'Int'),
+			),
+			)));
+			 
 
             $this->inputFilter = $inputFilter;        
         }

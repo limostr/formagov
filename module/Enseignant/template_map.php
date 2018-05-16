@@ -8,6 +8,10 @@ declare(strict_types = 1);
  */
 
 
-return [
-    
-];
+
+return array(
+    'layout/default'           => __DIR__ . '/../../layouts/adminlte/layout/default.phtml',
+    'layout/auth'              => __DIR__ . '/../../layouts/adminlte/layout/auth.phtml',
+    'layout/creationcompte'              => __DIR__ . '/../../layouts/adminlte/layout/creationcompte.phtml',
+
+    );

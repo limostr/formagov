@@ -1,4 +1,9 @@
 <?php
+ 
+//		$id=$row->idperiode;
+ 
+
+
 namespace Models\Tutorat\Model;
 
 use Zend\Db\TableGateway\AbstractTableGateway,
@@ -39,123 +44,9 @@ class PeriodeTable extends AbstractTableGateway
     	return $select->from('periode')->columns($columnsArray);    	
     }
     
-    public function createIfNotExist($checkColumnsArray,$optionalColumns=array(),&$isRowCreated=null) {
-			$rowset=$this->select($checkColumnsArray);
-    		$row = $rowset->current();
-    		$id=null;
-    		if ($row == null) {
-    			$allColumns=array_merge($checkColumnsArray,$optionalColumns);
-    			$affectedRows = $this->insert($allColumns);
-    			if ($affectedRows != 1) {
-    				throw new \Exception("error: could not add line to db");
-    			}
-    			$id=$this->lastInsertValue;
-    			$isRowCreated=true;
-    		} else {
-    			$id=$row->idperiode;
-    			$isRowCreated=false;
-    		}
-    		return $id;
-    }
-    
-    //http://stackoverflow.com/questions/6156942/how-do-i-insert-an-empty-row-but-have-the-autonumber-update-correctly
-    
-    public function createEmptyRow() {
-    	$row=array(
-    	'idperiode' => null
-    	);
-    	$affectedRows=$this->insert($row);
- 		if ($affectedRows != 1) {
-    		throw new \Exception("error: could not add empty row to db");
-    	}
-    	$id=$this->lastInsertValue;
-    	return $id;
-	}
-    
-    public function getPeriode($id)
-    {
-        $id  = (int) $id;
-        $rowset = $this->select(array('idperiode' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
-    
-     public function matchPeriode($idlevelformation, $labelperiode, $descperiode)
-    {
-        $select = $this->getSelect();
-                if ($idlevelformation != null) {
-        	$select->where->like('idlevelformation' ,'%'.$idlevelformation.'%');
-        }
-                if ($labelperiode != null) {
-        	$select->where->like('labelperiode' ,'%'.$labelperiode.'%');
-        }
-                if ($descperiode != null) {
-        	$select->where->like('descperiode' ,'%'.$descperiode.'%');
-        }
-                $statement = $this->getSql()->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        $ret = $result->current();
-        if ($ret !== false) {
-        	$ret = array($ret);
-            while (($line=$result->next()) !== false ) {
-        		$ret[]=$line;
-        	}
-        }
-        return $ret;
-    }
-    
-
-    public function savePeriode(Periode $periode)
-    {
-        $data = array(
-        	            'idlevelformation' => $periode->idlevelformation,
-                        'labelperiode' => $periode->labelperiode,
-                        'descperiode' => $periode->descperiode,
-                    );
-
-        $id = (int)$periode->id;
-        if ($id == 0) {
-            $this->insert($data);
-        } else {
-            if ($this->getPeriode($id)) {
-                $this->update($data, array('idperiode' => $id));
-            } else {
-                throw new \Exception('Form id does not exit');
-            }
-        }
-    }
-
-    public function addPeriode($idlevelformation, $labelperiode = null, $descperiode = null)
-    {
-        $data = array(            'idlevelformation' => $idlevelformation,
-                    );
-                if ($labelperiode != null) {
-        	$data['labelperiode'] = $labelperiode;
-        }
-                if ($descperiode != null) {
-        	$data['descperiode'] = $descperiode;
-        }
-                $affectedRows=$this->insert($data);
-                return $affectedRows;
-            }
-    
    
-    public function updatePeriode($idperiode, $idlevelformation, $labelperiode, $descperiode)
-    {
-        $data = array(
-        	            'idlevelformation' => $periode->idlevelformation,
-                        'labelperiode' => $periode->labelperiode,
-                        'descperiode' => $periode->descperiode,
-                            );
-        $this->update($data, array(idperiode => $id));
-    }
+    
+    
 
-    public function deletePeriode($id)
-    {
-        $this->delete(array('idperiode' => $id));
-    }
-
+    
 }

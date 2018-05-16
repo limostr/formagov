@@ -1,4 +1,7 @@
 <?php
+
+
+
 namespace Models\Tutorat\Model;
 
 use Zend\Db\TableGateway\AbstractTableGateway,
@@ -39,119 +42,9 @@ class EnseignantsmoduleTable extends AbstractTableGateway
     	return $select->from('enseignantsmodule')->columns($columnsArray);    	
     }
     
-    public function createIfNotExist($checkColumnsArray,$optionalColumns=array(),&$isRowCreated=null) {
-			$rowset=$this->select($checkColumnsArray);
-    		$row = $rowset->current();
-    		$id=null;
-    		if ($row == null) {
-    			$allColumns=array_merge($checkColumnsArray,$optionalColumns);
-    			$affectedRows = $this->insert($allColumns);
-    			if ($affectedRows != 1) {
-    				throw new \Exception("error: could not add line to db");
-    			}
-    			$id=$this->lastInsertValue;
-    			$isRowCreated=true;
-    		} else {
-    			$id=$row->array('idpersonnes', 'idModule', 'idanneeuniv');
-    			$isRowCreated=false;
-    		}
-    		return $id;
-    }
-    
-    //http://stackoverflow.com/questions/6156942/how-do-i-insert-an-empty-row-but-have-the-autonumber-update-correctly
-    
-    public function createEmptyRow() {
-    	$row=array(
-    	'array('idpersonnes', 'idModule', 'idanneeuniv')' => null
-    	);
-    	$affectedRows=$this->insert($row);
- 		if ($affectedRows != 1) {
-    		throw new \Exception("error: could not add empty row to db");
-    	}
-    	$id=$this->lastInsertValue;
-    	return $id;
-	}
-    
-    public function getEnseignantsmodule($id)
-    {
-        $id  = (int) $id;
-        $rowset = $this->select(array('array('idpersonnes', 'idModule', 'idanneeuniv')' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
-    
-     public function matchEnseignantsmodule($idpersonnes, $idModule, $idanneeuniv)
-    {
-        $select = $this->getSelect();
-                if ($idpersonnes != null) {
-        	$select->where->like('idpersonnes' ,'%'.$idpersonnes.'%');
-        }
-                if ($idModule != null) {
-        	$select->where->like('idModule' ,'%'.$idModule.'%');
-        }
-                if ($idanneeuniv != null) {
-        	$select->where->like('idanneeuniv' ,'%'.$idanneeuniv.'%');
-        }
-                $statement = $this->getSql()->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        $ret = $result->current();
-        if ($ret !== false) {
-        	$ret = array($ret);
-            while (($line=$result->next()) !== false ) {
-        		$ret[]=$line;
-        	}
-        }
-        return $ret;
-    }
-    
-
-    public function saveEnseignantsmodule(Enseignantsmodule $enseignantsmodule)
-    {
-        $data = array(
-        	            'idpersonnes' => $enseignantsmodule->idpersonnes,
-                        'idModule' => $enseignantsmodule->idModule,
-                        'idanneeuniv' => $enseignantsmodule->idanneeuniv,
-                    );
-
-        $id = (int)$enseignantsmodule->id;
-        if ($id == 0) {
-            $this->insert($data);
-        } else {
-            if ($this->getEnseignantsmodule($id)) {
-                $this->update($data, array('array('idpersonnes', 'idModule', 'idanneeuniv')' => $id));
-            } else {
-                throw new \Exception('Form id does not exit');
-            }
-        }
-    }
-
-    public function addEnseignantsmodule($idpersonnes, $idModule, $idanneeuniv)
-    {
-        $data = array(            'idpersonnes' => $idpersonnes,
-                        'idModule' => $idModule,
-                        'idanneeuniv' => $idanneeuniv,
-                    );
-                $affectedRows=$this->insert($data);
-                return $affectedRows;
-            }
-    
    
-    public function updateEnseignantsmodule($array('idpersonnes', 'idModule', 'idanneeuniv'), $idpersonnes, $idModule, $idanneeuniv)
-    {
-        $data = array(
-        	            'idpersonnes' => $enseignantsmodule->idpersonnes,
-                        'idModule' => $enseignantsmodule->idModule,
-                        'idanneeuniv' => $enseignantsmodule->idanneeuniv,
-                            );
-        $this->update($data, array(array('idpersonnes', 'idModule', 'idanneeuniv') => $id));
-    }
+    
+    
 
-    public function deleteEnseignantsmodule($id)
-    {
-        $this->delete(array('array('idpersonnes', 'idModule', 'idanneeuniv')' => $id));
-    }
-
+    
 }

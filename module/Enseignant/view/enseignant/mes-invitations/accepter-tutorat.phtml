@@ -1,0 +1,176 @@
+<?php
+/**
+ * ZF2 Application built by ZF2rapid
+ *
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+
+?>
+<div id="messagediv"></div>
+<div class="row">
+<div class="col-md-12">
+    <div class="box">
+        <div class="box-header"></div>
+        <div class="box-body">
+
+            <?php if($this->formation):?>
+                <table class="table table-bordered  table-striped">
+                    <tr>
+                        <th>Formation</th>
+
+
+                    </tr>
+                    <?php if(isset($this->formation)):?>
+                        <tr>
+                            <td>
+                                <!--Formation-->
+                                <table class="tableContent">
+                                    <?php foreach($this->formation as $f):?>
+                                        <tr>
+                                            <th><?=$f['idtypeformation']?> : </th>
+                                            <td><?=$f['Label']?></td>
+                                        </tr>
+                                    <?php endforeach;?>
+                                    <?php if(isset($this->Module['ue'])):?>
+                                    <tr>
+                                        <th>Niveau : </th>
+                                        <td><?=$this->Module['ue']['LabelNiveau']?></td>
+                                    </tr>
+                                    <?php endif;?>
+                                    <?php if(isset($this->periode)):?>
+                                        <tr>
+                                            <th>Période : </th>
+                                            <td>
+                                                <?php foreach ($this->periode as $p):?>
+                                                <?=$p->labelperiode?>
+                                                <?php endforeach;?>
+                                                &nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                    <?php endif;?>
+
+                                </table>
+                                <!--Fin Formation-->
+                            </td>
+                        </tr>
+
+
+                        </tr>
+                    <?php endif;?>
+                    </tr>
+
+                </table>
+
+            <?php else :?>
+
+
+            <?php endif;?>
+
+            <?php if(isset($this->Module)):?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>UE</th>
+                                    <td><?=$this->Module['ue']['titremodule']?></td>
+                                </tr>
+                                <tr>
+                                    <th>Période</th>
+                                    <td><?=$this->Module['ue']['idperiode']?></td>
+                                </tr>
+                                <tr>
+                                    <th>Coef.</th>
+                                    <td><?=$this->Module['ue']['coefficient']?></td>
+                                </tr>
+                                <tr>
+                                    <th>Nature</th>
+                                    <td><?=$this->Module['ue']['idNature']?></td>
+                                </tr>
+                                <tr>
+                                    <th>Regime</th>
+                                    <td><?=$this->Module['ue']['idRegime']?></td>
+                                </tr>
+                                <tr>
+                                    <th>Credit</th>
+                                    <td><?=$this->Module['ue']['credit']?></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="box">
+
+                            <div class="box">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th>ECUE</th>
+                                        <td><?=$this->Module['ecue']['titremodule']?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Période</th>
+                                        <td><?=$this->Module['ecue']['idperiode']?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Coef.</th>
+                                        <td><?=$this->Module['ecue']['coefficient']?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nature</th>
+                                        <td><?=$this->Module['ecue']['idNature']?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Regime</th>
+                                        <td><?=$this->Module['ecue']['idRegime']?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Credit</th>
+                                        <td><?=$this->Module['ecue']['credit']?></td>
+                                    </tr>
+                                </table>
+
+                        </div>
+                    </div>
+
+                </div>
+                <button class="btn btn-success" onclick="AjaxLoader('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'save-accept-tutorat'),array('query'=>array("ecue"=>$this->ecue,"invitations"=>$this->invitations)), true); ?>','<?=$this->invitations?>','messagediv');">Accepter la tutorat</button>
+
+
+            <?php else :?>
+
+
+            <?php endif;?>
+
+        </div>
+        <div class="box-footer"></div>
+
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+
+                <?php if(isset($this->tuteurExist)):?>
+                    <p>
+                        Le tuteur de module de l'année universitaire est : <br>
+                        <b>Nom : </b><?=$this->tuteurExist->nom?><br>
+                        <b>Prénom : </b><?=$this->tuteurExist->prenom?><br>
+                    </p>
+                <?php else :?>
+
+
+                <?php endif;?>
+
+            </div>
+            <div class="box-footer"></div>
+
+        </div>
+    </div>
+</div>

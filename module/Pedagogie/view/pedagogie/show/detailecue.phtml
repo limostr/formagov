@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    /**/
+    $(function () {
+        $('#ecuetabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    })
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+               <h3> Gestion de l'ECUE</h3>
+                <div class="box-tools">
+                    <button id="boxofg" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="col-md-12">
+                    <!-- Custom Tabs -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" id="ecuetabs">
+
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url("pedagogie/controller-action",array("controller"=>"create","action"=>"createue"),null,true)?>',{id:<?=$this->id?>,sem:'<?=$this->sem?>',idform:<?=$this->idform?>  } ,'div_ECUE_content');"  >ECUE</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'moduleens','action'=>'createenseignement'))?>',{idmodule:<?=$this->id?>,Type:'ECUE' },'div_ECUE_content');"  >Enseignement</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'moduleens','action'=>'gestionprerequit'))?>',{idmodule:<?=$this->id?>,sem:'<?=$this->sem?>',idform:<?=$this->idform?>},'div_ECUE_content');"  >Activité pratique</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'moduleens','action'=>'editvalidationmodule'))?>',{sem:'<?=$this->sem?>',idform:<?=$this->idform?>},'div_ECUE_content');"  >Validation de l'ECUE</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'moduleens','action'=>'gestionprerequit'))?>',{idmodule:<?=$this->id?>,Type:'ECUE'},'div_ECUE_content');"  >Prèrequit</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'moduleens','action'=>'gestionplancours'))?>',{idmodule:<?=$this->id?>,sem:'<?=$this->sem?>',idform:<?=$this->idform?>},'div_ECUE_content');"  >Plan de cours</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'detailecue'))?>',{sem:'<?=$this->sem?>',idform:<?=$this->idform?>},'div_ECUE_content');"  >Dossier e-learning</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="div_ECUE_content">
+
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- nav-tabs-custom -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

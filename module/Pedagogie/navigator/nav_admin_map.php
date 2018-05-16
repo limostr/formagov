@@ -68,8 +68,17 @@ return  array(
             'label'      => "Année Universitaire",
             'module'     => 'pedagogie',
             'controller' => 'anneeuniv',
-            'action'     => 'Listeformations',
+            'action'     => 'calendrierpedagogie',
             'icon' => 'fa fa-building',
+            'pages' => array(
+                array(
+                    'label' => 'Calendrier',
+                    'module'     => 'pedagogie',
+                    'controller' => 'Calendrier',
+                    'action'     => 'calendrierglobal',
+                    'icon' => 'fa fa-building',
+                ),
+            ),
             ),
     ),
 );

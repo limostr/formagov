@@ -1,0 +1,169 @@
+CREATE TABLE `menus` (
+  `idmenus` int(11) NOT NULL,
+  `idperemenus` int(11) DEFAULT NULL,
+  `label` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `labelarabe` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `labelan` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icone` text COLLATE utf8_unicode_ci,
+  `help` text COLLATE utf8_unicode_ci,
+  `afficher` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `menus`
+--
+ALTER TABLE `menus`
+  ADD PRIMARY KEY (`idmenus`),
+  ADD KEY `fk_menus_menus1` (`idperemenus`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `menus`
+--
+ALTER TABLE `menus`
+  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `menus`
+--
+ALTER TABLE `menus`
+  ADD CONSTRAINT `fk_menus_menus1` FOREIGN KEY (`idperemenus`) REFERENCES `menus` (`idmenus`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  
+  
+  
+  CREATE TABLE `typeservices` (
+  `idtypeservices` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `idperetypeservices` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `label` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `typeservices`
+--
+ALTER TABLE `typeservices`
+  ADD PRIMARY KEY (`idtypeservices`),
+  ADD KEY `fk_typeservices_typeservices1` (`idperetypeservices`);
+
+  
+  
+  
+  CREATE TABLE `services` (
+  `idservices` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `idtypeservices` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `idmenus` int(11) DEFAULT NULL,
+  `idsousservices` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `url` text COLLATE utf8_unicode_ci,
+  `afficher` tinyint(4) DEFAULT NULL,
+  `labelaffiche` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`idservices`),
+  ADD KEY `fk_services_services1` (`idsousservices`),
+  ADD KEY `fk_services_typeservices1` (`idtypeservices`),
+  ADD KEY `fk_services_menus1` (`idmenus`);
+
+  
+  
+  CREATE TABLE `droits` (
+  `iddroits` bigint(20) NOT NULL,
+  `idroles` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `idservices` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `droits`
+--
+ALTER TABLE `droits`
+  ADD PRIMARY KEY (`iddroits`),
+  ADD KEY `fk_droits_roles` (`idroles`),
+  ADD KEY `fk_droits_services1` (`idservices`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `droits`
+--
+ALTER TABLE `droits`
+  MODIFY `iddroits` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `droits`
+--
+ALTER TABLE `droits`
+  ADD CONSTRAINT `fk_droits_roles1` FOREIGN KEY (`idroles`) REFERENCES `roles` (`idroles`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_droits_services1` FOREIGN KEY (`idservices`) REFERENCES `services` (`idservices`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  INSERT INTO `services` (`idservices`, `idtypeservices`, `idmenus`, `idsousservices`, `label`, `description`, `url`, `afficher`, `labelaffiche`) VALUES
+('enseignant', 'Controller', NULL, NULL, 'Enseignant', NULL, 'enseignant', NULL, 'Enseignant'),
+('pedagogie', 'Controller', NULL, NULL, 'Pedagogie', 'Pedagogie', 'pedagogie', NULL, 'Pedagogie');
+  
+  

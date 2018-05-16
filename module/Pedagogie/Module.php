@@ -88,9 +88,9 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
         return array(
             'factories' => array(
                 'Model\AnneeunivTable' => function($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $table = new \Models\ExTutorat\ExAnneeunivTable($dbAdapter);
-                    return $table;
+                        $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                        $table = new \Models\ExTutorat\ExAnneeunivTable($dbAdapter);
+                        return $table;
                 },
                 'Model\TypeformationTable'=> function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
@@ -100,7 +100,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new \Models\ExTutorat\ExFormationsTable($dbAdapter);
                     return $table;
-                },
+                } ,
                 'Model\NiveauformationTable'=> function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new \Models\ExTutorat\ExNiveauformationTable($dbAdapter);
@@ -109,6 +109,10 @@ class Module implements InitProviderInterface, ConfigProviderInterface, Autoload
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new \Models\ExTutorat\ExLevelformationTable($dbAdapter);
                     return $table;
+
+                }, 'DB\Adapter' => function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    return $dbAdapter;
                 },
 
 

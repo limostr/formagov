@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -7,13 +6,13 @@ declare(strict_types = 1);
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 
 return [
     'service_manager' => [
         'factories' => [
             'navigation' => 'Zend\\Navigation\\Service\\DefaultNavigationFactory',
-            'Enseignant_Navigator' => 'Enseignant\\Navigator\\Service\\EnseignantNavigationFactory' ,
+            'Enseignant_Navigator' => 'Enseignant\\Navigator\\Service\\EnseignantNavigationFactory',
+
         ],
     ],
     'view_manager' => [
@@ -26,6 +25,13 @@ return [
         'invokables' => [
             'Enseignant\\Create' => 'Enseignant\\Controller\\CreateController',
             'Enseignant\\Show' => 'Enseignant\\Controller\\ShowController',
+        ],
+        'factories' => [
+            'Enseignant\\Save' => 'Enseignant\\Controller\\SaveControllerFactory',
+            'Enseignant\\MonCompte' => 'Enseignant\\Controller\\MonCompteControllerFactory',
+            'Enseignant\\MesInvitations' => 'Enseignant\\Controller\\MesInvitationsControllerFactory',
+            'Enseignant\\Tutorat' => 'Enseignant\\Controller\\TutoratControllerFactory',
+            'Enseignant\\Coordination' => 'Enseignant\\Controller\\CoordinationControllerFactory',
         ],
     ],
     'router' => [
@@ -57,8 +63,44 @@ return [
             ],
         ],
     ],
-    'navigation' => $navigation
-    ,
+    'navigation' => [
+        'default' => [
+            [
+                'label' => 'Mon profile',
+                'module' => 'enseignant',
+                'controller' => 'show',
+                'action' => 'showcv',
+            ],
+        ],
+        'Enseignant_Navigator' => [
+            [
+                'label' => 'Mon profile',
+                'module' => 'enseignant',
+                'controller' => 'show',
+                'action' => 'showcv',
+                'pages' => [
+                    [
+                        'label' => 'Mon CV',
+                        'module' => 'enseignant',
+                        'controller' => 'show',
+                        'action' => 'showcv',
+                    ],
+                    [
+                        'label' => 'Modifier Mon CV',
+                        'module' => 'enseignant',
+                        'controller' => 'show',
+                        'action' => 'gestioncv',
+                    ],
+                    [
+                        'label' => 'Modifier Mes information pro',
+                        'module' => 'enseignant',
+                        'controller' => 'show',
+                        'action' => 'gestioncv',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [
@@ -67,6 +109,36 @@ return [
                 'base_dir' => __DIR__ . '/../language',
                 'pattern' => '%s.php',
             ],
+        ],
+    ],
+    'form_elements' => [
+        'factories' => [
+            'enseignantDonneepersonnelle' => 'Enseignant\\Form\\DonneepersonnelleFactory',
+            'enseignantGradeEnseignant' => 'Enseignant\\Form\\GradeEnseignantFactory',
+            'enseignantSpecialiteEnseignant' => 'Enseignant\\Form\\SpecialiteEnseignantFactory',
+            'enseignantDonneePersoAr' => 'Enseignant\\Form\\DonneePersoArFactory',
+            'enseignantCompteUtilisateur' => 'Enseignant\\Form\\CompteUtilisateurFactory',
+            'enseignantDiplomeEnseignant' => 'Enseignant\\Form\\DiplomeEnseignantFactory',
+            'enseignantInfoProDossier' => 'Enseignant\\Form\\InfoProDossierFactory',
+            'enseignantInfoProDossierAr' => 'Enseignant\\Form\\InfoProDossierArFactory',
+            'enseignantDepotDocEnseignant' => 'Enseignant\\Form\\DepotDocEnseignantFactory',
+            'enseignantInviterCoordinateur' => 'Enseignant\\Form\\InviterCoordinateurFactory',
+            'enseignantCreateCompte' => 'Enseignant\\Form\\CreateCompteFactory',
+        ],
+    ],
+    'filters' => [
+        'factories' => [
+            'enseignantDonneepersonnelle' => 'Enseignant\\Filter\\DonneepersonnelleFactory',
+            'enseignantGradeEnseignant' => 'Enseignant\\Filter\\GradeEnseignantFactory',
+            'enseignantSpecialiteEnseignant' => 'Enseignant\\Filter\\SpecialiteEnseignantFactory',
+            'enseignantDonneePersoAr' => 'Enseignant\\Filter\\DonneePersoArFactory',
+            'enseignantCompteUtilisateur' => 'Enseignant\\Filter\\CompteUtilisateurFactory',
+            'enseignantDiplomeEnseignant' => 'Enseignant\\Filter\\DiplomeEnseignantFactory',
+            'enseignantInfoProDossier' => 'Enseignant\\Filter\\InfoProDossierFactory',
+            'enseignantInfoProDossierAr' => 'Enseignant\\Filter\\InfoProDossierArFactory',
+            'enseignantDepotDocEnseignant' => 'Enseignant\\Filter\\DepotDocEnseignantFactory',
+            'enseignantInviterCoordinateur' => 'Enseignant\\Filter\\InviterCoordinateurFactory',
+            'enseignantCreateCompte' => 'Enseignant\\Filter\\CreateCompteFactory',
         ],
     ],
 ];

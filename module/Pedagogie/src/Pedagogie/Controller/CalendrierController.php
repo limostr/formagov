@@ -31,7 +31,7 @@ class CalendrierController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-                        return $viewModel;
+        return $viewModel;
     }
 
     /**

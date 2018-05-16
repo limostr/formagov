@@ -1,0 +1,51 @@
+
+<script type="text/javascript">
+    $(document).ready(
+        function(){
+
+            AjaxFormAccessAjaxReload(
+                'formprrequit'
+                ,'msgprerequit'
+                 ,'<?=$this->url('pedagogie/controller-action', array('controller' => 'moduleens', 'action' => 'listeprerequit'))?>'
+                , {idmodule:<?=$this->idmodule?>}, 'listeZone'
+            );
+        }
+    );
+</script>
+<div class="box">
+    <div class="box-header"></div>
+    <div class="box-body">
+        <div id="msgprerequit"></div>
+        <form class="form-horizontal" method="post" action="<?=$this->url("pedagogie/controller-action",array("controller"=>"moduleens","action"=>"saveprerequit","id"=>$this->id),null,true)?>" id="formprrequit">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="Prerequit">Prérequit</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="Prerequit" id="Prerequit" value="" >
+
+                    <input type="hidden" name="idmodule" id="idmodule" value="<?=$this->idmodule?>" >
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="descprerequit">Description</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="descprerequit" id="descprerequit"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="obligatoire">Niveau d'importance</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="obligatoire" id="obligatoire"  >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Enregistrer" class="btn btn-success">
+        </form>
+    </div>
+</div>

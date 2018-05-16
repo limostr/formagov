@@ -39,7 +39,7 @@ declare(strict_types = 1);
             <div class="box-header">
                 <h3>Listes des formations</h3>
             </div>
-            <?php foreach ($formations as $key => $formation):?>
+            <?php foreach ($this->formations as $key => $formation):?>
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr class="bg-blue">
@@ -65,6 +65,7 @@ declare(strict_types = 1);
                                     <a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action' =>'showdetailsformation','id'=>$Parcours['key']), null, true); ?>" class="btn btn-info"><i class="fa fa-eye"></i> </a>
                                     <a href="#" class="btn btn-success"><i class="fa fa-edit"></i> </a>
                                     <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> </a>
+                                    <a href="<?=$this->url('enseignant/controller-action',array('controller'=>'create','action' =>'inviter-coordinateur','id'=>$Parcours['key']), null, true); ?>" class="btn btn-info"><i class="fa fa-user-circle"></i> </a>
 
                                 </td>
                             </tr>

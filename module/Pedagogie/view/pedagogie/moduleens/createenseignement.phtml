@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    $(document).ready(
+        function(){
+
+            AjaxFormAccess('addenseignement','msgenseignement' );
+        }
+    );
+</script>
+<div class="box">
+     <div class="box-header">
+         Volume Horaire
+     </div>
+     <div class="box-body">
+         <div class="msgenseignement"></div>
+         <form id="addenseignement" method="post">
+            <?php foreach ($this->typeensignement as $typens):?>
+                <div class="form-group">
+                    <label for="valumehoraire" class="col-sm-3 control-label"><?=$typens->labeltypeenseignement?> (V.H)</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" title="<?=$typens->desctypeenseignement?>" name="VH_<?=$typens->idTypeenseignement?>">
+                    </div>
+                </div>
+            <?php endforeach;?>
+             <input type="submit" value="Enregistrer" class="btn btn-success">
+         </form>
+     </div>
+ </div>

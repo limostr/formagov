@@ -1,9 +1,8 @@
 <?php
 declare(strict_types = 1);
 
-namespace Models\Extutorat;
+namespace Models\ExTutorat;
 
-namespace Models\Extutorat;
 
 use Zend\Db\TableGateway\AbstractTableGateway,
 		Zend\Db\Adapter\Adapter,

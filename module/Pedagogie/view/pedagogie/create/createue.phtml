@@ -1,29 +1,203 @@
-<?php
-declare(strict_types = 1);
-/**
- * ZF2 Application built by ZF2rapid
- *
- * @copyright (c) 2015 John Doe
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
- */
 
+<script type="text/javascript">
+    $(document).ready(
+        function(){
 
-?>
-<button type="button" class="btn btn-warning" onclick="AjaxLoader('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action'=>'showdetailsmoduls'))?>','0','moduledesc');">Annuler</button>
+            AjaxFormAccess('formecue','msgecue' );
+        }
+    );
+</script>
 
 <div class="box box-success">
     <div class="box-header with-border">
-
+        <?php if($this->Module &&  empty($this->idUE)):?>
+            <h1>Modifier l'UE : <?=$this->Module->titremodule?></h1>
+        <?php elseif($this->Module &&  !empty($this->idUE)):?>
+                <h1>Modifier l'ECUE : <?=$this->Module->titremodule?></h1>
+        <?php elseif($this->idUE && $this->UEs):?>
+            <h1>Saisir un nouveau ECUE</h1>
+        <?php else :?>
+            <h1>Saisir une nouvelle UE</h1>
+        <?php endif;?>
     </div>
-    <div class="box-body">
-        <form class="form-horizontal" role="form" action="" method="post">
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label"><?=$this->translate('UeAdd_El_TItre')?></label>
+    <div class="box-body" id="ue_content">
 
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="" placeholder="Email">
-                </div>
+
+    <div id="msgecue"></div>
+    <form class="form-horizontal" method="post" action="<?=$this->url("pedagogie/controller-action",array("controller"=>"create","action"=>"savemodule"),null,true)?>" id="formecue">
+        <?php if($this->Module):?>
+        <input type="hidden" name="idModule" id="idModule" value="<?=$this->Module->idModule?>" >
+        <?php endif;?>
+
+        <?php if($this->idUE && $this->UEs && $this->UE_Select):?>
+        <div class="form-group bg-success">
+            <label class="col-sm-2 control-label" for="idue">UE</label>
+            <div class="col-sm-10">
+                <input type="hidden" name="idue" id="idue" value="<?=$this->UE_Select->idModule?>" >
+                <b><?=$this->UE_Select->titremodule?></b>
             </div>
-        </form>
-    </div>
+        </div>
+            <input type="hidden" name="TypeModule" id="TypeModule" value="ECUE" >
+        <?php elseif($this->Module &&  !empty($this->Module->idue)):?>
+            <input type="hidden" name="TypeModule" id="TypeModule" value="ECUE" >
+        <?php else:?>
+            <input type="hidden" name="TypeModule" id="TypeModule" value="UE" >
+        <?php endif;?>
+
+
+
+        <div class="form-group bg-danger">
+            <label class="col-sm-2 control-label" for="idniveauformation">Niveau </label>
+            <div class="col-sm-10">
+                <b><?=$this->Niveau->labelnivformation?></b>
+                <input  name="idniveauformation" id="idniveauformation" type="hidden" value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->idniveauformation : $this->Niveau->idniveauformation ?> ">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="idsemestres">Semestre/Période</label>
+            <div class="col-sm-10">
+
+                <select class="form-control" class="form-control" name="idsemestres" id="idsemestres">
+                    <option value="" label=" -- Sélectionner --"> -- Sélectionner --</option>
+                    <?php
+                    $idperiode_selected=($this->Module && isset($this->Module->idperiode) && !empty($this->Module->idperiode)) ? $this->Module->idperiode : "" ;
+
+                    if(isset($this->UE_Select) && empty($idperiode_selected)){
+                        $idperiode_selected=$this->UE_Select->idperiode;
+                    }
+                    if(empty($idperiode_selected)){
+                        $idperiode_selected=$this->sem;
+                    }
+                    ?>
+                    <?php foreach ($this->curentPeriode as $p):?>
+                        <option value="<?=$p->idperiode?>" <?=(!empty($idperiode_selected) && $p->idperiode==$idperiode_selected) ? "selected" : ""?>><?=$p->labelperiode?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="titreecue">Titre </label>
+            <div class="col-sm-10">
+
+                <textarea  name="titreecue" id="titreecue" class="input-xxlarge form-control" rows="3" cols="80"><?=($this->Module && isset($this->Module->idModule)) ? $this->Module->titremodule : "" ?></textarea>                                            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="codeue">Code de l'etablissement</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->codeue)) ? $this->Module->codeue : '' ?>"  type="text" name="codeue" id="codeue" class="form-control">                                            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="idNature">Nature</label>
+            <div class="col-sm-10">
+                <!--Nature-->
+                <select class="form-control" name="idNature" id="idNature">
+                    <option value="" label=" -- Sélectionner --"> -- Sélectionner --</option>
+                    <?php
+                    $idnature_selected=($this->Module && isset($this->Module->idNature) && !empty($this->Module->idNature)) ? $this->Module->idNature : "" ;
+
+                    if(isset($this->UE_Select) && empty($idnature_selected)){
+                        $idnature_selected=$this->UE_Select->idNature;
+                    }
+                    ?>
+                    <?php foreach ($this->nature as $n):?>
+                    <option value="<?=$n->idNature?>" <?=(!empty($idnature_selected) && $n->idNature==$idnature_selected) ? "selected" : ""?>><?=$n->labelnature?></option>
+                    <?php endforeach;?>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="idregime">Régime</label>
+            <div class="col-sm-10">
+                <?php
+                $idRegime_selected=($this->Module && isset($this->Module->idRegime) && !empty($this->Module->idRegime)) ? $this->Module->idRegime : "" ;
+
+                if(isset($this->UE_Select) && empty($idRegime_selected)){
+                    $idRegime_selected=$this->UE_Select->idRegime;
+                }
+                ?>
+                <select class="form-control" name="idregime" id="idregime">
+                    <option value="" label="- - Sélectionner - -"> -- Sélectionner --</option>
+                    <?php foreach ($this->regimes as $r):?>
+                        <option value="<?=$r->idRegime?>" <?=($r->idRegime==$idRegime_selected) ? "selected" : "" ?> ><?=$r->labelregime?></option>
+
+                    <?php endforeach;?>
+                </select>                                            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="coef">Coef</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->coefficient : '' ?>" type="text" name="coef" id="coef" value="" maxlength="45" class="form-control input-xlarge">                                            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="credit">Credit</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->credit : '' ?>" type="text" name="credit" id="credit" value="" maxlength="45" class="form-control input-xlarge">                                            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="noteeleminatoire">Note éleminatoire</label>
+            <div class="col-sm-10"> 
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->noteeleminatoire : '' ?>"  type="text" name="noteeleminatoire" id="noteeleminatoire" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="descriptionecue">Description</label>
+            <div class="col-sm-10">
+
+                <textarea name="descriptionecue" id="descriptionecue" class="input-xxlarge form-control" rows="3" cols="80"><?=($this->Module && isset($this->Module->idModule)) ? $this->Module->descriptionecue : "" ?></textarea>                                            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="resume">Résumé</label>
+            <div class="col-sm-10">
+
+                <textarea name="resume" id="resume" class="input-xxlarge form-control" rows="3" cols="80"><?=($this->Module && isset($this->Module->idModule)) ? $this->Module->resumer : "" ?></textarea>                                            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="nombresience">Nombre de science</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->nbrscience : '' ?>"  type="text" name="nombresience" id="nombresience" class="form-control">                                            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="nombresemaine">Nombre de semaine</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->Nombredesemaine : '' ?>"  type="text" name="nombresemaine" id="nombresemaine" class="form-control">                                            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="nombreoptions">Nombre d'option</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->nbroption : '' ?>" type="number" name="nombreoptions" id="nombreoptions" class="form-control">                                            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="codemes">Identificateur Salima</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->codemes : '' ?>"  type="text" name="codemes" id="codemes" class="form-control">                                            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="codemoodle">Identificateur MOODLE</label>
+            <div class="col-sm-10">
+
+                <input value="<?=($this->Module && isset($this->Module->idModule)) ? $this->Module->codemoodle : '' ?>"  type="text" name="codemoodle" id="codemoodle" class="form-control">                                            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button name="submit" id="submit" type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </form>
+
 </div>

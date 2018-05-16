@@ -1,10 +1,10 @@
 <?php
 declare(strict_types = 1);
-
+//echo "<pre>";print_r($this->formation) ;echo "</pre>";
 ?>
 <script type="text/javascript">
     $(document).ready(function () {
-        AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>','S1','moduledesc');
+        //AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>','S1','moduledesc');
 
         $('ul.nav.nav-pills li a').click(function() {
             $(this).parent().addClass('active').siblings().removeClass('active');
@@ -12,8 +12,7 @@ declare(strict_types = 1);
     });
 
     function getSemestreModule(idsemestre){
-        AjaxLoader('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls"),null,true)?>',idsemestre,'moduledesc');
-
+        AjaxLoaderMultiParam('<?=$this->url("pedagogie/controller-action",array("controller"=>"show","action"=>"showdetailsmoduls",'id'=>$this->idformation),null,true)?>',{sem:idsemestre,idform:<?=$this->idformation?>} ,'moduledesc');
     }
 </script>
 <div class="row">
@@ -32,22 +31,12 @@ declare(strict_types = 1);
                     <div class="col-md-7">
                         <table class="table">
                             <thead>
-                            <tr class="bg-light-blue">
-                                <th>Type Diplôme</th>
-                                <td>Licence Appliquée</td>
-                            </tr>
+                            <?php foreach($this->formation as $f):?>
                             <tr>
-                                <th>Domaine</th>
-                                <td>Sciences économiques et de gestion</td>
+                                <th><?=$f['idtypeformation']?></th>
+                                <td><?=$f['Label']?></td>
                             </tr>
-                            <tr>
-                                <th>Mention</th>
-                                <td>Management</td>
-                            </tr>
-                            <tr>
-                                <th>Spécialité</th>
-                                <td>gestion des petites et moyennes entreprises </td>
-                            </tr>
+                        <?php endforeach;?>
                             </thead>
 
                         </table>
@@ -83,14 +72,17 @@ declare(strict_types = 1);
             </div>
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active" ><a href="#" onclick="getSemestreModule('S1')">Semestre 1</a></li>
-                            <li><a href="#" onclick="getSemestreModule('S2')">Semestre 2</a></li>
-                            <li><a href="#" onclick="getSemestreModule('S3')">Semestre 3</a></li>
+                            <?php foreach ($this->Periode as $p):?>
+                                <?php foreach ($p['periode'] as $key=>$d):?>
+                                    <li><a style="cursor: hand;"  onclick="getSemestreModule('<?=$key?>')"><?=$d['labelperiode']?></a></li>
+                                <?php endforeach;?>
+                            <?php endforeach;?>
+
                         </ul>
                     </div>
-                    <div class="col-md-9" id="moduledesc">
+                    <div class="col-md-10" id="moduledesc">
 
                     </div>
                 </div>

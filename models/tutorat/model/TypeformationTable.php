@@ -1,4 +1,9 @@
 <?php
+ 
+//		$id=$row->idtypeformation;
+ 
+
+
 namespace Models\Tutorat\Model;
 
 use Zend\Db\TableGateway\AbstractTableGateway,
@@ -39,141 +44,9 @@ class TypeformationTable extends AbstractTableGateway
     	return $select->from('typeformation')->columns($columnsArray);    	
     }
     
-    public function createIfNotExist($checkColumnsArray,$optionalColumns=array(),&$isRowCreated=null) {
-			$rowset=$this->select($checkColumnsArray);
-    		$row = $rowset->current();
-    		$id=null;
-    		if ($row == null) {
-    			$allColumns=array_merge($checkColumnsArray,$optionalColumns);
-    			$affectedRows = $this->insert($allColumns);
-    			if ($affectedRows != 1) {
-    				throw new \Exception("error: could not add line to db");
-    			}
-    			$id=$this->lastInsertValue;
-    			$isRowCreated=true;
-    		} else {
-    			$id=$row->idtypeformation;
-    			$isRowCreated=false;
-    		}
-    		return $id;
-    }
-    
-    //http://stackoverflow.com/questions/6156942/how-do-i-insert-an-empty-row-but-have-the-autonumber-update-correctly
-    
-    public function createEmptyRow() {
-    	$row=array(
-    	'idtypeformation' => null
-    	);
-    	$affectedRows=$this->insert($row);
- 		if ($affectedRows != 1) {
-    		throw new \Exception("error: could not add empty row to db");
-    	}
-    	$id=$this->lastInsertValue;
-    	return $id;
-	}
-    
-    public function getTypeformation($id)
-    {
-        $id  = (int) $id;
-        $rowset = $this->select(array('idtypeformation' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
-    
-     public function matchTypeformation($desctype, $labeltype, $labeltypear, $labetypean, $idpertypeformation)
-    {
-        $select = $this->getSelect();
-                if ($desctype != null) {
-        	$select->where->like('desctype' ,'%'.$desctype.'%');
-        }
-                if ($labeltype != null) {
-        	$select->where->like('labeltype' ,'%'.$labeltype.'%');
-        }
-                if ($labeltypear != null) {
-        	$select->where->like('labeltypear' ,'%'.$labeltypear.'%');
-        }
-                if ($labetypean != null) {
-        	$select->where->like('labetypean' ,'%'.$labetypean.'%');
-        }
-                if ($idpertypeformation != null) {
-        	$select->where->like('idpertypeformation' ,'%'.$idpertypeformation.'%');
-        }
-                $statement = $this->getSql()->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        $ret = $result->current();
-        if ($ret !== false) {
-        	$ret = array($ret);
-            while (($line=$result->next()) !== false ) {
-        		$ret[]=$line;
-        	}
-        }
-        return $ret;
-    }
-    
-
-    public function saveTypeformation(Typeformation $typeformation)
-    {
-        $data = array(
-        	            'desctype' => $typeformation->desctype,
-                        'labeltype' => $typeformation->labeltype,
-                        'labeltypear' => $typeformation->labeltypear,
-                        'labetypean' => $typeformation->labetypean,
-                        'idpertypeformation' => $typeformation->idpertypeformation,
-                    );
-
-        $id = (int)$typeformation->id;
-        if ($id == 0) {
-            $this->insert($data);
-        } else {
-            if ($this->getTypeformation($id)) {
-                $this->update($data, array('idtypeformation' => $id));
-            } else {
-                throw new \Exception('Form id does not exit');
-            }
-        }
-    }
-
-    public function addTypeformation($desctype = null, $labeltype = null, $labeltypear = null, $labetypean = null, $idpertypeformation = null)
-    {
-        $data = array(        );
-                if ($desctype != null) {
-        	$data['desctype'] = $desctype;
-        }
-                if ($labeltype != null) {
-        	$data['labeltype'] = $labeltype;
-        }
-                if ($labeltypear != null) {
-        	$data['labeltypear'] = $labeltypear;
-        }
-                if ($labetypean != null) {
-        	$data['labetypean'] = $labetypean;
-        }
-                if ($idpertypeformation != null) {
-        	$data['idpertypeformation'] = $idpertypeformation;
-        }
-                $affectedRows=$this->insert($data);
-                return $affectedRows;
-            }
-    
    
-    public function updateTypeformation($idtypeformation, $desctype, $labeltype, $labeltypear, $labetypean, $idpertypeformation)
-    {
-        $data = array(
-        	            'desctype' => $typeformation->desctype,
-                        'labeltype' => $typeformation->labeltype,
-                        'labeltypear' => $typeformation->labeltypear,
-                        'labetypean' => $typeformation->labetypean,
-                        'idpertypeformation' => $typeformation->idpertypeformation,
-                            );
-        $this->update($data, array(idtypeformation => $id));
-    }
+    
+    
 
-    public function deleteTypeformation($id)
-    {
-        $this->delete(array('idtypeformation' => $id));
-    }
-
+    
 }

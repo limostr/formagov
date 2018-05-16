@@ -1,0 +1,47 @@
+<script type="text/javascript">
+    /**/
+    $(function () {
+        $('#ecuetabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    })
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3>Gestion de l'unité d'enseignement</h3>
+                <div class="box-tools">
+                    <button id="boxofg" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="col-md-12">
+                    <!-- Custom Tabs -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" id="ecuetabs">
+
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url("pedagogie/controller-action",array("controller"=>"create","action"=>"createue" ),null,true)?>',{id:<?=$idue?>,Type:'UE',sem:'<?=$this->sem?>',idform:<?=$this->idform?>} ,'div_ECUE_content');"  >Modifier UE</a></li>
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array("controller"=>"show","action"=>"showdetailsmoduls"))?>',{idue:<?=$idue?>,sem:'<?=$this->sem?>',idform:<?=$this->idform?>,ecran:'visualisation'},'div_ECUE_content');"  >Liste des ECUE</a></li>
+
+                            <li><a href="#" onclick="AjaxLoaderMultiParam('<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>',{idue:<?=$idue?>,Type:'UE',sem:'<?=$this->sem?>',idform:<?=$this->idform?>},'div_ECUE_content');"  >Ajouter ECUE</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="div_ECUE_content">
+
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- nav-tabs-custom -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

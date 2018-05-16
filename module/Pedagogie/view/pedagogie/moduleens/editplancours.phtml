@@ -1,0 +1,54 @@
+
+<script type="text/javascript">
+    $(document).ready(
+        function(){
+
+            AjaxFormAccess('formchp','msgchp' );
+        }
+    );
+</script>
+
+
+<div class="box box-success">
+    <div class="box-header with-border">
+    </div>
+
+    <div class="box-body" id="ue_content">
+
+
+        <div id="msgchp"></div>
+        <form class="form-horizontal" method="post" action="<?=$this->url("pedagogie/controller-action",array("controller"=>"create","action"=>"savemodule"),null,true)?>" id="formchp">
+<input type="hidden" name="idpereplan" value="<?=$this->pereplan?>">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="titrechapitre">Titre </label>
+                <div class="col-sm-10">
+                    <input type="text"  name="titrechapitre" id="titrechapitre" class="input-xxlarge form-control"  >                                              </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="descplan">Description </label>
+                <div class="col-sm-10">
+
+                    <textarea  name="descplan" id="descplan" class="input-xxlarge form-control" ></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="contenuchapitre">Contenue de chapitre </label>
+                <div class="col-sm-10">
+
+                    <textarea  name="contenuchapitre" id="contenuchapitre" class="input-xxlarge form-control" ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="fileupload">Document </label>
+                <div class="col-sm-10">
+
+                    <input type="file"  name="fileupload" id="fileupload" class="form-control" >
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-success" value="Enregistrer">
+        </form>
+    </div>
+</div>

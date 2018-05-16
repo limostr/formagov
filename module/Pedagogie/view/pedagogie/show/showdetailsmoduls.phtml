@@ -7,49 +7,59 @@ declare(strict_types = 1);
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+//echo "<pre>";print_r($this->modules); echo "</pre>";
 ?>
 
 <script type="text/javascript">
     function getAddUe(idsemestre,idformation){
-        AjaxLoader("<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>","0",'moduledesc');
+        AjaxLoaderMultiParam("<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>",{sem:'<?=$this->sem?>',idform:<?=$this->idform?>},'moduledesc');
     }
 
     function getGestCalendrier(idsemestre,idformation){
         AjaxLoader("<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>","0",'moduledesc');
     }
 </script>
-<button type="button" class="btn btn-info pull-right"  onclick="getAddUe('1','2');"><i class="fa fa-edit"></i> <?=$this->translate('DetailModule_Btn_AjoutModule')?></button>
+<?php if($this->ecran!='visualisation'):?>
+<button type="button" class="btn btn-info pull-right"  onclick="getAddUe();"><i class="fa fa-edit"></i> <?=$this->translate('DetailModule_Btn_AjoutModule')?></button>
+<?php endif;?>
+<?php if(!$this->ecran):?>
+<a href="<?=$this->url('pedagogie/controller-action',array('controller'=>'moduleens','action'=>'gestionunite','id'=>$this->Niveau->idniveauformation))?>"  class="btn btn-info pull-left" ><i class="fa fa-edit"></i> <?=$this->translate('DetailModule_Btn_ModifierdetailModule')?></a>
+<?php endif;?>
 <br>
 <hr>
-<table class="table table-bordered">
-    <thead>
-        <tr class="bg-purple-gradient text-center">
-            <!--UE-->
-            <th>Code_Ue</th>
-            <th>Libelle</th>
-            <th>Cr</th>
-            <th>Coef</th>
-            <th>Nat</th>
-            <th>Rg</th>
-            <th>Action</th>
-            <!--FIN UE-->
-            <!--ECUE-->
-            <th>Eléments d'enseignements</th>
+ <table class="table table-bordered">
 
-            <!--FIN ECUE-->
-        </tr>
-    </thead>
     <tbody>
-    <tr>
-        <!--UE-->
-        <td>1325035</td>
-        <td>Unité fondamentale</td>
-        <td>7</td>
-        <td>6</td>
-        <td>Fond</td>
-        <td>MX</td>
-        <td>
 
+        <?php foreach ($this->modules as $p):?>
+            <tr class="bg-purple-gradient text-center">
+
+                <th>Code_Ue</th>
+                <th>Libelle</th>
+                <th>Cr</th>
+                <th>Coef</th>
+                <th>Nat</th>
+                <th>Rg</th>
+
+                <th>Action</th>
+                <th>Eléments d'enseignements</th>
+            </tr>
+        <tr>
+            <td colspan="8" class="bg-gray">Niveau <?=$p['level']?> : <?=$p['periode']?></td>
+        </tr>
+        <?php foreach ($p['UE'] as $keyue=> $module):?>
+
+
+                <tr>
+        <!--UE-->
+        <td><?=$module['info']['codeue']?> (<?=$module['info']['codemes']?>)</td>
+        <td><?=$module['info']['titremodule']?></td>
+        <td><?=$module['info']['credit']?></td>
+        <td><?=$module['info']['coefficient']?></td>
+        <td><?=$module['info']['idNature']?></td>
+        <td><?=$module['info']['idRegime']?></td>
+
+        <td>
             <!--Debut action menu-->
             <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -57,16 +67,19 @@ declare(strict_types = 1);
                     <span class="sr-only">Liste</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#"><i class="fa fa-eye"></i>Details</a></li>
-                    <li><a href="#">Modifier</a></li>
-                    <li><a href="#">Details e-learning</a></li>
+                    <?php if($this->ecran!='visualisation'):?>
+                    <li><a onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>',{id:<?=$keyue?>,Type:'UE',sem:'<?=$this->sem?>',idform:<?=$this->idform?>});"><i class="fa fa-edit"></i> Modifier</a></li>
+                    <li><a onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>',{idue:<?=$keyue?>,Type:'UE',sem:'<?=$this->sem?>',idform:<?=$this->idform?>});"><i class="fa fa-edit"></i> Ajouter ECUE</a></li>
                     <li class="divider"></li>
+                    <?php endif;?>
+                    <li><a href="#"><i class="fa fa-eye"></i>Details</a></li>
+
+                    <li><a href="#">Details e-learning</a></li>
+
                     <li><a href="#">Details présentielle</a></li>
                 </ul>
             </div>
-
             <!---->
-
         </td>
         <!--FIN UE-->
         <!--ECUE-->
@@ -87,24 +100,32 @@ declare(strict_types = 1);
                 </thead>
                 <tbody>
                 <!--ECUE-->
+                <!--FIN ECUE-->
+                <?php if (isset($module['ECUE'])):?>
+                <?php foreach ($module['ECUE'] as $keyecue => $ecue):?>
+                <!--ECUE-->
                 <tr>
 
-                    <td>113250164</td>
-                    <td>gestion de la production</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>MX</td>
+                    <td><?=$ecue['codeue']?>(<?=$ecue['codemes']?>)</td>
+                    <td><?=$ecue['titremodule']?></td>
+                    <td><?=$ecue['credit']?></td>
+                    <td><?=$ecue['coefficient']?></td>
+                     <td><?=$ecue['idRegime']?></td>
                     <td>
                         <!--Debut action menu-->
                         <div class="btn-group">
-                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Liste</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
+                        <?php if($this->ecran!='visualisation'):?>
+                                <li><a onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'create','action'=>'createue'))?>',{id:<?=$keyecue?>,Type:'ECUE',sem:'<?=$this->sem?>',idform:<?=$this->idform?>});"><i class="fa fa-edit"></i> Modifier</a></li>
+                            <?php endif;?>
+                            <li class="divider"></li>
+
                                 <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action'=>'detailmodulepresence'))?>',{id:2,Type:'ECUE'});"><i class="fa fa-eye"></i>Details</a></li>
-                                <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'update','action'=>'updateue'))?>',{id:2,Type:'ECUE'});">Modifier</a></li>
-                                <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action'=>'detailmodulevirtual'))?>',{id:2,Type:'ECUE'});">Details e-learning</a></li>
+                                 <li><a href="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'show','action'=>'detailmodulevirtual'))?>',{id:2,Type:'ECUE'});">Details e-learning</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Details présentielle</a></li>
                             </ul>
@@ -115,22 +136,15 @@ declare(strict_types = 1);
                     </td>
                 </tr>
                 <!--FIN ECUE-->
-                <!--ECUE-->
-                <tr>
-
-                    <td>113250165</td>
-                    <td>marketing</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>MX</td>
-                    <td>Action</td>
-                </tr>
-                <!--FIN ECUE-->
+                <?php endforeach;?>
+<?php endif;?>
                 </tbody>
             </table>
         </td>
 
         <!--FIN ECUE-->
     </tr>
+    <?php endforeach;?>
+    <?php endforeach;?>
     </tbody>
  </table>

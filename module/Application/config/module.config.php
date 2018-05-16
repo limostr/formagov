@@ -1,105 +1,131 @@
 <?php
-declare(strict_types = 1);
 /**
- * Zend Framework (http://framework.zend.com/)
+ * ZF2 Application built by ZF2rapid
  *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @copyright (c) 2015 John Doe
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application;
 
-return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
+return [
+    'router' => [
+        'routes' => [
+            'home' => [
+                'type' => 'Zend\\Mvc\\Router\\Http\\Literal',
+                'options' => [
+                    'route' => '/',
+                    'defaults' => [
+                        'controller' => 'Application\\Controller\\Index',
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'login' => [
+                'type' => 'Zend\\Mvc\\Router\\Http\\Literal',
+                'options' => [
+                    'route' => '/login',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application',
+                        'controller' => 'Authentification',
+                        'action' => 'login',
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type' => 'Zend\\Mvc\\Router\\Http\\Literal',
+                'options' => [
+                    'route' => '/logout',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application',
+                        'controller' => 'Authentification',
+                        'action' => 'logout',
+                    ],
+                ],
+            ],
+            'permission-denied' => [
+                'type' => 'Zend\\Mvc\\Router\\Http\\Literal',
+                'options' => [
+                    'route' => '/permission-denied',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application',
+                        'controller' => 'Authentification',
+                        'action' => 'permission-denied',
+                    ],
+                ],
+            ],
+            'application' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/application',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application',
+                        'controller' => 'Controller\\Authentification',
+                        'action' => 'login',
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
+                'child_routes' => [
+                    'controller-action' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/:controller[/:action[/:id]]',
+                            'constraints' => [
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'service_manager' => array(
-        'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'factories' => array(
-            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
-        ),
-    ),
-    'translator' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id' => '[0-9_-]*',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'service_manager' => [
+        'abstract_factories' => [
+            'Zend\\Cache\\Service\\StorageCacheAbstractServiceFactory',
+            'Zend\\Log\\LoggerAbstractServiceFactory',
+        ],
+        'factories' => [
+            'translator' => 'Zend\\Mvc\\Service\\TranslatorServiceFactory',
+            'ACLUniv' => 'university\\Acl\\AclModelFactory',
+            'GenericParams' => 'university\\Params\\GeniricParamsFactory',
+        ],
+    ],
+    'translator' => [
         'locale' => 'en_US',
-        'translation_file_patterns' => array(
-            array(
-                'type'     => 'gettext',
+        'translation_file_patterns' => [
+            [
+                'type' => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
-            ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
-        ),
-    ),
-    'view_manager' => array(
+                'pattern' => '%s.mo',
+            ],
+        ],
+    ],
+    'controllers' => [
+        'invokables' => [
+            'Application\\Controller\\Index' => 'Application\\Controller\\IndexController',
+        ],
+        'factories' => [
+            'Application\\Authentification' => 'Application\\Controller\\AuthentificationControllerFactory',
+            'Application\\Menus' => 'Application\\Controller\\MenusControllerFactory',
+        ],
+    ],
+    'view_manager' => [
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
-        'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../../layouts/adminlte/layout/default.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
-        ),
-        'template_path_stack' => array(
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
+        'template_map' => include APPLICATION_MODULE_ROOT . '/template_map.php',
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-    // Placeholder for console routes
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-            ),
-        ),
-    ),
-);
+        ],
+    ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                
+            ],
+        ],
+    ],
+];

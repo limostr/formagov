@@ -18,17 +18,17 @@
                 $("#selectedformation").html(data.node.tooltip);
                 var keydata=data.node.key;
                 var keysplit=keydata.split("_");
-                var url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?> ";
+                var url="<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'parametrageuniv'))?> ";
                 if(keysplit[0]=="NIV"){
-                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gniveau','action'=>'parametrageniveau'))?>/idniv/"+data.node.key;
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'parametrageniveau'))?>/idniv/"+data.node.key;
                 }else if(keysplit[0]=="PERE"){
-                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/niveau/"+data.node.key;
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'parametrageformation'))?>/niveau/"+data.node.key;
                 }else if(keysplit[0]=="GPERE"){
-                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/niveau/"+data.node.key;
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'parametrageuniv'))?>/niveau/"+data.node.key;
                 }else if(keysplit[0]=="SEM"){
-                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/sem/"+data.node.key;
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'showdetailsformation'))?>/sem/"+data.node.key;
                 }else{
-                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage'))?>/id/"+data.node.key;
+                    url="<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'parametrageuniv'))?>/id/"+data.node.key;
                 }
 
                 $.ajax({
@@ -54,7 +54,7 @@
 
     $(function(){
         treeconstractor();
-       // AjaxLoader('<?=$this->url("pedagogie/controller-action",array('controller'=>'gformation','action'=>'parametrage','niveau'=>'GPERE_PR'))?>', 'ajax','formation_content');
+       // AjaxLoader('<?=$this->url("pedagogie/controller-action",array('controller'=>'show','action'=>'parametrage','niveau'=>'GPERE_PR'))?>', 'ajax','formation_content');
 
 
     });

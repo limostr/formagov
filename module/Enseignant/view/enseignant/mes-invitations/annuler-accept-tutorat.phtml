@@ -1,0 +1,68 @@
+
+<script type="text/javascript">
+    $(document).ready(
+        function(){
+
+            AjaxFormAccess('formannul','msgformannul' );
+        }
+    );
+</script>
+<div id="msgformannul"></div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">Cause d'annulation</div>
+            <div class="box-body">
+                <form method="post" id="formannul" name="formannul"
+
+                      action ="<?=$this->url("enseignant/controller-action",array("controller"=>"mes-invitations","action"=>"save-annuler-tutorat"),array('query'=>array("ecue"=>$this->ecue,"invitations"=> $this->invitations)),true)?>"
+                >
+                    <textarea id="remarque" name="remarque" rows="5" cols="25">
+
+                    </textarea>
+                    <script type="text/javascript">
+
+                        var instance = CKEDITOR.instances['remarque'];
+                        if(instance)
+                        {
+                            CKEDITOR.remove(instance);
+                        }
+                        CKEDITOR.replace('remarque');
+
+                    </script>
+                    <br>
+                    <input class="btn btn-flat btn-success" type="submit" name="submit" value="Enregistrer" />
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">Remarque</div>
+            <div class="box-body">
+                <section>
+                    <h3>Cause d'annulation</h3>
+                    <article>
+                        <h4>Annulation de Tutorat</h4>
+                        <p>
+                            En cas d'annulation de tutorat vous devez mentionnet la cause d'annulation
+                            <ul>
+                                <li>
+                                    <p>
+                                        Il est préférable de signaler l'annulation de tutorat par mail envoyer au
+                                        coordinater et à l'administrateur pédagogique
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                    </article>
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h2>Définition des période de chaque semestre de formation de l'année universitaire : <?=\Myhelper\GenericParams::__getUnivYear()?></h2>
+            </div>
+            <div class="box-body">
+                <?php foreach ($this->formations as $titrediplome => $diplome):?>
+                Diplôme :<?=$titrediplome?> <br>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="rows">
+                        <th class="col-md-3">Formation</th>
+                        <th class="col-md-2">Niveau</th>
+                        <th class="col-md-2" colspan="2">Periode</th>
+                        <th class="col-md-2"></th>
+                    </tr>
+                    </thead>
+
+                <tbody>
+                <?php foreach ($diplome as $formkey => $formation):?>
+
+                    <tr>
+                        <td rowspan="<?=$formation['rowspan']?>" title="<?=$formation['tooltip']?>">
+                            <?=$formation['title']?> <i style="cursor:help;" class="fa fa-info-circle text-info" onclick="$('#hid-<?=$formation['key']?>').toggle()"></i>
+
+                                <table class="table table-bordered" id="hid-<?=$formation['key']?>" style="display: none">
+                                    <?php foreach ($formation["description"] as $desc):?>
+                                    <tr class="bg-info">
+                                        <th><?=$desc['type']?></th>
+                                        <td><?=$desc['label']?></td>
+                                    </tr>
+                                    <?php endforeach;?>
+                                </table>
+
+                        </td>
+
+                    </tr>
+                <?php if(isset($formation['niveau'])):?>
+                    <?php foreach ($formation['niveau'] as $niveau):?>
+                        <tr>
+                            <td rowspan="<?=$niveau['rowspan']?>">
+                                <?=$niveau['title']?>
+                            </td>
+                        </tr>
+                        <?php if(isset($niveau['semestre'])):?>
+                            <?php foreach ($niveau['semestre'] as $semestre):?>
+                                <tr>
+                                    <td rowspan="<?=$semestre['rowspan']?>">
+                                        <?=$semestre['tooltip']?>
+                                        <?=date("d/m/Y",strtotime($semestre['debut']))?> <?=date("d/m/Y",strtotime($semestre['fin']))?>
+
+                                    </td>
+                                <?php if(!isset($semestre['periode'])):?>
+                                    <td class="hidesem"></td>
+                                    <td>
+                                        <a class="btn btn-success" href ="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'anneeuniv','action' =>'definir-periode-formation'), array("query"=>array("listId"=>$semestre['key'],'type'=>'SEM')), true); ?>','','DefinirPeriode','periodeContent')">
+                                            <i class="fa fa-calendar-plus-o"></i>
+                                        </a>
+                                    </td>
+                                <?php endif;?>
+                                </tr>
+                                <?php if(isset($semestre['periode'])):?>
+                                    <?php foreach ($semestre['periode'] as $periode):?>
+                                        <tr class="hidesem">
+                                            <td>
+                                                <?=$periode['tooltip']?> <?=date("d/m/Y",strtotime($periode['debut']))?> <?=date("d/m/Y",strtotime($periode['fin']))?>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-success" href ="#" onclick="showinmodal('<?=$this->url('pedagogie/controller-action',array('controller'=>'anneeuniv','action' =>'definir-periode-formation'), array("query"=>array("listId"=>$periode['key'],'type'=>'PER')), true); ?>','','DefinirPeriode','periodeContent')">
+                                                    <i class="fa fa-calendar-plus-o"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach;?>
+                                <?php endif;?>
+                            <?php endforeach;?>
+                        <?php endif;?>
+
+                    <?php endforeach;?>
+                <?php endif;?>
+                <?php endforeach;?>
+                </tbody>
+                </table>
+                <?php endforeach;?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="DefinirPeriode"  >
+    <div class="modal-dialog" style="width:auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Periode</h4>
+            </div>
+            <div class="modal-body" id="formchoixue">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-danger"><i class="fa fa-book "></i> Definir Periode</h3>
+                        </div>
+                        <div class="box-body" id="periodeContent">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

@@ -1,0 +1,320 @@
+<script>
+    $(function(){
+        $(".HideInfor").toggle();
+    });
+
+</script>
+
+<?=$this->headScript()->setFile('/adminlte/plugins/ckeditor/ckeditor.js');?>
+<?=$this->headScript()->setFile('/adminlte/plugins/ckeditor/lang/fr.js');?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3>Liste des invitation envoyer</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <thead>
+
+                    <th>Annee Universitaire </th>
+                    <th>Période </th>
+                    <th>Module <button class="btn btn-info" onclick="$('.HideInfor').toggle();"><i class="fa fa-eyedropper" </button> </th>
+                    <th>Réponse</th>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->listeInvitation as $m):?>
+                        <tr>
+
+                            <td><?=$m['invitation']->idanneeuniv?></td>
+                            <td><?=$m['invitation']->idperiode?></td>
+                            <td>
+                                <table class="table table-bordered  table-striped">
+                                    <tr>
+                                        <th>Formation</th>
+                                        <th>Niveau</th>
+                                        <th>Période</th>
+                                        <th>Module</th>
+                                    </tr>
+                                    <?php if(isset($m['invitation'])):?>
+                                        <?php foreach ($m['modules'] as $KeyForm => $formation):?>
+                                            <tr>
+                                                <td rowspan="<?=$formation['count']?>">
+                                                    <!--Formation-->
+                                                    <?php
+                                                    $lastformation=count($formation['formation']);
+                                                    $iconteur_formation=0;
+                                                    ?>
+                                                    <table class="table table-bordered  table-striped">
+                                                        <?php foreach($formation['formation'] as $f):?>
+                                                            <?php $iconteur_formation++;?>
+                                                            <tr <?=$iconteur_formation!=$lastformation ? "class='HideInfor'": ""?>>
+                                                                <th><?=$f['idtypeformation']?></th>
+                                                                <td><?=$f['Label']?></td>
+                                                            </tr>
+                                                        <?php endforeach;?>
+                                                    </table>
+                                                    <!--Fin Formation-->
+                                                </td>
+                                            </tr>
+                                            <?php foreach($formation['niveau'] as $keyniveau=>$n):?>
+                                                <tr>
+                                                    <th rowspan="<?=$n['count']?>"><?=$n['label']?></th>
+                                                </tr>
+                                                <?php foreach($n['periode'] as $p):?>
+                                                    <tr>
+                                                        <td rowspan="<?=$p['count']?>"><?=$p['label']?></td>
+                                                    </tr>
+                                                    <?php foreach($p['modules'] as $keymod=> $mod):?>
+                                                        <tr>
+                                                            <td>
+                                                                <table class="table table-bordered  table-striped">
+                                                                    <tr>
+                                                                        <th> <?=$mod['titremodule']?></th>
+
+                                                                            <?php
+
+                                                                            $resp=$m['modules'][$KeyForm]['reponse'][$keymod];
+                                                                            if(!empty($resp)){
+                                                                                $repAll=\Zend\Json\Decoder::decode($resp,\Zend\Json\Json::TYPE_ARRAY);
+                                                                               // print_r($repAll);
+                                                                                $rep=$repAll[count($repAll)-1];
+
+                                                                                if(isset($rep['Reponse'])){
+                                                                                    ?>
+                                                                                    <?=$rep['Reponse']?>
+
+
+                                                                                    <?php if(isset($m['modules'][$KeyForm]['bloquer'][$keymod]) && $m['modules'][$KeyForm]['bloquer'][$keymod]==1):?>
+                                                                        <td class="bg-info">
+                                                                                            Si vous voulez annuler votre tutorat pour ce module vous devez contactez soit le coordinateur ou l'administrateur pédagogique
+                                                                                    <?php elseif($rep['statusinvtvalid']=='InvitationValider') :?>
+                                                                        <td class="bg-green">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                        <a class="btn btn-warning" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'annuler-accept-tutorat'),array('query'=>array("ecue"=>$keymod,"invitations"=> $m['invitation']->idinvitations)), true); ?>','<?=$m['invitation']->idinvitations?>','InvitationShow','InvitationShowcontent')"><i class="fa fa-undo"></i> </a>
+                                                                                    <?php elseif($rep['statusinvtvalid']=='InvitationAnnuler') :?>
+                                                                        <td class="bg-yellow">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                        <a class="btn btn-success" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'accepter-tutorat'),array('query'=>array("ecue"=>$keymod,"invitations"=> $m['invitation']->idinvitations)), true); ?>','<?=$m['invitation']->idinvitations?>','InvitationShow','InvitationShowcontent')"><i class="fa fa-thumbs-up"></i> </a>
+
+                                                                                    <?php endif;?>
+                                                                                </div>
+                                                                                    <div class="col-md-8">
+                                                                            <br><i class='fa fa-calendar-times-o'></i> <b> <?=date('d/m/Y',strtotime($rep['date']))?>
+                                                                            </b> <b><?=date('H:i:s',strtotime($rep['date']))?></b>
+                                                                            <br>
+                                                                                    </div>
+                                                                                </div>
+                                                                                    <?php
+                                                                                }else{
+                                                                                   ?>
+                                                                                    <a class="btn btn-success" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'accepter-tutorat'),array('query'=>array("ecue"=>$keymod,"invitations"=> $m['invitation']->idinvitations)), true); ?>','<?=$m['invitation']->idinvitations?>','InvitationShow','InvitationShowcontent')"><i class="fa fa-thumbs-up"></i> </a>
+                                                                                    <a class="btn btn-danger" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'show-mail-invitation'),array('query'=>array("ecue"=>$keymod,"invitations"=> $m['invitation']->idinvitations)), true); ?>','<?=$m['invitation']->idinvitations?>','InvitationShow','InvitationShowcontent')"><i class="fa fa-thumbs-down"></i> </a>
+
+                                                                                    <?php
+                                                                                }
+                                                                            }else{?>
+                                                                                <a class="btn btn-success" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'accepter-tutorat'),array('query'=>array("ecue"=>$keymod,"invitations"=> $m['invitation']->idinvitations)), true); ?>','<?=$m['invitation']->idinvitations?>','InvitationShow','InvitationShowcontent')"><i class="fa fa-thumbs-up"></i> </a>
+                                                                                <a class="btn btn-danger" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'show-mail-invitation'),array('query'=>array("ecue"=>$keymod,"invitations"=> $m['invitation']->idinvitations)), true); ?>','<?=$m['invitation']->idinvitations?>','InvitationShow','InvitationShowcontent')"><i class="fa fa-thumbs-down"></i> </a>
+
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class='HideInfor'>
+                                                                        <th> Coef. :</th><td> <?=$mod['coefficient']?></td>
+                                                                    </tr>
+                                                                    <tr class='HideInfor'>
+                                                                        <th> Noture. :</th><td>  <?=$mod['idNature']?></td>
+                                                                    </tr>
+                                                                    <tr class='HideInfor'>
+                                                                        <th> Régime. :</th><td>  <?=$mod['idRegime']?></td>
+                                                                    </tr class='HideInfor'>
+
+                                                                </table>
+
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach;?>
+
+                                                <?php endforeach;?>
+
+                                            <?php endforeach;?>
+
+                                        <?php endforeach;?>
+                                    <?php endif;?>
+                                    </tr>
+
+                                </table>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'show-mail-invitation','id'=>$m['invitation']->idinvitations), null, true); ?>','<?=$m['invitation']->idinvitations?>','MailSended','mailcontent')"><i class="fa fa-eye"></i> </a>
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="box-footer">
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box">
+            <div class="box-header">
+                <h3>Liste des invitation envoyer</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <thead>
+
+                    <th>Annee Universitaire </th>
+                    <th>Type Coordination</th>
+                    <th>Réponse</th>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->listeInvitationCoordination as $m):?>
+                        <tr>
+
+                            <td><?=$m['invitation']->idanneeuniv?></td>
+                            <td><?=$m['invitation']->idnaturecoordinateur?></td>
+                            <td>
+                                <table class="table table-bordered  table-striped">
+                                    <tr>
+                                        <th>Formation</th>
+                                        <th>Niveau</th>
+
+                                    </tr>
+                                    <?php if(isset($m['formation']['diplome'])):?>
+                                        <tr>
+                                            <td rowspan="<?=count($m['formation']['niveaux'])+1?>">
+                                                <!--Formation-->
+                                                <table class="tableContent">
+                                                    <?php foreach($m['formation']['diplome'] as $f):?>
+                                                        <tr>
+                                                            <th><?=$f['idtypeformation']?></th>
+                                                            <td><?=$f['Label']?></td>
+                                                        </tr>
+                                                    <?php endforeach;?>
+                                                </table>
+                                                <!--Fin Formation-->
+                                            </td>
+                                        </tr>
+                                        <?php foreach($m['formation']['niveaux'] as $n):?>
+                                            <tr>
+                                                <th><?=$n?></th>
+                                            </tr>
+                                        <?php endforeach;?>
+
+                                        </tr>
+                                    <?php endif;?>
+                                    </tr>
+
+                                </table>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="#" onclick="showinmodal('<?=$this->url('enseignant/controller-action',array('controller'=>'mes-invitations','action' =>'show-mail-invitation','id'=>$m['invitation']->idinvitations), null, true); ?>','<?=$m['invitation']->idinvitations?>','MailSended','mailcontent')"><i class="fa fa-eye"></i> </a>
+
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="box-footer">
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="MailSended"  >
+    <div class="modal-dialog" style="width:auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Mail d'invitation Envoyer</h4>
+            </div>
+            <div class="modal-body" id="formchoixue">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-danger"><i class="fa fa-book "></i> Mail</h3>
+                        </div>
+                        <div class="box-body" id="mailcontent">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="InvitationShow"  >
+    <div class="modal-dialog" style="width:auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Invitation</h4>
+            </div>
+            <div class="modal-body" id="formchoixue">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-danger"><i class="fa fa-book "></i> Mon invitation</h3>
+                        </div>
+                        <div class="box-body" id="InvitationShowcontent">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

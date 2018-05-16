@@ -49,7 +49,7 @@ return [
     //element Btn
 
     'DetailModule_Btn_AjoutModule'=>"Ajouter une unité d'enseignement",
-
+    'DetailModule_Btn_ModifierdetailModule'=>"Edition details Module",
 
     //affichage module
     'ECUE_ENSEIGEMENT'=>'Enseignements',
@@ -77,7 +77,35 @@ return [
     "date"=>"Date",
     "heur"=>"Heure",
     "Description"=>"Description",
-    "Titre_event"=>"titre de l'evénement"
+    "Titre_event"=>"titre de l'evénement",
 
+
+      //Invitation
+    'Enseignant_Inviter_Coordinateur_Anneescolaire'=>'Année Universitaire',
+    'Enseignant_Inviter_Coordinateur_Submit_Inviter'=>'Inviter',
+    'enseignants_title_inviter_coordinateur'=>'Inviter Le coordinateur',
+    'Message_Email_Invitation_Coordinateur'=>"
+        Vous ete inviter à effetuer la validation des modules sité dans ce mail pour enseigner ....
+    ",
+    'Context_Email_Invitation_Coordinateur'=>"Invitation pour tutorat",
+    "GoToLink_Message_Email_Invitation_Coordinateur"=>"Suivre ce lien : ",
+
+
+    'Message_Email_Invitation_Tuteur'=>"
+        Vous ete inviter à effetuer la validation des modules sité dans ce mail pour enseigner ....
+    ",
+    'Context_Email_Invitation_Tuteur'=>"Invitation pour tutorat",
+    "GoToLink_Message_Email_Invitation_Tuteur"=>"Suivre ce lien : ",
+
+///Form : Période formation
+///
+///
+
+    'PeriodeFormation_Num_Semaine_Debut'=>"Num. de semaine de debut",
+    "PeriodeFormation_Num_Semaine_Fin"=>"Num. de semaine de fin",
+    "PeriodeFormation_Date_Debut"=>"Date debut",
+    "PeriodeFormation_Date_Fin"=>"Date Fin",
+    "PeriodeFormation_Periode_Non_Utiliser"=>"Semestriel",
+    "PeriodeFormation_Form_Titre"=>"Periode formation",
 
 ];

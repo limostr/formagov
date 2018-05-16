@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 /**
  * ZF2 Application built by ZF2rapid
  *
@@ -7,7 +6,6 @@ declare(strict_types = 1);
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-$navigation=include __DIR__ . '/../navigator/nav_admin_map.php';
 
 return [
     'service_manager' => [
@@ -29,6 +27,7 @@ return [
             'Superadmin\\Gestcompeval' => 'Superadmin\\Controller\\GestcompevalController',
             'Superadmin\\Gestcompens' => 'Superadmin\\Controller\\GestcompensController',
             'Superadmin\\Gestcompactprat' => 'Superadmin\\Controller\\GestcompactpratController',
+            'Superadmin\\Formoxiliaire' => 'Superadmin\\Controller\\FormoxiliaireController',
         ],
     ],
     'router' => [
@@ -59,8 +58,45 @@ return [
                 ],
             ],
         ],
-    ],'navigation' => $navigation
-    ,
+    ],
+    'navigation' => [
+        'Superadmin_Navigator' => [
+            [
+                'label' => 'Gestion des Composant d\'enseignement',
+                'module' => 'superadmin',
+                'controller' => 'show',
+                'action' => 'showdetailsformation',
+                'pages' => [
+                    [
+                        'label' => 'Details formations',
+                        'module' => 'superadmin',
+                        'controller' => 'show',
+                        'action' => 'showdetailsformation',
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Gestion des composants',
+                'module' => 'superadmin',
+                'controller' => 'show',
+                'action' => 'showdetailsformation',
+                'pages' => [
+                    [
+                        'label' => 'Details formations',
+                        'module' => 'superadmin',
+                        'controller' => 'show',
+                        'action' => 'showdetailsformation',
+                    ],
+                    [
+                        'label' => 'Ajouter une formation',
+                        'module' => 'superadmin',
+                        'controller' => 'create',
+                        'action' => 'addformation',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'translator' => [
         'locale' => 'fr_FR',
         'translation_file_patterns' => [

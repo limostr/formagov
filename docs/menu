@@ -1,0 +1,62 @@
+insert INTO services(idservices,idsousservices,idtypeservices,label,url) 
+values("ensCrindex","enseignant","Controller","index","enseignant\\create\\index")
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\createjob")
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\donneepersonnelle")            
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\donnee-perso-arab") 
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\etablissementenseigne") 
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\traveau-enseignant") 
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\menu-cv-enseignant") 
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\liste-mes-grades-ens") 
+,("ensCrindex","enseignant","Controller","index","enseignant\\create\\mon-grade-ens") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","") 
+,("ensCrindex","enseignant","Controller","index","")  
+           
+           enseignant\\create\\grades-enseignants
+           enseignant\\create\\specialite-enseignant
+           enseignant\\create\\compte-utilisateur
+           enseignant\\create\\diplome-enseignant
+           enseignant\\create\\info-pro-dossier
+           enseignant\\create\\info-pro-dossier-ar
+           enseignant\\create\\depot-dossier-papier
+           enseignant\\create\\inviter-coordinateur
+           enseignant\\create\\inviter-coordinateur-mail-send
+           enseignant\\create\\create-compte 
+           enseignant\\show\\index
+           enseignant\\show\\showcv
+           enseignant\\show\\showcvcarriere
+           enseignant\\show\\liste-mes-grades-ens
+           enseignant\\show\\list-diplome-enseignant
+           enseignant\\show\\gest-diplome-enseignant
+           enseignant\\show\\list-info-pro-dossier
+           enseignant\\show\\gest-info-pro-dossier
+           enseignant\\show\\aide-saisie-dossier-enseignat
+           enseignant\\show\\imprimer-demande-heur-enseigne
+           enseignant\\show\\depot-dossier-papier
+           enseignant\\show\\gest-depot-dossier-papier
+           enseignant\\show\\gest-invitation  
+           enseignant\\mes-invitations\\index
+           enseignant\\mes-invitations\\lister-mes-invitations
+           enseignant\\mes-invitations\\accepter-tutorat
+           enseignant\\mes-invitations\\accepter-coordination  
+           enseignant\\mon-compte\\index
+           enseignant\\mon-compte\\create-compte
+           enseignant\\mon-compte\\login
+           enseignant\\mon-compte\\logout
+           enseignant\\mon-compte\\change-password
+           enseignant\\mon-compte\\demande-change-password
+           enseignant\\mon-compte\\save-compte 
+           enseignant\\save\\index
+           enseignant\\save\\donneepersonnelle
+           enseignant\\save\\etablissementenseigne
+           enseignant\\save\\traveau-enseignant
