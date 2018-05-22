@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/vendor/Myhelper/Acl" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bjyoungblood/bjy-profiler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fortawesome/font-awesome" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/frameworks/jquery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kriswallsmith/assetic" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/rwoverdijk/assetmanager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/san/san-session-toolbar" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twitter/bootstrap" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/university/config" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/university/src" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-developer-tools" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zfrapid/zfrapid-domain" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zfrapid/zfrapid-library" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
-        </CLASSES>
-        <SOURCES>
-          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHP Runtime" type="php">
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard" />
-        </CLASSES>
-        <SOURCES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
